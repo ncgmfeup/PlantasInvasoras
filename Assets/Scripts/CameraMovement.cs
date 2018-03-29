@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (swiping)
         {
-            float swipeX = Mathf.Lerp(swipeForce * swipeStrength, 0, (Time.time - startSwipe) * smoothRatio);
+            float swipeX = Mathf.Lerp(swipeForce * swipeStrength * -1f, 0, (Time.time - startSwipe) * smoothRatio);
             transform.position += Vector3.right * swipeX * Time.deltaTime;
             if (swipeX == 0)
                 swiping = false;
