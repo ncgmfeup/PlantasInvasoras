@@ -3,29 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mimosa : MonoBehaviour {
+    public enum TreeStates { NoTree, Normal, Stage1, Stage2, Dried };
 
-
+	public int treeID; //Equivalent to the position on the manager's tree array
 	public int treeState; // 0 - No tree, 1 - normal, 2 - 1st stage (cut), 3 - 2nd stage (pants out), 4 - dried and ready to cut
-	public int initialState = 0;
+	public int initialState = (int)TreeStates.NoTree;
 	public Sprite[] sprites;
 	public double timeToDry;
+    public double timeToReproduce;
 
-	private double timeLeft;
-	private Vector3 treePos;
+    public double timeReproLeft;
+    private double timeDryLeft;
 
 	// Use this for initialization
 	void Start () {
 		treeState = initialState;
-		treePos = this.transform.position;
+        timeReproLeft = timeToReproduce;
+        timeDryLeft = timeToDry;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //Reproducing
+        if (treeState == (int) TreeStates.Normal)
+        {
+            timeReproLeft -= Time.deltaTime;
+            if (timeReproLeft <= 0)
+            {
+                GameObject.Find("GameManager").GetComponent<Manager>().SpawnTreeNear(treeID);
+                timeReproLeft += timeToReproduce;
+            }
+        }
+
 		//Drying
-		if (treeState == 4 && timeLeft > 0) {
-			timeLeft -= Time.deltaTime;
-			if (timeLeft <= 0) {
-				treeState = 5;
+		if (treeState == (int)TreeStates.Stage2 && timeDryLeft > 0) {
+			timeDryLeft -= Time.deltaTime;
+			if (timeDryLeft <= 0) {
+				treeState = (int)TreeStates.Dried;
 			}
 		}
 
@@ -50,21 +64,23 @@ public class Mimosa : MonoBehaviour {
 		}
 	}
 
-	public bool plantTree () {
-		if (treeState == 0) {
-			treeState = 1;
+	public bool PlantTree () {
+		if (treeState == (int)TreeStates.NoTree) {
+			treeState = (int)TreeStates.Normal;
+            timeReproLeft = timeToReproduce;
+            return true;
 		}
 		return false;
 	}
 
-	public void cutBark() {
+	public void CutBark() {
 		//TODO: Play animation and sound;
-		treeState = 2;
+		treeState = (int)TreeStates.Stage1;
 	}
 
-	public void takeBarkOff() {
+	public void TakeBarkOff() {
 		//TODO: Play animation and sound;
-		treeState = 3;
-		timeLeft = timeToDry;
+		treeState = (int)TreeStates.Stage2;
+		timeDryLeft = timeToDry;
 	}
 }
