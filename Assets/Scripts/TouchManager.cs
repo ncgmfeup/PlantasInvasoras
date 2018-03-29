@@ -11,6 +11,7 @@ public class TouchManager : MonoBehaviour
     private CameraMovement cameraMovement;
 
     public float minSwipeForce = 50;
+    public float tapTimeLimit = 1000;
 
     // Use this for initialization
     void Start()
@@ -24,24 +25,31 @@ public class TouchManager : MonoBehaviour
     void Update()
     {
         #region MouseInputs
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //On Touch/Mouse down
         {
             cameraMovement.Stop();
             startTouch = Input.mousePosition;
             startTouchTime = Time.time;
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButton(0)) //While Touch/Mouse down
         {
             swipeForce = (Vector2)Input.mousePosition - startTouch;
-            swipeForce /= (Time.time - startTouchTime);
-            HandleSwipe();
+            swipeForce /= Time.deltaTime;
+            startTouch = Input.mousePosition;
+            HandleSwipe(false);
+        }
+        else if (Input.GetMouseButtonUp(0)) //On Touch/Mouse up
+        {
+            swipeForce = (Vector2)Input.mousePosition - startTouch;
+            swipeForce /= Time.deltaTime;
+            HandleSwipe(true);
         }
         #endregion
 
 
     }
 
-    private void HandleSwipe()
+    private void HandleSwipe(bool ended)
     {
         float sfx = Mathf.Abs(swipeForce.x);
         float sfy = Mathf.Abs(swipeForce.y);
@@ -58,10 +66,18 @@ public class TouchManager : MonoBehaviour
             //Vertical Swipe
             Debug.Log("Vertical Swipe");
         }
-        else
+        else if(ended && Time.time - startTouchTime < tapTimeLimit)
         {
             //Tap
             Debug.Log("Tap");
+
+            Vector2 touch = mainCamera.ScreenToWorldPoint(startTouch);
+            RaycastHit2D hit = Physics2D.Raycast(touch, Vector2.zero);
+
+            if (hit)
+            {
+                Debug.Log("Hit: " + hit.collider.gameObject.name);
+            }
         }
     }
 }
