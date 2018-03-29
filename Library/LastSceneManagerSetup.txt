@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Filipe.unity
+- path: Assets/Scenes/Mimosas.unity
   isLoaded: 1
   isActive: 1
