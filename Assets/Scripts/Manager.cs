@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Manager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
     public enum GameState
     {
@@ -15,25 +15,50 @@ public abstract class Manager : MonoBehaviour {
 
     public GameState currGameState;
     public int weaponEquippedIndex = 0;
-    public uint maxInvadingPlants, invadingPlantCount = 0, minStartingInvadingPlants = 10;
+    public uint minStartingInvadingPlants = 10, maxStartingInvadingPlants, maxInvadingPlants, invadingPlantCount = 0,
+           minStartingNativePlants = 5, maxStartingNativePlants, nativePlantCount = 0;
+    public float yInvadingPlantPos, yNativePlantPos, initialXInvadingPlantPos, xPosIncrement;
     public List<GameObject> possiblePlantSpots;
-    public GameObject invadingPlantPrefab;
+    public GameObject emptyTreePrefab, invadingPlantPrefab, nativePlantPrefab;
 
-    protected virtual void StartGame()
+    void Start()
     {
+        GeneratePlants();
         currGameState = GameState.Playing;
     }
 
     protected void GeneratePlants()
     {
-        //TODO: possibly rethink this part, as it can generate inumerous plants. (add min range, add random safeguards e.g. increasing probability, to do it all in one go)
-        //Populate random spots.
-        for (int i = 0; i < possiblePlantSpots.Count; i++)
-            if (Random.Range(0.0f, 1.0f) > 0.5f && !possiblePlantSpots[i].GetComponent<GameInvadingPlant>())
+        do
+        {
+            float currXPos = initialXInvadingPlantPos;
+            for (int i = 0; i < possiblePlantSpots.Count; i++)
             {
-                possiblePlantSpots[i] = Instantiate(invadingPlantPrefab, possiblePlantSpots[i].transform.position, Quaternion.identity);
-                invadingPlantCount++;
+                if(possiblePlantSpots[i] != emptyTreePrefab)
+                    continue;
+                float ranChance = Random.Range(0.0f, 1.0f);
+                //Populate random spots.
+                if(ranChance <= 0.35f && nativePlantCount < maxStartingNativePlants && nativePlantPrefab)
+                {
+                    nativePlantCount++;
+                    possiblePlantSpots[i] = Instantiate(nativePlantPrefab,
+                                            new Vector3(currXPos, yNativePlantPos),
+                                            Quaternion.identity);
+                }
+                else if(invadingPlantPrefab && ranChance <= 0.5f && invadingPlantCount < maxStartingInvadingPlants)
+                {
+                    invadingPlantCount++;
+                    possiblePlantSpots[i] = Instantiate(invadingPlantPrefab,
+                                            new Vector3(currXPos, yNativePlantPos),
+                                            Quaternion.identity);
+                }
+                else
+                {
+                    possiblePlantSpots[i] = Instantiate(emptyTreePrefab);
+                }
+                currXPos += xPosIncrement;
             }
+        } while (nativePlantCount < minStartingNativePlants || invadingPlantCount < minStartingInvadingPlants);
     }
 
     public virtual void RemoveInvadingPlant(GameObject removedInvadingPlant)
