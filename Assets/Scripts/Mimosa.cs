@@ -29,7 +29,7 @@ public class Mimosa : MonoBehaviour {
             timeReproLeft -= Time.deltaTime;
             if (timeReproLeft <= 0)
             {
-                GameObject.Find("GameManager").GetComponent<Manager>().SpawnTreeNear(treeID);
+                GameObject.Find("GameManager").GetComponent<MimosaManager>().SpawnTreeNear(treeID);
                 timeReproLeft += timeToReproduce;
             }
         }

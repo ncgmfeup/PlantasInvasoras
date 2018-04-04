@@ -19,7 +19,7 @@ public class Reproduction : MonoBehaviour {
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
             int treeID = this.GetComponent<Mimosa>().treeID;
-            GameObject.Find("GameManager").GetComponent<Manager>().SpawnTreeNear(treeID);
+            GameObject.Find("GameManager").GetComponent<MimosaManager>().SpawnTreeNear(treeID);
 			timeLeft += timeToReproduce;
 		}
 	}
