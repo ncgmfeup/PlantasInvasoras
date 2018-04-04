@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mimosa : MonoBehaviour {
-    public enum TreeStates { NoTree, Normal, Stage1, Stage2, Dried };
+    public enum MimosaState { NoTree = 0, Normal, Cut, BarkOff, DriedAndReadyToCut};
 
 	public int treeID; //Equivalent to the position on the manager's tree array
-	public int treeState; // 0 - No tree, 1 - normal, 2 - 1st stage (cut), 3 - 2nd stage (pants out), 4 - dried and ready to cut
-	public int initialState = (int)TreeStates.NoTree;
+	public MimosaState currTreeState;
 	public Sprite[] sprites;
 	public double timeToDry;
     public double timeToReproduce;
@@ -17,7 +16,7 @@ public class Mimosa : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		treeState = initialState;
+        currTreeState = MimosaState.NoTree;
         timeReproLeft = timeToReproduce;
         timeDryLeft = timeToDry;
 	}
@@ -25,7 +24,7 @@ public class Mimosa : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Reproducing
-        if (treeState == (int) TreeStates.Normal)
+        if (currTreeState == MimosaState.Normal)
         {
             timeReproLeft -= Time.deltaTime;
             if (timeReproLeft <= 0)
@@ -36,14 +35,17 @@ public class Mimosa : MonoBehaviour {
         }
 
 		//Drying
-		if (treeState == (int)TreeStates.Stage2 && timeDryLeft > 0) {
+		if (currTreeState == MimosaState.BarkOff && timeDryLeft > 0) {
 			timeDryLeft -= Time.deltaTime;
 			if (timeDryLeft <= 0) {
-				treeState = (int)TreeStates.Dried;
+                currTreeState = MimosaState.DriedAndReadyToCut;
 			}
 		}
 
-		switch (treeState) {
+        //Set the sprite to be the equivalent int enum.
+        this.GetComponent<SpriteRenderer>().sprite = sprites[(int)currTreeState];
+
+		/*switch (treeState) {
 		case 0:
 			this.GetComponent<SpriteRenderer> ().sprite = sprites [0];
 			break;
@@ -61,12 +63,12 @@ public class Mimosa : MonoBehaviour {
 			break;
 		default:
 			break;
-		}
+		}*/
 	}
 
 	public bool PlantTree () {
-		if (treeState == (int)TreeStates.NoTree) {
-			treeState = (int)TreeStates.Normal;
+		if (currTreeState == MimosaState.NoTree) {
+            currTreeState = MimosaState.Normal;
             timeReproLeft = timeToReproduce;
             return true;
 		}
@@ -74,13 +76,13 @@ public class Mimosa : MonoBehaviour {
 	}
 
 	public void CutBark() {
-		//TODO: Play animation and sound;
-		treeState = (int)TreeStates.Stage1;
+        //TODO: Play animation and sound;
+        currTreeState = MimosaState.Cut;
 	}
 
 	public void TakeBarkOff() {
-		//TODO: Play animation and sound;
-		treeState = (int)TreeStates.Stage2;
+        //TODO: Play animation and sound;
+        currTreeState = MimosaState.BarkOff;
 		timeDryLeft = timeToDry;
 	}
 }

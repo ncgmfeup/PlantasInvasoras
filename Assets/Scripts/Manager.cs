@@ -53,7 +53,7 @@ public class Manager : MonoBehaviour {
 		for (int i = 1; i < maxDistanceReproduction; i++) {
             if (treeID - i >= 0) {
                 Mimosa mimosa = trees[treeID - i].GetComponent<Mimosa>();
-                if (mimosa.treeState == 0)
+                if (mimosa.currTreeState == Mimosa.MimosaState.NoTree)
                 {
                     mimosa.PlantTree();
                     break;
@@ -62,7 +62,7 @@ public class Manager : MonoBehaviour {
             if (treeID + i < trees.Length)
             {
                 Mimosa mimosa = trees[treeID + i].GetComponent<Mimosa>();
-                if (mimosa.treeState == 0)
+                if (mimosa.currTreeState == Mimosa.MimosaState.NoTree)
                 {
                     mimosa.PlantTree();
                     break;
@@ -77,7 +77,7 @@ public class Manager : MonoBehaviour {
         bool isFound = false;
         for (int i = 0; i < trees.Length; i++)
         {
-            if (trees[i].GetComponent<Mimosa>().treeState == 0)
+            if (trees[i].GetComponent<Mimosa>().currTreeState == Mimosa.MimosaState.NoTree)
             {
                 isFound = true;
                 break;
