@@ -10,9 +10,15 @@ public class MenuFunctions : MonoBehaviour {
     [SerializeField]
     GameObject mainMenuScreen, levelSelectScreen, creditsScreen, encyclopediaScreen;
 
-    public void PlayGame(int levelBuildIndex)
+    public void PlayGame(string levelName)
     {
-        SceneManager.LoadScene(levelBuildIndex);
+        SceneManager.LoadScene(levelName);
+    }
+
+    public void SetMainMenuScreenVisiblity(bool isVisible)
+    {
+        if (mainMenuScreen)
+            mainMenuScreen.SetActive(isVisible);
     }
 
     public void SetLevelSelectVisibility(bool isVisible)
@@ -31,12 +37,6 @@ public class MenuFunctions : MonoBehaviour {
     {
         if(encyclopediaScreen)
             encyclopediaScreen.SetActive(isVisible);
-    }
-
-    public void SetMainMenuScreenVisiblity(bool isVisible)
-    {
-        if (mainMenuScreen)
-            mainMenuScreen.SetActive(isVisible);
     }
 
     public void QuitGame()
