@@ -23,7 +23,7 @@ public class MenuFunctions : MonoBehaviour {
 
     public void SetLevelSelectVisibility(bool isVisible)
     {
-        if(levelSelectScreen)
+        if(levelSelectScreen) 
             levelSelectScreen.SetActive(isVisible);
     }
 
