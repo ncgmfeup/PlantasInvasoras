@@ -10,8 +10,7 @@ public class MenuFunctions : MonoBehaviour {
     [SerializeField]
     GameObject mainMenuScreen, levelSelectScreen, creditsScreen, encyclopediaScreen;
 
-    public void PlayGame(string levelName)
-    {
+    public void PlayGame(string levelName)  {
         SceneManager.LoadScene(levelName);
     }
 

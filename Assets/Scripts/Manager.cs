@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class Manager : MonoBehaviour { // Restructured to be extensible
 
     public enum GameState
     {
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
         Paused
     }
 
-    public GameState currGameState;
+    public GameState currGameState; 
     public int weaponEquippedIndex = 0;
     public uint minStartingInvadingPlants = 10, maxStartingInvadingPlants, maxInvadingPlants, invadingPlantCount = 0,
            minStartingNativePlants = 5, maxStartingNativePlants, nativePlantCount = 0;
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        GeneratePlants();
+        GeneratePlants(); 
         currGameState = GameState.Playing;
     }
 

@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class JacintaManager : MonoBehaviour {
-
+public class JacintaManager : StateNamespace.StageManager {
 	private SpriteRenderer waterRenderer;
 	public float health;
 	public int numberJacintas;
@@ -12,7 +10,7 @@ public class JacintaManager : MonoBehaviour {
 	public Color waterColor;
 	
 	// Use this for initialization
-	void Start () {
+	public override void initializeVariables() {
 		// WATER
 		waterRenderer = GameObject.Find("Water").GetComponent<SpriteRenderer>();
 		health = 100f;
@@ -26,9 +24,9 @@ public class JacintaManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void updateGameState() {
 		updateWater();
-		//(53, 86, 70)
+		
 	}
 
 	void updateWater() {
@@ -44,4 +42,10 @@ public class JacintaManager : MonoBehaviour {
 	public void updateNumberJacintas() {
 		numberJacintas++;
 	}
+
+    public override bool checkGameOver()    {
+		return false;
+    }
+
+    public override void handleDifficulty() {}
 }

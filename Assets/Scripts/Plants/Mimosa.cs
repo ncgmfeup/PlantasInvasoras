@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlantNamespace;
 
-public class Mimosa : MonoBehaviour {
+public class Mimosa : Plant {
     public enum MimosaState { NoTree = 0, Normal, Cut, BarkOff, DriedAndReadyToCut};
 
 	public int treeID; //Equivalent to the position on the manager's tree array
@@ -15,14 +16,14 @@ public class Mimosa : MonoBehaviour {
     private double timeDryLeft;
 
 	// Use this for initialization
-	void Start () {
+	public override void initializeVariables() {
         currTreeState = MimosaState.NoTree;
         timeReproLeft = timeToReproduce;
         timeDryLeft = timeToDry;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void updatePlantState() { 
         //Reproducing
         if (currTreeState == MimosaState.Normal)
         {
@@ -75,6 +76,7 @@ public class Mimosa : MonoBehaviour {
 		return false;
 	}
 
+	/*
 	public void CutBark() {
         //TODO: Play animation and sound;
         currTreeState = MimosaState.Cut;
@@ -84,5 +86,12 @@ public class Mimosa : MonoBehaviour {
         //TODO: Play animation and sound;
         currTreeState = MimosaState.BarkOff;
 		timeDryLeft = timeToDry;
-	}
+	} 
+	*/
+
+	public override void bombed() {}
+
+	public override void cut() {}
+
+	public override void burnt() {}
 }

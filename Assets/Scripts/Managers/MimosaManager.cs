@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
-public class MimosaManager : MonoBehaviour {
+using StateNamespace;
+public class MimosaManager : StateNamespace.StageManager {
 
 	public int numMaxTrees = 50;
 	public int maxDistanceReproduction = 2;
@@ -19,8 +19,7 @@ public class MimosaManager : MonoBehaviour {
 
 	public int weaponSelected = 0; //0 - none, 1/4 others;
 
-	// Use this for initialization
-	void Awake () {
+    public override void initializeVariables() {
 		trees = new GameObject[numMaxTrees];
 
 		float xPos = 0;
@@ -37,13 +36,10 @@ public class MimosaManager : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        if (CheckGameOver())
-        {
-            //TODO: GameOverScreen
-        }
-	}
+	// Update is called once per frame 
+	public override void updateGameState() {
+
+    }
 
 	public void SelectWeapon(int value) {
 		weaponSelected = value;
@@ -72,8 +68,7 @@ public class MimosaManager : MonoBehaviour {
         return;
 	}
 
-    bool CheckGameOver()
-    {
+    public override bool checkGameOver()    {
         bool isFound = false;
         for (int i = 0; i < trees.Length; i++)
         {
@@ -85,4 +80,7 @@ public class MimosaManager : MonoBehaviour {
         }
         return isFound;
     }
+
+    public override void handleDifficulty() {}
+
 }
