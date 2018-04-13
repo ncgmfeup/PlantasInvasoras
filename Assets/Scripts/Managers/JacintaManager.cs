@@ -25,8 +25,7 @@ public class JacintaManager : StateNamespace.StageManager {
 	
 	// Update is called once per frame
 	public override void updateGameState() {
-		updateWater();
-		
+		updateWater();	
 	}
 
 	void updateWater() {

@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 532120618}
   - component: {fileID: 532120617}
   m_Layer: 5
-  m_Name: Slot 3
+  m_Name: Burn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,6 +677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96dcf72e180ae134bb20eeaa83914f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchManager: {fileID: 0}
+  numPlants: 0
+  gameOver: 0
   numMaxTrees: 25
   maxDistanceReproduction: 2
   distanceTrees: 3
@@ -685,7 +688,6 @@ MonoBehaviour:
   mimosaPrefab: {fileID: 1447975102605444, guid: 8e4a2053f4216c742934ba3f852ce72e,
     type: 2}
   initialTrees: 0000000001000000050000000600000009000000
-  weaponSelected: 0
 --- !u!4 &1149641584
 Transform:
   m_ObjectHideFlags: 0
@@ -1084,7 +1086,7 @@ GameObject:
   - component: {fileID: 1456017881}
   - component: {fileID: 1456017880}
   m_Layer: 5
-  m_Name: Slot 2
+  m_Name: Cut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1465,7 +1467,7 @@ GameObject:
   - component: {fileID: 1718902909}
   - component: {fileID: 1718902908}
   m_Layer: 5
-  m_Name: Slot 1
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1710,7 +1712,7 @@ GameObject:
   - component: {fileID: 2114893424}
   - component: {fileID: 2114893423}
   m_Layer: 5
-  m_Name: Slot 4
+  m_Name: Mario?
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

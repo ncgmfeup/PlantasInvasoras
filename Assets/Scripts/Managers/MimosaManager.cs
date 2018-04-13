@@ -17,7 +17,6 @@ public class MimosaManager : StateNamespace.StageManager {
 	private GameObject[] trees;
 	public int[] initialTrees;
 
-	public int weaponSelected = 0; //0 - none, 1/4 others;
 
     public override void initializeVariables() {
 		trees = new GameObject[numMaxTrees];
@@ -41,9 +40,7 @@ public class MimosaManager : StateNamespace.StageManager {
 
     }
 
-	public void SelectWeapon(int value) {
-		weaponSelected = value;
-	}
+
 
 	public void SpawnTreeNear(int treeID) {
 		for (int i = 1; i < maxDistanceReproduction; i++) {
