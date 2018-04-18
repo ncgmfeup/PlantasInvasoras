@@ -35,16 +35,11 @@ public class JacintaManager : StateNamespace.StageManager {
 		waterColor.b = (bWater + (100-bWater)*health/100f)/100f;
 		
 		waterRenderer.color= waterColor;
-		
 	}
 
 	public void updateNumberJacintas() {
 		numberJacintas++;
 	}
-
-    public override bool checkGameOver()    {
-		return false;
-    }
 
     public override void handleDifficulty() {}
 }

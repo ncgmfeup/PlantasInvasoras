@@ -9,6 +9,8 @@ public class Jacinta : Plant {
 	public float secondsToDry = 1f;
 	public float secondsToReproduce;
 
+	public float minRange = 10f, maxRange = 20f;
+
 	private Color jacintaColor;
 	
 	private PlantState currentState;
@@ -16,7 +18,7 @@ public class Jacinta : Plant {
 	public override void initializeVariables() {
 		jacintaColor = new Color(1,1,1,1); // Updates when dried
 		secondsToDry = 1;
-		secondsToReproduce = Random.Range(1f, 2f);
+		secondsToReproduce = Random.Range(minRange, maxRange);
 		GameObject gameManager = GameObject.Find("GameManager");
 		manager = (StateNamespace.StageManager) gameManager.GetComponent(typeof(JacintaManager));
 
@@ -28,7 +30,7 @@ public class Jacinta : Plant {
 		secondsToReproduce -= Time.deltaTime;
 		if (secondsToReproduce <= 0) {
 			reproduce();
-			secondsToReproduce = Random.Range(1f, 2f);
+			secondsToReproduce = Random.Range(minRange, maxRange);
 		}
 	}
 
@@ -39,7 +41,7 @@ public class Jacinta : Plant {
 	}
 
 	public override void cut() {
-
+		
 	}
 
 	public override void burnt() {
@@ -47,6 +49,10 @@ public class Jacinta : Plant {
 	}
 
 	public override void bombed() {
+		
+	}
 
+	public override void caught() {
+		
 	}
 }

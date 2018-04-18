@@ -18,8 +18,7 @@ public class CameraMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update()  {
         if (swiping)
         {
             float swipeX = Mathf.Lerp(swipeForce * swipeStrength * -1f, 0, (Time.time - startSwipe) * smoothRatio);
@@ -27,7 +26,6 @@ public class CameraMovement : MonoBehaviour
             if (swipeX == 0)
                 swiping = false;
         }
-
     }
 
     public void Swipe(float force)

@@ -94,4 +94,6 @@ public class Mimosa : Plant {
 	public override void cut() {}
 
 	public override void burnt() {}
+
+	public override void caught() {}
 }

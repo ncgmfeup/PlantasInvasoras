@@ -65,19 +65,6 @@ public class MimosaManager : StateNamespace.StageManager {
         return;
 	}
 
-    public override bool checkGameOver()    {
-        bool isFound = false;
-        for (int i = 0; i < trees.Length; i++)
-        {
-            if (trees[i].GetComponent<Mimosa>().currTreeState == Mimosa.MimosaState.NoTree)
-            {
-                isFound = true;
-                break;
-            }
-        }
-        return isFound;
-    }
-
     public override void handleDifficulty() {}
 
 }

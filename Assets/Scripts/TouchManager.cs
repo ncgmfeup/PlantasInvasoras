@@ -19,16 +19,13 @@ public class TouchManager : MonoBehaviour
     public TouchManager(StageManager manager) { // TODO Maybe change this to be a persistent member, and update manager
         this.manager = manager;
 
-        
         mainCamera = Camera.main;
         cameraMovement = mainCamera.GetComponent<CameraMovement>();
         Input.simulateMouseWithTouches = true;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("TEste");
+    public void updateTouch()   {
         #region MouseInputs
         if (Input.GetMouseButtonDown(0)) //On Touch/Mouse down
         {
@@ -50,8 +47,6 @@ public class TouchManager : MonoBehaviour
             HandleSwipe(true);
         }
         #endregion
-
-
     }
 
     private void HandleSwipe(bool ended)

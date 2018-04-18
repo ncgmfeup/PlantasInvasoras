@@ -15,7 +15,6 @@ namespace StateNamespace {
         public bool gameOver = false;
         // Use this for initialization
         void Start()  {
-
             touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager  
 
             tools = new Tool[4];
@@ -25,7 +24,6 @@ namespace StateNamespace {
             tools[2] = new Flame();
             tools[3] = new Mario();
 
-
             initializeVariables();
         }
 
@@ -33,6 +31,8 @@ namespace StateNamespace {
         // Update is called once per frame
         void Update() {
             updateGameState();
+
+            touchManager.updateTouch();
 
             handleDifficulty();
         }
@@ -54,7 +54,9 @@ namespace StateNamespace {
 
 
         // To detect whether gameOver is reached. Varies from stage, override it in manager.
-        public abstract bool checkGameOver();
+        public bool checkGameOver() {
+            return numPlants == 0;
+        }
 
        	public void SelectWeapon(int value) {
 	    	weaponSelected = value;

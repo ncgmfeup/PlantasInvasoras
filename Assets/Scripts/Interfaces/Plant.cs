@@ -19,15 +19,12 @@ namespace PlantNamespace {
         }
 
 		public abstract void updatePlantState();
-
         public abstract void bombed();
-
         public abstract void burnt();
         public abstract void cut();
-
+        public abstract void caught();
         public abstract void initializeVariables();
 
         // void outraCenaQueNaoSeiONome();
-
     }
 }
