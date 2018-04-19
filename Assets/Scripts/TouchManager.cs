@@ -32,10 +32,13 @@ public class TouchManager : MonoBehaviour
             cameraMovement.Stop();
             startTouch = Input.mousePosition;
             startTouchTime = Time.time;
+            manager.touched((Vector2)startTouch);
+
         }
         else if (Input.GetMouseButton(0)) //While Touch/Mouse down
         {
             swipeForce = (Vector2)Input.mousePosition - startTouch;
+            manager.touched((Vector2)startTouch);
             swipeForce /= Time.deltaTime;
             startTouch = Input.mousePosition;
             HandleSwipe(false);
@@ -58,21 +61,17 @@ public class TouchManager : MonoBehaviour
         {
             //Horizontal Swipe
             Debug.Log("Horizontal Swipe");
-            cameraMovement.Swipe(swipeForce.x);
-            manager.swiped(swipeForce);
-
+            //cameraMovement.Swipe(swipeForce.x);
         }
         else if (sfy > minSwipeForce)
         {
             //Vertical Swipe
             Debug.Log("Vertical Swipe");
-            manager.swiped(swipeForce);
         }
         else if(ended && Time.time - startTouchTime < tapTimeLimit)
         {
             //Tap
             Debug.Log("Tap");
-            manager.swiped(swipeForce);
 
             Vector2 touch = mainCamera.ScreenToWorldPoint(startTouch);
             RaycastHit2D hit = Physics2D.Raycast(touch, Vector2.zero);

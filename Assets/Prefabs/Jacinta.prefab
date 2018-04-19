@@ -23,11 +23,10 @@ GameObject:
   - component: {fileID: 253746305768674750}
   - component: {fileID: 50789978009401996}
   - component: {fileID: 114238509244618378}
-  - component: {fileID: 61711778740203202}
   - component: {fileID: 61792705961127598}
   m_Layer: 0
   m_Name: Jacinta
-  m_TagString: Untagged
+  m_TagString: InvadingPlant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1864722989104568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.0474331, y: 1.4638419, z: -3.1132812}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -65,31 +64,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61711778740203202
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864722989104568}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 3, y: 3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3, y: 3}
-  m_EdgeRadius: 0
 --- !u!61 &61792705961127598
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -128,6 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   secondsToDry: 1
+  secondsToReproduce: 0
+  minRange: 10
+  maxRange: 20
 --- !u!212 &212771316230267496
 SpriteRenderer:
   m_ObjectHideFlags: 1

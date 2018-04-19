@@ -89,7 +89,7 @@ public class Mimosa : Plant {
 	} 
 	*/
 
-	public override void bombed() {}
+	public override void bombed(float impact) {}
 
 	public override void cut() {}
 

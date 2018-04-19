@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Mario : ToolNamespace.Tool {
+public class Net : ToolNamespace.Tool {
 
-	public Mario() {
+	public Net() {
 		initializeVariables();
 	}
 
@@ -13,6 +13,6 @@ public class Mario : ToolNamespace.Tool {
 	
 	// Update is called once per frame
 	public override void updateToolState() {
-        Debug.Log("Mario Swipe");
+        Debug.Log("Net Swipe");
 	}
 }

@@ -6,7 +6,7 @@ namespace PlantNamespace {
 
     public abstract class Plant : MonoBehaviour {
 		
-		public StageManager manager; // So I can alter the managers state
+		protected StageManager manager; // So I can alter the managers state
 		public enum PlantState {
 			DRYING, WATERED // Add here more states you need
 		}
@@ -19,12 +19,10 @@ namespace PlantNamespace {
         }
 
 		public abstract void updatePlantState();
-        public abstract void bombed();
+        public abstract void bombed(float impact);
         public abstract void burnt();
         public abstract void cut();
         public abstract void caught();
         public abstract void initializeVariables();
-
-        // void outraCenaQueNaoSeiONome();
     }
 }

@@ -10,7 +10,6 @@ public class MimosaManager : StateNamespace.StageManager {
 	public int maxDistanceReproduction = 2;
 	public float distanceTrees;
 
-
 	public GameObject noTreePrefab;
 	public GameObject mimosaPrefab;
 
@@ -19,6 +18,7 @@ public class MimosaManager : StateNamespace.StageManager {
 
 
     public override void initializeVariables() {
+		base.initializeVariables();
 		trees = new GameObject[numMaxTrees];
 
 		float xPos = 0;

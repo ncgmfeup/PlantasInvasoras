@@ -12,7 +12,7 @@ public class Bomb : ToolNamespace.Tool {
 	
 	// Update is called once per frame
 	public override void updateToolState() {
-        Debug.Log("Bomb Swipe");		
+        
 	}
 
 }
