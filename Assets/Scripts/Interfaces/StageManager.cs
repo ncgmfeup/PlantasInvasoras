@@ -5,73 +5,108 @@ using ToolNamespace;
 
 namespace StateNamespace {
 	public abstract class StageManager : MonoBehaviour {
-    	private int weaponSelected = 0; //0 - none, 1/4 others;
+        public enum GameState
+        {
+            Starting,
+            Playing,
+            Paused,
+            GameWon,
+            GameLost
+        }
+        
+    	private int m_weaponSelected = 0; //0 - none, 1/4 others;
+        /// <summary>
+        /// The current selected weapon. 0 is no weapon selected.
+        /// </summary>
+        public int WeaponSelected
+        {
+            get { return m_weaponSelected; }
+            set { m_weaponSelected = value; }
+        }
 
-        private Tool[] tools;
+        /// <summary>
+        /// The tools to be used in the current level.
+        /// </summary>
+        private Tool[] m_tools;
 
-        public TouchManager touchManager;
+        /// <summary>
+        /// The touch manager generic touch manager.
+        /// </summary>
+        public TouchManager m_touchManager; //Probably use a singleton shared object instead of a reference var.
 
-	    public int numPlants; // Number of "bad" plants
-        public bool gameOver = false;
+        /// <summary>
+        /// Current number of invading plants in the level.
+        /// </summary>
+	    public int m_currentNumInvadingPlants; // Number of "bad" plants
+
+        /// <summary>
+        /// Maximum number of invading plants in the level, before game over (if currentNumInvadingPlants == this = gameLost)
+        /// </summary>
+        public int m_maxNumInvadingPlants;
+        public GameState m_currentGameState = GameState.Starting;
         // Use this for initialization
-        void Start()  {
-            touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager  
+        void Start() {
+            m_touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager  
 
-            tools = new Tool[4];
+            m_tools = new Tool[4];
             
-            tools[0] = new Bomb();
-            tools[1] = new Axe(); 
-            tools[2] = new Flame();
-            tools[3] = new Mario();
+            //TODO: Remove this due to each level using separate tools.
+            m_tools[0] = new Bomb();
+            m_tools[1] = new Axe(); 
+            m_tools[2] = new Flame();
+            m_tools[3] = new Mario();
 
-            initializeVariables();
+            InitializeVariables();
         }
 
 
         // Update is called once per frame
         void Update() {
-            updateGameState();
+            UpdateGameState();
 
-            touchManager.updateTouch();
+            m_touchManager.updateTouch();
 
-            handleDifficulty();
+            HandleDifficulty();
         }
 
-        public void swiped(Vector2 swipe) {
-            if (weaponSelected != 0) { // Weapon was selected
-                tools[weaponSelected].activated();
+        // Possibly this has to go to the touch manager.
+        public void Swiped(Vector2 swipe) {
+            if (m_weaponSelected != 0) { // Weapon was selected
+                m_tools[m_weaponSelected].activated();
             }
         }
 
-        // Initializes all stage specific variables
-        public abstract void initializeVariables();
+        /// <summary>
+        /// Initializes all stage specific variables.
+        /// </summary>
+        public abstract void InitializeVariables();
 
-        // Stage checks to see how challenging game is becoming, might come in handy.
-        public abstract void handleDifficulty();
+        /// <summary>
+        /// Stage checks to see how challenging game is becoming. (might come in handy)
+        /// </summary>
+        public abstract void HandleDifficulty();
 
-        // Updates all the necessary components in a frame
-        public abstract void updateGameState();
+        /// <summary>
+        /// Updates all the necessary components in a frame.
+        /// </summary>
+        public abstract void UpdateGameState();
 
 
         // To detect whether gameOver is reached. Varies from stage, override it in manager.
-        public bool checkGameOver() {
-            return numPlants == 0;
+        public bool CheckGameOver() {
+            return m_currentNumInvadingPlants == 0;
         }
 
        	public void SelectWeapon(int value) {
-	    	weaponSelected = value;
+	    	m_weaponSelected = value;
 	    }
 
-		public void increaseNumPlants() { 
-			numPlants += 1;
+		public void increaseNumPlants() {
+            m_currentNumInvadingPlants += 1;
 		}
 
 		public void decreaseNumPlants() {
-			numPlants -= 1;
+			m_currentNumInvadingPlants -= 1;
 		}
-
-        public int getSelectedWeapon() {
-            return weaponSelected;
-        }
     }
 }
