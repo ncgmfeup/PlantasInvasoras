@@ -4,15 +4,20 @@ using UnityEngine;
 public class Flame : ToolNamespace.Tool {
 
     public Flame() {
-        initializeVariables();
+        InitializeVariables();
     }
 
-    public override void initializeVariables() {
+    public override void UseTool()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void InitializeVariables() {
 		
 	}
 	
 	// Update is called once per frame
-	public override void updateToolState() {
+	public override void UpdateToolState() {
         Debug.Log("Flame Swipe");
 	}
 

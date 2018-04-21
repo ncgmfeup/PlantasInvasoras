@@ -17,8 +17,7 @@ public class MimosaManager : StateNamespace.StageManager {
 	public int[] initialTrees;
 
 
-    public override void initializeVariables() {
-		base.initializeVariables();
+    public override void InitializeVariables() {
 		trees = new GameObject[numMaxTrees];
 
 		float xPos = 0;
@@ -36,7 +35,7 @@ public class MimosaManager : StateNamespace.StageManager {
 	}
 	
 	// Update is called once per frame 
-	public override void updateGameState() {
+	public override void UpdateGameState() {
 
     }
 
@@ -65,6 +64,6 @@ public class MimosaManager : StateNamespace.StageManager {
         return;
 	}
 
-    public override void handleDifficulty() {}
+    public override void HandleDifficulty() {}
 
 }

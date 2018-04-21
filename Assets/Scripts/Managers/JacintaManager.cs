@@ -9,8 +9,7 @@ public class JacintaManager : StateNamespace.StageManager {
 	public Color waterColor;
 	
 	// Use this for initialization
-	public override void initializeVariables() {
-		base.initializeVariables();
+	public override void InitializeVariables() {
 		// WATER
 		waterRenderer = GameObject.Find("Water").GetComponent<SpriteRenderer>();
 		health = 100f;
@@ -23,12 +22,12 @@ public class JacintaManager : StateNamespace.StageManager {
 	}
 	
 	// Update is called once per frame
-	public override void updateGameState() {
+	public override void UpdateGameState() {
 		updateWater();	
 	}
 
 	void updateWater() {
-		health -= 0.02f*plants.Count;
+		//health -= 0.02f*plants.Count;
 		waterColor.r = (rWater + (100-rWater)*health/100f)/100f;
 		waterColor.g = (gWater + (100-gWater)*health/100f)/100f;
 		waterColor.b = (bWater + (100-bWater)*health/100f)/100f;
@@ -36,5 +35,5 @@ public class JacintaManager : StateNamespace.StageManager {
 		waterRenderer.color= waterColor;
 	}
 
-    public override void handleDifficulty() {}
+    public override void HandleDifficulty() {}
 }

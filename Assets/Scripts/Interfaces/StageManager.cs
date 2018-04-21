@@ -5,96 +5,113 @@ using ToolNamespace;
 using PlantNamespace;
 
 namespace StateNamespace {
-	public abstract class StageManager : MonoBehaviour {
-    	private int weaponSelected = -1; //0 - none, 0/3 others;
+	public abstract class StageManager : MonoBehaviour
+    {
+        public enum GameState
+        {
+            Starting,
+            Playing,
+            Paused,
+            GameWon,
+            GameLost
+        }
 
-        // TODO Trocar aqui para um object pooler
-        protected List<Plant> plants;
+        public static StageManager sharedInstance;
 
-        private Tool[] tools;
+        public GameState m_gameState { get; set; }
+
+        public Player m_scenePlayer;
+
+        [SerializeField]
+        private int m_maxInvadingPlantsBeforeGameLost;
 
         private TouchManager touchManager;
 
-        public bool gameOver = false;
+        private void Awake()
+        {
+            if (!sharedInstance)
+                sharedInstance = this;
+            else
+            {
+                Debug.LogWarning("Found an extra StageManager in the scene! Destroying GameObject: " + gameObject.name + "...");
+                Destroy(gameObject);
+            }
+        }
+
         // Use this for initialization
-        void Start()  {
-            touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager  
-    
-            tools = new Tool[4];
+        void Start()
+        {
+            touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager
             
-            tools[0] = new Bomb();
-            tools[1] = new Axe(); 
-            tools[2] = new Flame();
-            tools[3] = new Net();
-            
-            plants = new List<Plant>();
-
-            initializeVariables();
-
+            //CheckIfPlayerExists();
+            InitializeVariables();
         }
 
 
         // Update is called once per frame
         void Update() {
-            updateGameState();
+            UpdateGameState();
 
             touchManager.updateTouch();
 
-            handleDifficulty();
+            HandleDifficulty();
         }
 
-        public void touched(Vector2 touch) {
-            if (weaponSelected != -1) { // Weapon was selected
-                tools[weaponSelected].activated();
-            }
-            
-            if (weaponSelected == 0) {
-                // Bomb exploded
-                for (int i = 0 ; i < plants.Count ; i++) {
-                    // TODO Ver distância à planta e fazer cálculos para impacto
-                    plants[i].bombed(touch.magnitude - plants[i].transform.position.magnitude);
-                }
+        // To detect the win/loss condition.
+        private void CheckGameState()
+        {
+            if (m_gameState == GameState.Paused || m_gameState == GameState.Starting)
+                return;
 
-            } else if (weaponSelected == Utils.AXE_SEL) {
-                // Axe chopped
-            } else if (weaponSelected == Utils.FIRE_SEL) {
-                // Fire burnt
-            } else if (weaponSelected == Utils.NET_SEL) { 
-                // Net caught
+            int currentlySpawnedInvadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
+
+            //If all invading plants in the plant pooler are inactive
+            if (currentlySpawnedInvadingPlants == 0)
+            {
+                m_gameState = GameState.GameWon;
+            }
+            else if (currentlySpawnedInvadingPlants > m_maxInvadingPlantsBeforeGameLost)
+            {
+                m_gameState = GameState.GameLost;
             }
         }
 
         // Initializes all stage specific variables
-        public virtual void initializeVariables() {
-            foreach(GameObject badPlant in GameObject.FindGameObjectsWithTag(Utils.BAD_PLANT_TAG))  {
-                Plant plant = (Plant) badPlant.GetComponent("Plant");
-                plants.Add(plant);
-            }
-         }
+        public abstract void InitializeVariables();
 
         // Stage checks to see how challenging game is becoming, might come in handy.
-        public abstract void handleDifficulty();
+        public abstract void HandleDifficulty();
 
         // Updates all the necessary components in a frame
-        public abstract void updateGameState();
+        public abstract void UpdateGameState();
 
-
-        // To detect whether gameOver is reached. Varies from stage, override it in manager.
-        public bool checkGameOver() {
-            return plants.Count == 0;
+        public void touched(Vector2 touch) {
+            if (m_scenePlayer.SelectedTool != -1) { // Weapon was selected
+                //m_scenePlayer.m_tools[m_scenePlayer.SelectedTool].activated();
+            }
+            
+            if (m_scenePlayer.SelectedTool == 0)
+            {
+                
+            }
+            else if (m_scenePlayer.SelectedTool == Utils.AXE_SEL)
+            {
+                // Axe chopped
+            }
+            else if (m_scenePlayer.SelectedTool == Utils.FIRE_SEL)
+            {
+                // Fire burnt
+            }
+            else if (m_scenePlayer.SelectedTool == Utils.NET_SEL)
+            { 
+                // Net caught
+            }
         }
 
-       	public void SelectWeapon(int value) {
-	    	weaponSelected = value;
-	    }
+        public void SpawnInvadingPlant(Vector2 pos)
+        {
+            PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
+        }
         
-        public void spawnAtPosition(Plant plant, Vector3 pos) {
-            Instantiate(plant, pos, Quaternion.identity);
-            plants.Add(plant);
-        }
-
-      public int getSelectedWeapon() {
-            return weaponSelected;
-        }
     }
 }

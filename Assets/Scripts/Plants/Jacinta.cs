@@ -35,8 +35,8 @@ public class Jacinta : Plant {
 	}
 
 	void reproduce() {
-		manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
-				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));
+		/**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
+				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));*/
 	}
 
 	public override void cut() {

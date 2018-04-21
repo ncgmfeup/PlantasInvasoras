@@ -5,13 +5,19 @@ using UnityEngine;
 public class Bomb : ToolNamespace.Tool {
 
     public Bomb() {
-        initializeVariables();
+        InitializeVariables();
     }
-    public override void initializeVariables() {
+
+    public override void UseTool()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void InitializeVariables() {
 	}
 	
 	// Update is called once per frame
-	public override void updateToolState() {
+	public override void UpdateToolState() {
         
 	}
 

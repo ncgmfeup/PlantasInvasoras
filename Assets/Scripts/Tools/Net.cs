@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Net : ToolNamespace.Tool {
 
-	public Net() {
-		initializeVariables();
+	public Net()
+    {
+		InitializeVariables();
 	}
 
-    public override void initializeVariables() {
+    public override void UseTool()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void InitializeVariables() {
 		
 	}
 	
 	// Update is called once per frame
-	public override void updateToolState() {
+	public override void UpdateToolState() {
         Debug.Log("Net Swipe");
 	}
 }

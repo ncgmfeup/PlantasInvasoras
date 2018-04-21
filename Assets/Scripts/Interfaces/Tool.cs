@@ -3,25 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ToolNamespace {
-    public abstract class Tool {
+    public abstract class Tool
+    {
+        public string m_toolName { get; set; }
 
-    public enum ToolState {
-        ACTIVE, INACTIVE // Add here more states you need
-    }
+        public enum ToolState
+        {
+            ACTIVE, INACTIVE // Add here more states you need
+        }
 
-    public Tool() {
-        initializeVariables();
-    }
+        public Tool()
+        {
+            InitializeVariables();
+        }
 
-    public void activated() {
-        updateToolState();
-    }
+        public void Activated() {
+            UpdateToolState();
+        }
     
-    public abstract void updateToolState(); // Whenever an update is triggered
+        public abstract void UpdateToolState(); // Whenever an update is triggered
 
-    public abstract void initializeVariables();
+        public abstract void InitializeVariables();
 
-    // void outraCenaQueNaoSeiONome();
+        public abstract void UseTool();
+
+        // void outraCenaQueNaoSeiONome();
 
     }
 }

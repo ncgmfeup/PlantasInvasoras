@@ -13,7 +13,8 @@ public class PlantObjectPooler : MonoBehaviour
     /// </summary>
     public static PlantObjectPooler sharedInstance;
 
-    public ObjectPool m_invadingPlantsPool, m_nativePlantsPool;
+    [SerializeField]
+    private ObjectPool m_invadingPlantsPool, m_nativePlantsPool;
 
     void Awake()
     {
@@ -25,17 +26,22 @@ public class PlantObjectPooler : MonoBehaviour
             Destroy(this);
         }
 
-        if (!m_nativePlantsPool)
+        if (m_nativePlantsPool == null)
             Debug.LogError("No native plant pool created!");
         else
             m_nativePlantsPool.GenerateObjects();
 
-        if (!m_invadingPlantsPool)
+        if (m_invadingPlantsPool == null)
             Debug.LogError("No invating plant to instantiate!");
         else
             m_invadingPlantsPool.GenerateObjects();
     }
-        
+
+    public int GetNumberOfActiveInvadingPlants()
+    {
+        return m_invadingPlantsPool.ActiveObjects;
+    }
+    
     public GameObject GetNativePlant()
     {
         return m_nativePlantsPool.GetObjectFromPool();
