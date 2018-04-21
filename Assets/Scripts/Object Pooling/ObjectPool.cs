@@ -5,7 +5,8 @@ using UnityEngine;
 namespace ObjectPooling
 {
     /// <summary>
-    /// A gameObject pool. Can be used to hold multiple inactive gameObjects at a time. Mainly used for optimizing gameplay (reduces the number of instantiate and destroy calls.)
+    /// A gameObject pool. Can be used to hold multiple inactive gameObjects at a time. 
+    ///Mainly used for optimizing gameplay (reduces the number of instantiate and destroy calls.)
     /// </summary>
     [Serializable]
     public class ObjectPool

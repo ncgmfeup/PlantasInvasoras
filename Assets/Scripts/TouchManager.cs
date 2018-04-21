@@ -16,13 +16,14 @@ public class TouchManager : MonoBehaviour
 
     private StageManager manager; // To tell what to do with input.
 
-    public TouchManager(StageManager manager) { // TODO Maybe change this to be a persistent member, and update manager
+    public TouchManager(StageManager manager) { 
         this.manager = manager;
 
         mainCamera = Camera.main;
         cameraMovement = mainCamera.GetComponent<CameraMovement>();
         Input.simulateMouseWithTouches = true;
     }
+
 
     // Update is called once per frame
     public void updateTouch()   {
@@ -32,13 +33,15 @@ public class TouchManager : MonoBehaviour
             cameraMovement.Stop();
             startTouch = Input.mousePosition;
             startTouchTime = Time.time;
-            manager.touched((Vector2)startTouch);
-
+          
+            Vector2 altered = (mainCamera.ScreenToWorldPoint(startTouch));
+            manager.touched(altered);
         }
         else if (Input.GetMouseButton(0)) //While Touch/Mouse down
         {
             swipeForce = (Vector2)Input.mousePosition - startTouch;
             manager.touched((Vector2)startTouch);
+        
             swipeForce /= Time.deltaTime;
             startTouch = Input.mousePosition;
             HandleSwipe(false);
@@ -60,18 +63,18 @@ public class TouchManager : MonoBehaviour
         if (sfx > sfy && sfx > minSwipeForce)
         {
             //Horizontal Swipe
-            Debug.Log("Horizontal Swipe");
+            //Debug.Log("Horizontal Swipe");
             //cameraMovement.Swipe(swipeForce.x);
         }
         else if (sfy > minSwipeForce)
         {
             //Vertical Swipe
-            Debug.Log("Vertical Swipe");
+            //Debug.Log("Vertical Swipe");
         }
         else if(ended && Time.time - startTouchTime < tapTimeLimit)
         {
             //Tap
-            Debug.Log("Tap");
+            //Debug.Log("Tap");
 
             Vector2 touch = mainCamera.ScreenToWorldPoint(startTouch);
             RaycastHit2D hit = Physics2D.Raycast(touch, Vector2.zero);

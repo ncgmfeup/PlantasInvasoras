@@ -5,15 +5,9 @@ using ToolNamespace;
 using PlantNamespace;
 
 namespace StateNamespace {
-	public abstract class StageManager : MonoBehaviour
-    {
-        public enum GameState
-        {
-            Starting,
-            Playing,
-            Paused,
-            GameWon,
-            GameLost
+	public abstract class StageManager : MonoBehaviour    {
+        public enum GameState {
+            Starting, Playing, Paused, GameWon, GameLost
         }
 
         public static StageManager sharedInstance;
@@ -27,13 +21,18 @@ namespace StateNamespace {
 
         private TouchManager touchManager;
 
+
+        private float m_timeBetweenTaps = 0.5f;
+        private bool canUseTool;
+
         private void Awake()
         {
             if (!sharedInstance)
                 sharedInstance = this;
             else
             {
-                Debug.LogWarning("Found an extra StageManager in the scene! Destroying GameObject: " + gameObject.name + "...");
+                Debug.LogWarning("Found an extra StageManager in the scene! Destroying GameObject: " 
+                    + gameObject.name + "...");
                 Destroy(gameObject);
             }
         }
@@ -43,8 +42,16 @@ namespace StateNamespace {
         {
             touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager
             
-            //CheckIfPlayerExists();
+            canUseTool = true;
+
+            CheckIfPlayerExists();
+
             InitializeVariables();
+        }
+
+        void CheckIfPlayerExists() {
+            GameObject gameManager = GameObject.Find("GameManager");
+            m_scenePlayer = gameManager.GetComponent<Player>();
         }
 
 
@@ -63,15 +70,14 @@ namespace StateNamespace {
             if (m_gameState == GameState.Paused || m_gameState == GameState.Starting)
                 return;
 
-            int currentlySpawnedInvadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
+            int currentlySpawnedInvadingPlants = 
+                PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
 
             //If all invading plants in the plant pooler are inactive
-            if (currentlySpawnedInvadingPlants == 0)
-            {
+            if (currentlySpawnedInvadingPlants == 0) {
                 m_gameState = GameState.GameWon;
             }
-            else if (currentlySpawnedInvadingPlants > m_maxInvadingPlantsBeforeGameLost)
-            {
+            else if (currentlySpawnedInvadingPlants > m_maxInvadingPlantsBeforeGameLost) {
                 m_gameState = GameState.GameLost;
             }
         }
@@ -86,26 +92,17 @@ namespace StateNamespace {
         public abstract void UpdateGameState();
 
         public void touched(Vector2 touch) {
-            if (m_scenePlayer.SelectedTool != -1) { // Weapon was selected
-                //m_scenePlayer.m_tools[m_scenePlayer.SelectedTool].activated();
+            if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
+                canUseTool = false;
+                StartCoroutine("DecreaseTime");
+                m_scenePlayer.UseTool(touch);
             }
-            
-            if (m_scenePlayer.SelectedTool == 0)
-            {
-                
-            }
-            else if (m_scenePlayer.SelectedTool == Utils.AXE_SEL)
-            {
-                // Axe chopped
-            }
-            else if (m_scenePlayer.SelectedTool == Utils.FIRE_SEL)
-            {
-                // Fire burnt
-            }
-            else if (m_scenePlayer.SelectedTool == Utils.NET_SEL)
-            { 
-                // Net caught
-            }
+
+        }
+
+        IEnumerator DecreaseTime() {
+            yield return new WaitForSeconds(m_timeBetweenTaps);
+            canUseTool = true;
         }
 
         public void SpawnInvadingPlant(Vector2 pos)

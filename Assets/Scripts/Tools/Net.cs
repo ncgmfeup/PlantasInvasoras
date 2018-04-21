@@ -9,8 +9,7 @@ public class Net : ToolNamespace.Tool {
 		InitializeVariables();
 	}
 
-    public override void UseTool()
-    {
+    public override void UseTool(Vector2 pos)  {
         throw new System.NotImplementedException();
     }
 

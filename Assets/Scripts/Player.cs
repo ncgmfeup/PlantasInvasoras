@@ -5,30 +5,35 @@ using ToolNamespace;
 using StateNamespace;
 
 /// <summary>
-/// Defines the player in the game. Contains all the tools the player has access to, and also creates the gameplay effects in the scene.
+/// Defines the player in the game. Contains all the tools the player has access to, 
+/// and also creates the gameplay effects in the scene.
 /// </summary>
-public abstract class Player : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     [SerializeField]
     private Tool[] m_playerTools;
 
     private int m_selectedTool = -1;
-    public int SelectedTool
-    {
-        get { return m_selectedTool; }
-        set { if(value < 4 || value > -1) m_selectedTool = value; }
-    }
 
-    void Start()
-    {
+    void Start() {
         if (!StageManager.sharedInstance)
             Debug.LogWarning("No state manager found in the scene.");
 
+        instantiateTools();
+
         CheckIfToolsExist();
     }
+
+    private void instantiateTools() {
+        m_playerTools = new Tool[4];
+        m_playerTools[0] = new Bomb();
+        m_playerTools[1] = new Axe();
+        m_playerTools[2] = new Flame();
+        m_playerTools[3] = new Net();
+
+    }
     
-    private void CheckIfToolsExist()
-    {
+    private void CheckIfToolsExist()  {
         if (m_playerTools.Length == 0)
             Debug.LogError("No array of tools created!");
         else
@@ -37,10 +42,18 @@ public abstract class Player : MonoBehaviour {
                     Debug.Log("One of the player's tools does not exist!");
     }
 
-    public void UseTool()
-    {
-        if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length && m_playerTools[m_selectedTool] != null)
-            m_playerTools[m_selectedTool].UseTool();
+    public void UseTool(Vector2 position) {
+        if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length && 
+            m_playerTools[m_selectedTool] != null)
+            m_playerTools[m_selectedTool].UseTool(position);
+    }
+
+    public void SelectWeapon(int newSelected) {
+        m_selectedTool = newSelected;
+    }
+
+    public int GetSelectedWeapon() {
+        return m_selectedTool;
     }
 
     

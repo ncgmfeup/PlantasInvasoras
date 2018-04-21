@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlantNamespace;
 
 namespace ToolNamespace {
     public abstract class Tool
@@ -12,20 +13,15 @@ namespace ToolNamespace {
             ACTIVE, INACTIVE // Add here more states you need
         }
 
-        public Tool()
-        {
+        public Tool() {
             InitializeVariables();
-        }
-
-        public void Activated() {
-            UpdateToolState();
         }
     
         public abstract void UpdateToolState(); // Whenever an update is triggered
 
         public abstract void InitializeVariables();
 
-        public abstract void UseTool();
+        public abstract void UseTool(Vector2 position);
 
         // void outraCenaQueNaoSeiONome();
 
