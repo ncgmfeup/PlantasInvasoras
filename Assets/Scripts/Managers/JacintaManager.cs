@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class JacintaManager : StateNamespace.StageManager {
 	private SpriteRenderer waterRenderer;
 	public float health;
+    public Slider healthSlider;
 
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
@@ -23,10 +27,11 @@ public class JacintaManager : StateNamespace.StageManager {
 	
 	// Update is called once per frame
 	public override void UpdateGameState() {
-		updateWater();	
+		updateWater();
+        updateWaterLevel();
 	}
 
-	void updateWater() {
+    void updateWater() {
 		//health -= 0.02f*plants.Count;
 		waterColor.r = (rWater + (100-rWater)*health/100f)/100f;
 		waterColor.g = (gWater + (100-gWater)*health/100f)/100f;
@@ -34,6 +39,11 @@ public class JacintaManager : StateNamespace.StageManager {
 		
 		waterRenderer.color= waterColor;
 	}
+
+    private void updateWaterLevel()
+    {
+        healthSlider.value = health/100f;
+    }
 
     public override void HandleDifficulty() {}
 }
