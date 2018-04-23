@@ -97,7 +97,11 @@ namespace StateNamespace {
                 StartCoroutine("DecreaseTime");
                 m_scenePlayer.UseTool(touch);
             }
+        }
 
+        public void HitSomething(GameObject obj) {
+            if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG)
+                m_scenePlayer.UseToolOnObject(obj);
         }
 
         IEnumerator DecreaseTime() {

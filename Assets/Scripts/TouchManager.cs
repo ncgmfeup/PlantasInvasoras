@@ -79,9 +79,9 @@ public class TouchManager : MonoBehaviour
             Vector2 touch = mainCamera.ScreenToWorldPoint(startTouch);
             RaycastHit2D hit = Physics2D.Raycast(touch, Vector2.zero);
 
-            if (hit)
-            {
+            if (hit)   {
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
+                manager.HitSomething(hit.collider.gameObject);
             }
         }
     }

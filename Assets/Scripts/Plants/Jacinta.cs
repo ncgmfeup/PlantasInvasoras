@@ -57,7 +57,12 @@ public class Jacinta : Plant {
 
 	}
 
+	public void OnTriggerEnter() {
+		Debug.Log("Entered Water");
+	}
 	public override void caught() {
-		
+		Debug.Log("CAUGHT, FAM");
+
+		// TODO Spawn Net Prefab, and use tool
 	}
 }

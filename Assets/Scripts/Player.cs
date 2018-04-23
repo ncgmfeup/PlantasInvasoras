@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ToolNamespace;
 using StateNamespace;
+using PlantNamespace;
 
 /// <summary>
 /// Defines the player in the game. Contains all the tools the player has access to, 
@@ -42,10 +43,33 @@ public class Player : MonoBehaviour {
                     Debug.Log("One of the player's tools does not exist!");
     }
 
+    /**
+     * Useful for explosions!
+     */
     public void UseTool(Vector2 position) {
         if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length && 
             m_playerTools[m_selectedTool] != null)
             m_playerTools[m_selectedTool].UseTool(position);
+    }
+
+    /**
+     * Used only for certain weapons
+     */
+    public void UseToolOnObject(GameObject plantObject) {
+
+        Plant plant = plantObject.GetComponent<Plant>();
+        
+        switch(m_selectedTool) {
+            case 1: // Axe
+                plant.cut();
+                break;
+            case 2: // Flame
+                plant.burnt();
+                break;
+            case 3: // Net
+                plant.caught();
+                break;
+        }
     }
 
     public void SelectWeapon(int newSelected) {

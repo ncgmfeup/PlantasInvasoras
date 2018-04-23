@@ -5,5 +5,7 @@ public class Utils {
     public static int FIRE_SEL = 2;
     public static int NET_SEL = 3;
     public static string BAD_PLANT_TAG = "InvadingPlant";
+    public static string NORMAL_PLANT_TAG = "NormalPlant";
+
 
 }
