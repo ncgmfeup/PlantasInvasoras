@@ -18,6 +18,11 @@ namespace PlantNamespace {
 			updatePlantState();
         }
 
+        public void DeSpawn()
+        {
+            gameObject.SetActive(false);
+        }
+
 		public abstract void updatePlantState();
         public abstract void bombed(float impact);
         public abstract void burnt();

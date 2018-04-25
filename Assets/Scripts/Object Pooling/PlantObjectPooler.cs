@@ -56,7 +56,10 @@ public class PlantObjectPooler : MonoBehaviour
     {
         GameObject nativePlant = GetNativePlant();
         if (nativePlant)
+        {
+            nativePlant.SetActive(true);
             nativePlant.transform.position = plantPos;
+        }
         return nativePlant;
     }
 
@@ -64,7 +67,10 @@ public class PlantObjectPooler : MonoBehaviour
     {
         GameObject invadingPlant = GetInvadingPlant();
         if (invadingPlant)
+        {
+            invadingPlant.SetActive(true);
             invadingPlant.transform.position = plantPos;
+        }
         return invadingPlant;
     }
 
