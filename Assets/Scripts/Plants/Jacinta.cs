@@ -55,6 +55,8 @@ public class Jacinta : Plant {
 
 		m_jacintaColor = spriteRenderer.color;
 
+		yield return new WaitForSeconds(1f);
+
 		float elapsedTime = 0;
 		while (elapsedTime < m_secondsToDry) 	{
 			m_jacintaColor.a = Mathf.Lerp(1f, 0f, (elapsedTime / m_secondsToDry));
@@ -68,9 +70,8 @@ public class Jacinta : Plant {
 	}
 
 	void reproduce() {
-		
-		/**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
-				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));*/
+		manager.SpawnInvadingPlant(new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
+				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));
 	}
 
 	public override void cut() {

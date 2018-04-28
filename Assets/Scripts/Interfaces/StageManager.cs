@@ -27,8 +27,9 @@ namespace StateNamespace {
 
         private void Awake()
         {
-            if (!sharedInstance)
+            if (!sharedInstance) {
                 sharedInstance = this;
+            }
             else
             {
                 Debug.LogWarning("Found an extra StageManager in the scene! Destroying GameObject: " 
@@ -64,7 +65,7 @@ namespace StateNamespace {
             HandleDifficulty();
         }
 
-        // To detect the win/loss condition.
+        // To detect the win/lose condition.
         private void CheckGameState()
         {
             if (m_gameState == GameState.Paused || m_gameState == GameState.Starting)
@@ -99,9 +100,15 @@ namespace StateNamespace {
             canUseTool = true;
         }
 
-        public void SpawnInvadingPlant(Vector2 pos)
-        {
-            PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
+        public void SpawnInvadingPlant(Vector3 pos) {
+            if (PlantObjectPooler.sharedInstance == null)
+                Debug.Log("Merda");
+            else
+                PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
+        }
+
+        public void SpawnNativePlant(Vector3 pos) {
+            PlantObjectPooler.sharedInstance.SpawnNativePlantAtPosition(pos);
         }
         
     }

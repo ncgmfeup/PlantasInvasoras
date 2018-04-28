@@ -1669,50 +1669,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212771316230267496, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 615c5306acb774591a2fa868a6182bed,
-        type: 3}
-    - target: {fileID: 4189375246801778, guid: 1e75a04f9964d4af8a80ec0608e4b1c0, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4189375246801778, guid: 1e75a04f9964d4af8a80ec0608e4b1c0, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.042444944
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.7461605
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: 0.03080213
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 2.2984579
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e75a04f9964d4af8a80ec0608e4b1c0, type: 2}
   m_IsPrefabParent: 0
@@ -2367,6 +2323,7 @@ GameObject:
   - component: {fileID: 1847910017}
   - component: {fileID: 1847910016}
   - component: {fileID: 1847910018}
+  - component: {fileID: 1847910019}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -2386,7 +2343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_scenePlayer: {fileID: 0}
-  m_maxInvadingPlantsBeforeGameLost: 0
+  m_maxInvadingPlantsBeforeGameLost: 2
   health: 11.14
   healthSlider: {fileID: 1436153902}
   waterColor: {r: 0, g: 0, b: 0, a: 0}
@@ -2419,6 +2376,24 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1662990770152814, guid: ddcff54933fbc4ee8bededc67b98c7c9, type: 2}
+--- !u!114 &1847910019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1847910015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edde5f45727a44c4aa2631f63a40d846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_invadingPlantsPool:
+    m_gameObjectPrefab: {fileID: 1864722989104568, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
+      type: 2}
+    m_objectPoolSize: 3
+  m_nativePlantsPool:
+    m_gameObjectPrefab: {fileID: 0}
+    m_objectPoolSize: 6
 --- !u!1 &1977899413
 GameObject:
   m_ObjectHideFlags: 0
