@@ -42,6 +42,7 @@ public class JacintaManager : StateNamespace.StageManager {
 
     private void updateWaterLevel()
     {
+
         healthSlider.value = health/100f;
     }
 

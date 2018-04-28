@@ -60,8 +60,7 @@ public class Player : MonoBehaviour {
         } if (m_selectedTool.Equals(Utils.NET_SEL)) {
             plant.caught();
             newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
-        }
-            
+        }     
     }
 
     public void SelectWeapon(int newSelected) {

@@ -104,13 +104,9 @@ public class Jacinta : Plant {
 		Debug.Log("Affected with " + impact);
 
 		// If was bombed closer, more seeds fly, more reproductions
-		for (int i = 0 ; i < impact / 100f ; i++) {
+		for (int i = 0 ; i < (int) (impact / 100f) ; i++) {
 			reproduce();
 		}
-
-        //Bomb Sound
-        plantAudio.clip = bombedClip;
-        plantAudio.Play();
     }
     
 	public override void caught() {

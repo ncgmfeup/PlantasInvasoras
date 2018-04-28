@@ -101,10 +101,7 @@ namespace StateNamespace {
         }
 
         public void SpawnInvadingPlant(Vector3 pos) {
-            if (PlantObjectPooler.sharedInstance == null)
-                Debug.Log("Merda");
-            else
-                PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
+            PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
         }
 
         public void SpawnNativePlant(Vector3 pos) {
