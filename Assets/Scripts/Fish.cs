@@ -28,13 +28,17 @@ public class Fish : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        fractionTravel = (Time.time - startTime) * speed;
-        if (fractionTravel > 1) {
-            getNewDestination();
-            startTime = Time.time;
-            fractionTravel = 0.0f;
+        if (!dead)
+        {
+            fractionTravel = (Time.time - startTime) * speed;
+            if (fractionTravel > 1)
+            {
+                getNewDestination();
+                startTime = Time.time;
+                fractionTravel = 0.0f;
+            }
+            this.transform.position = Vector3.Lerp(posInic, posFim, fractionTravel); 
         }
-        this.transform.position = Vector3.Lerp(posInic, posFim, fractionTravel);
 	}
 
     private void getNewDestination()
