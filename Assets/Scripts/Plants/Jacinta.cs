@@ -8,6 +8,8 @@ public class Jacinta : Plant {
 	public float m_secondsToDry;
 	public float m_secondsToReproduce;
 
+	public Vector2 m_cutImpulse;
+
 	public float minRange = 10f, maxRange = 20f;
 
     public AudioClip bombedClip;
@@ -24,6 +26,7 @@ public class Jacinta : Plant {
 		m_jacintaColor = new Color(1,1,1,1); // Updates when dried
 		m_secondsToDry = 1;
 		m_secondsToReproduce = Random.Range(minRange, maxRange);
+		m_cutImpulse = new Vector2(0f, -1f);
 		GameObject gameManager = GameObject.Find("GameManager");
 		manager = (StateNamespace.StageManager) gameManager.GetComponent(typeof(JacintaManager));
 
@@ -60,6 +63,8 @@ public class Jacinta : Plant {
 
 		m_jacintaColor = spriteRenderer.color;
 
+		yield return new WaitForSeconds(1f);
+
 		float elapsedTime = 0;
 		while (elapsedTime < m_secondsToDry) 	{
 			m_jacintaColor.a = Mathf.Lerp(1f, 0f, (elapsedTime / m_secondsToDry));
@@ -72,17 +77,18 @@ public class Jacinta : Plant {
 		yield return null;
 	}
 
-	void reproduce() {
-        /**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
-				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));*/
-        Debug.Log("Repro");
-
+	public void reproduce() {
         //Pop Sound
         plantAudio.clip = popClip;
         plantAudio.Play();
+		manager.SpawnInvadingPlant(new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
+				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));
 	}
 
 	public override void cut() {
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		rb.AddForce(m_cutImpulse, ForceMode2D.Impulse);
+	
         //Cut Sound
         plantAudio.clip = cutClip;
         plantAudio.Play();
@@ -108,9 +114,6 @@ public class Jacinta : Plant {
     }
     
 	public override void caught() {
-		Debug.Log("CAUGHT, FAM");
-	
-		// Start Dying, pls
 		currentState = PlantState.DRYING;
 
         //Pop Sound

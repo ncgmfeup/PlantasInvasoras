@@ -18,11 +18,13 @@ public class PlantObjectPooler : MonoBehaviour
 
     void Awake()
     {
-        if(!sharedInstance)
+        if(!sharedInstance) {
             sharedInstance = this;
-        else
+        }
+        else 
         {
-            Debug.LogWarning("Found another plant object pooler in the scene. Destroying the instance on gameObj: " + gameObject.name);
+            Debug.LogWarning("Found another plant object pooler in the scene. " +
+            "Destroying the instance on gameObj: " + gameObject.name);
             Destroy(this);
         }
 
@@ -32,7 +34,7 @@ public class PlantObjectPooler : MonoBehaviour
             m_nativePlantsPool.GenerateObjects();
 
         if (m_invadingPlantsPool == null)
-            Debug.LogError("No invating plant to instantiate!");
+            Debug.LogError("No invading plant to instantiate!");
         else
             m_invadingPlantsPool.GenerateObjects();
     }
@@ -52,7 +54,7 @@ public class PlantObjectPooler : MonoBehaviour
         return m_invadingPlantsPool.GetObjectFromPool();
     }
 
-    public GameObject SpawnNativePlantAtPosition(Vector2 plantPos)
+    public GameObject SpawnNativePlantAtPosition(Vector3 plantPos)
     {
         GameObject nativePlant = GetNativePlant();
         if (nativePlant)
@@ -63,8 +65,7 @@ public class PlantObjectPooler : MonoBehaviour
         return nativePlant;
     }
 
-    public GameObject SpawnInvadingPlantAtPosition(Vector2 plantPos)
-    {
+    public GameObject SpawnInvadingPlantAtPosition(Vector3 plantPos)  {
         GameObject invadingPlant = GetInvadingPlant();
         if (invadingPlant)
         {

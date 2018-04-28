@@ -12,7 +12,7 @@ public class Net : ToolNamespace.Tool {
 
 
     public override void InitializeVariables() {
-		m_secondsToLift = 1;	
+		m_secondsToLift = 2;	
 		
 	}
 
@@ -29,12 +29,14 @@ public class Net : ToolNamespace.Tool {
 		float elapsedTime = 0;
 
 		while (elapsedTime < m_secondsToLift) 	{
-			transform.position = Vector3.Lerp(startPos, finalPos, (elapsedTime / m_secondsToLift));
+			transform.position = Vector3.Lerp(startPos, finalPos, 
+				Easing.Back.InOut(elapsedTime / m_secondsToLift));
 			elapsedTime += Time.deltaTime;
         	yield return new WaitForEndOfFrame();
       	}
 
 		yield return null;
+		Destroy(this);
 	}
 
 	

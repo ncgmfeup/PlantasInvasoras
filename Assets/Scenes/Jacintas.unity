@@ -2545,6 +2545,7 @@ GameObject:
   - component: {fileID: 1847910017}
   - component: {fileID: 1847910016}
   - component: {fileID: 1847910018}
+  - component: {fileID: 1847910019}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -2564,7 +2565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_scenePlayer: {fileID: 0}
-  m_maxInvadingPlantsBeforeGameLost: 0
+  m_maxInvadingPlantsBeforeGameLost: 2
   health: 11.14
   healthSlider: {fileID: 1436153902}
   waterColor: {r: 0, g: 0, b: 0, a: 0}
@@ -2594,9 +2595,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerTools:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1579883397802454, guid: 246a06b774ffafb4995c7da64da93e39, type: 2}
   - {fileID: 0}
   - {fileID: 1662990770152814, guid: ddcff54933fbc4ee8bededc67b98c7c9, type: 2}
+--- !u!114 &1847910019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1847910015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edde5f45727a44c4aa2631f63a40d846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_invadingPlantsPool:
+    m_gameObjectPrefab: {fileID: 1864722989104568, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
+      type: 2}
+    m_objectPoolSize: 3
+  m_nativePlantsPool:
+    m_gameObjectPrefab: {fileID: 0}
+    m_objectPoolSize: 6
 --- !u!1001 &1880360908
 Prefab:
   m_ObjectHideFlags: 0

@@ -49,21 +49,19 @@ public class Player : MonoBehaviour {
 
         // Bomb is handled dynamically, through physics
         GameObject newTool;
+
+        newTool = Instantiate(m_playerTools[m_selectedTool],
+             plantObject.transform.position, m_playerTools[m_selectedTool].transform.rotation);
         if (m_selectedTool.Equals(Utils.AXE_SEL)) {
             plant.cut();
+            newTool.GetComponent<Axe>().UseTool(plantObject.transform.position);
         } else if (m_selectedTool.Equals(Utils.FIRE_SEL)) {
             plant.burnt();
         } if (m_selectedTool.Equals(Utils.NET_SEL)) {
             plant.caught();
+            newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
         }
-        
-        Debug.Log("CARAMBAS " + plantObject.transform.position + " rotation " +
-            m_playerTools[m_selectedTool].transform.rotation);
-
-        newTool = Instantiate(m_playerTools[m_selectedTool],
-             plantObject.transform.position, m_playerTools[m_selectedTool].transform.rotation);
-        
-        newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
+            
     }
 
     public void SelectWeapon(int newSelected) {
