@@ -8,6 +8,8 @@ public class Jacinta : Plant {
 	public float m_secondsToDry;
 	public float m_secondsToReproduce;
 
+	public Vector2 m_cutImpulse;
+
 	public float minRange = 10f, maxRange = 20f;
 
     public AudioClip bombedClip;
@@ -24,6 +26,7 @@ public class Jacinta : Plant {
 		m_jacintaColor = new Color(1,1,1,1); // Updates when dried
 		m_secondsToDry = 1;
 		m_secondsToReproduce = Random.Range(minRange, maxRange);
+		m_cutImpulse = new Vector2(0f, -1f);
 		GameObject gameManager = GameObject.Find("GameManager");
 		manager = (StateNamespace.StageManager) gameManager.GetComponent(typeof(JacintaManager));
 
@@ -83,6 +86,9 @@ public class Jacinta : Plant {
 	}
 
 	public override void cut() {
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+		rb.AddForce(m_cutImpulse, ForceMode2D.Impulse);
+	
         //Cut Sound
         plantAudio.clip = cutClip;
         plantAudio.Play();
