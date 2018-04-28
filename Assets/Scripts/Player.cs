@@ -57,6 +57,8 @@ public class Player : MonoBehaviour {
             newTool.GetComponent<Axe>().UseTool(plantObject.transform.position);
         } else if (m_selectedTool.Equals(Utils.FIRE_SEL)) {
             plant.burnt();
+            Debug.Log("Burning");
+            newTool.GetComponent<Flame>().UseTool(plantObject.transform.position);
         } if (m_selectedTool.Equals(Utils.NET_SEL)) {
             plant.caught();
             newTool.GetComponent<Net>().UseTool(plantObject.transform.position);

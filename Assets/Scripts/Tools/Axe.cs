@@ -16,7 +16,6 @@ public class Axe : ToolNamespace.Tool
   public override void UseTool(Vector3 pos)
   {
     StartCoroutine("Sweep", pos);
-
   }
 
   IEnumerator Sweep(Vector3 pos)

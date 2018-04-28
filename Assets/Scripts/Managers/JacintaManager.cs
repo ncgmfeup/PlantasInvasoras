@@ -55,6 +55,9 @@ public class JacintaManager : StateNamespace.StageManager {
 			} else if (m_scenePlayer.GetSelectedWeapon() == Utils.AXE_SEL) {
 				// Instantiate axe
             	m_scenePlayer.UseToolOnObject(obj);
+			} else if (m_scenePlayer.GetSelectedWeapon() == Utils.FIRE_SEL) {
+				// Instantiate flame
+            	m_scenePlayer.UseToolOnObject(obj);
 			}
 		}
     }
