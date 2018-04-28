@@ -14,7 +14,7 @@ public class Bomb : ToolNamespace.Tool {
         InitializeVariables();
     }
 
-    public override void UseTool(Vector2 pos) {
+    public override void UseTool(Vector3 pos) {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, m_radius);
 
         foreach (Collider2D nearbyObject in colliders) {

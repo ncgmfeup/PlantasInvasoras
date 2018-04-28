@@ -29,5 +29,8 @@ namespace PlantNamespace {
         public abstract void cut();
         public abstract void caught();
         public abstract void initializeVariables();
+
+        // Dying coroutine
+        public abstract IEnumerator Die();
     }
 }

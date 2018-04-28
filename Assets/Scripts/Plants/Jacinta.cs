@@ -5,36 +5,70 @@ using PlantNamespace;
 
 public class Jacinta : Plant {
 
-	public int Health = 0;
-	public float secondsToDry = 1f;
-	public float secondsToReproduce;
+	public float m_secondsToDry;
+	public float m_secondsToReproduce;
 
 	public float minRange = 10f, maxRange = 20f;
 
-	private Color jacintaColor;
+	private Color m_jacintaColor;
 	
 	private PlantState currentState;
 
 	public override void initializeVariables() {
-		jacintaColor = new Color(1,1,1,1); // Updates when dried
-		secondsToDry = 1;
-		secondsToReproduce = Random.Range(minRange, maxRange);
+		m_jacintaColor = new Color(1,1,1,1); // Updates when dried
+		m_secondsToDry = 1;
+		m_secondsToReproduce = Random.Range(minRange, maxRange);
 		GameObject gameManager = GameObject.Find("GameManager");
 		manager = (StateNamespace.StageManager) gameManager.GetComponent(typeof(JacintaManager));
 
-		currentState = PlantState.DRYING;
+		currentState = PlantState.WATERED;
+
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.centerOfMass = new Vector2(0,-2);
+
 	}
 	
 	// Update is called once per frame
 	public override void updatePlantState () {
-		secondsToReproduce -= Time.deltaTime;
-		if (secondsToReproduce <= 0) {
-			reproduce();
-			secondsToReproduce = Random.Range(minRange, maxRange);
+		switch(currentState) {
+			case PlantState.WATERED:
+				m_secondsToReproduce -= Time.deltaTime;
+				if (m_secondsToReproduce <= 0) {
+					reproduce();
+					m_secondsToReproduce = Random.Range(minRange, maxRange);		
+				}
+				break;
+			case PlantState.DRYING:
+				StartCoroutine("Die");
+
+				// RETORNAR À POOL
+				currentState = PlantState.WATERED;
+				break;
+
 		}
 	}
 
+	public override IEnumerator Die() {
+		Debug.Log("Is dying, poor thing");
+
+		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+		m_jacintaColor = spriteRenderer.color;
+
+		float elapsedTime = 0;
+		while (elapsedTime < m_secondsToDry) 	{
+			m_jacintaColor.a = Mathf.Lerp(1f, 0f, (elapsedTime / m_secondsToDry));
+			spriteRenderer.color = m_jacintaColor; 
+
+          	elapsedTime += Time.deltaTime;
+        	yield return new WaitForEndOfFrame();
+      	}
+
+		yield return null;
+	}
+
 	void reproduce() {
+		
 		/**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
 				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));*/
 	}
@@ -62,7 +96,8 @@ public class Jacinta : Plant {
 	}
 	public override void caught() {
 		Debug.Log("CAUGHT, FAM");
-
-		// TODO Spawn Net Prefab, and use tool
+	
+		// Start Dying, pls
+		currentState = PlantState.DRYING;
 	}
 }

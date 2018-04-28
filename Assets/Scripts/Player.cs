@@ -12,7 +12,7 @@ using PlantNamespace;
 public class Player : MonoBehaviour {
 
     [SerializeField]
-    private Tool[] m_playerTools;
+    private GameObject[] m_playerTools;
 
     private int m_selectedTool = -1;
 
@@ -21,55 +21,49 @@ public class Player : MonoBehaviour {
             Debug.LogWarning("No state manager found in the scene.");
 
         instantiateTools();
-
-        CheckIfToolsExist();
     }
 
     private void instantiateTools() {
-        m_playerTools = new Tool[4];
+        /*m_playerTools[0]
         m_playerTools[0] = new Bomb();
         m_playerTools[1] = new Axe();
         m_playerTools[2] = new Flame();
         m_playerTools[3] = new Net();
-
+    */
     }
     
-    private void CheckIfToolsExist()  {
-        if (m_playerTools.Length == 0)
-            Debug.LogError("No array of tools created!");
-        else
-            foreach (Tool t in m_playerTools)
-                if (t == null)
-                    Debug.Log("One of the player's tools does not exist!");
-    }
-
     /**
      * Useful for explosions!
      */
     public void UseTool(Vector2 position) {
         if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length && 
             m_playerTools[m_selectedTool] != null)
-            m_playerTools[m_selectedTool].UseTool(position);
+            m_playerTools[m_selectedTool].GetComponent<Tool>().UseTool(position);
     }
 
     /**
      * Used only for certain weapons
      */
     public void UseToolOnObject(GameObject plantObject) {
-
         Plant plant = plantObject.GetComponent<Plant>();
-        
-        switch(m_selectedTool) {
-            case 1: // Axe
-                plant.cut();
-                break;
-            case 2: // Flame
-                plant.burnt();
-                break;
-            case 3: // Net
-                plant.caught();
-                break;
+
+        // Bomb is handled dynamically, through physics
+        GameObject newTool;
+        if (m_selectedTool.Equals(Utils.AXE_SEL)) {
+            plant.cut();
+        } else if (m_selectedTool.Equals(Utils.FIRE_SEL)) {
+            plant.burnt();
+        } if (m_selectedTool.Equals(Utils.NET_SEL)) {
+            plant.caught();
         }
+        
+        Debug.Log("CARAMBAS " + plantObject.transform.position + " rotation " +
+            m_playerTools[m_selectedTool].transform.rotation);
+
+        newTool = Instantiate(m_playerTools[m_selectedTool],
+             plantObject.transform.position, m_playerTools[m_selectedTool].transform.rotation);
+        
+        newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
     }
 
     public void SelectWeapon(int newSelected) {

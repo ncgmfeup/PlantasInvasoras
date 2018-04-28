@@ -23,7 +23,7 @@ namespace StateNamespace {
 
 
         private float m_timeBetweenTaps = 0.5f;
-        private bool canUseTool;
+        protected bool canUseTool;
 
         private void Awake()
         {
@@ -90,19 +90,9 @@ namespace StateNamespace {
 
         // Updates all the necessary components in a frame
         public abstract void UpdateGameState();
+        public abstract void touched(Vector2 touch);
 
-        public void touched(Vector2 touch) {
-            if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
-                canUseTool = false;
-                StartCoroutine("DecreaseTime");
-                m_scenePlayer.UseTool(touch);
-            }
-        }
-
-        public void HitSomething(GameObject obj) {
-            if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG)
-                m_scenePlayer.UseToolOnObject(obj);
-        }
+        public abstract void HitSomething(GameObject obj); 
 
         IEnumerator DecreaseTime() {
             yield return new WaitForSeconds(m_timeBetweenTaps);

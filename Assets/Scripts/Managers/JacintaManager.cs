@@ -46,4 +46,21 @@ public class JacintaManager : StateNamespace.StageManager {
     }
 
     public override void HandleDifficulty() {}
+
+	public override void HitSomething(GameObject obj) {
+        if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG) {
+			if (m_scenePlayer.GetSelectedWeapon() == Utils.NET_SEL) {
+				// Instantiate net
+            	m_scenePlayer.UseToolOnObject(obj);
+			}
+		}
+    }
+
+	public override void touched(Vector2 touch) {
+        if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
+            canUseTool = false;
+            StartCoroutine("DecreaseTime");
+            m_scenePlayer.UseTool(touch);
+        }
+    }
 }

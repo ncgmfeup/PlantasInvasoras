@@ -7,7 +7,7 @@ public class Axe : ToolNamespace.Tool {
         InitializeVariables();
     }
 
-    public override void UseTool(Vector2 pos)  {
+    public override void UseTool(Vector3 pos)  {
         throw new System.NotImplementedException();
     }
 

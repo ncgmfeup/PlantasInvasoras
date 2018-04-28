@@ -96,4 +96,8 @@ public class Mimosa : Plant {
 	public override void burnt() {}
 
 	public override void caught() {}
+
+	public override IEnumerator Die() {
+		yield return null;
+	}
 }

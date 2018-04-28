@@ -4,7 +4,7 @@ using UnityEngine;
 using PlantNamespace;
 
 namespace ToolNamespace {
-    public abstract class Tool
+    public abstract class Tool : MonoBehaviour
     {
         public string m_toolName { get; set; }
 
@@ -21,7 +21,7 @@ namespace ToolNamespace {
 
         public abstract void InitializeVariables();
 
-        public abstract void UseTool(Vector2 position);
+        public abstract void UseTool(Vector3 position);
 
         // void outraCenaQueNaoSeiONome();
 

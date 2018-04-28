@@ -4,18 +4,39 @@ using UnityEngine;
 
 public class Net : ToolNamespace.Tool {
 
-	public Net()
-    {
+	private float m_secondsToLift;
+
+	public Net()   {	
 		InitializeVariables();
 	}
 
-    public override void UseTool(Vector2 pos)  {
-        throw new System.NotImplementedException();
-    }
 
     public override void InitializeVariables() {
+		m_secondsToLift = 1;	
 		
 	}
+
+    public override void UseTool(Vector3 pos)  {
+		StartCoroutine("ExtractFromWater", pos);
+    }
+
+	IEnumerator ExtractFromWater(Vector3 pos) {
+		Debug.Log("Extracting from water");
+
+		Vector3 startPos = pos - new Vector3(0,2,0);
+		Vector3 finalPos = pos + new Vector3(0,2,0);
+		
+		float elapsedTime = 0;
+
+		while (elapsedTime < m_secondsToLift) 	{
+			transform.position = Vector3.Lerp(startPos, finalPos, (elapsedTime / m_secondsToLift));
+			elapsedTime += Time.deltaTime;
+        	yield return new WaitForEndOfFrame();
+      	}
+
+		yield return null;
+	}
+
 	
 	// Update is called once per frame
 	public override void UpdateToolState() {
