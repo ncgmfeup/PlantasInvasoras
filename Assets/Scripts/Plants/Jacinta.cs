@@ -74,11 +74,7 @@ public class Jacinta : Plant {
 		yield return null;
 	}
 
-	void reproduce() {
-        /**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
-				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));*/
-        Debug.Log("Repro");
-
+	public void reproduce() {
         //Pop Sound
         plantAudio.clip = popClip;
         plantAudio.Play();
@@ -112,9 +108,6 @@ public class Jacinta : Plant {
     }
     
 	public override void caught() {
-		Debug.Log("CAUGHT, FAM");
-	
-		// Start Dying, pls
 		currentState = PlantState.DRYING;
 
         //Pop Sound

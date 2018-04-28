@@ -36,6 +36,7 @@ public class Net : ToolNamespace.Tool {
       	}
 
 		yield return null;
+		Destroy(this);
 	}
 
 	
