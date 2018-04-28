@@ -10,11 +10,17 @@ public class Jacinta : Plant {
 
 	public float minRange = 10f, maxRange = 20f;
 
+    public AudioClip bombedClip;
+    public AudioClip fireClip;
+    public AudioClip cutClip;
+    public AudioClip popClip;
+    public AudioClip netClip;
+
 	private Color m_jacintaColor;
 	
 	private PlantState currentState;
 
-	public override void initializeVariables() {
+    public override void initializeVariables() {
 		m_jacintaColor = new Color(1,1,1,1); // Updates when dried
 		m_secondsToDry = 1;
 		m_secondsToReproduce = Random.Range(minRange, maxRange);
@@ -25,7 +31,6 @@ public class Jacinta : Plant {
 
 		Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.centerOfMass = new Vector2(0,-2);
-
 	}
 	
 	// Update is called once per frame
@@ -68,18 +73,26 @@ public class Jacinta : Plant {
 	}
 
 	void reproduce() {
-		
-		/**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
+        /**manager.spawnAtPosition(this, new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
 				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));*/
+        Debug.Log("Repro");
+
+        //Pop Sound
+        plantAudio.clip = popClip;
+        plantAudio.Play();
 	}
 
 	public override void cut() {
-		
-	}
+        //Cut Sound
+        plantAudio.clip = cutClip;
+        plantAudio.Play();
+    }
 
 	public override void burnt() {
-
-	}
+        //Burn Sound
+        plantAudio.clip = fireClip;
+        plantAudio.Play();
+    }
 
 	public override void bombed(float impact) {
 		Debug.Log("Affected with " + impact);
@@ -89,15 +102,19 @@ public class Jacinta : Plant {
 			reproduce();
 		}
 
-	}
-
-	public void OnTriggerEnter() {
-		Debug.Log("Entered Water");
-	}
+        //Bomb Sound
+        plantAudio.clip = bombedClip;
+        plantAudio.Play();
+    }
+    
 	public override void caught() {
 		Debug.Log("CAUGHT, FAM");
 	
 		// Start Dying, pls
 		currentState = PlantState.DRYING;
-	}
+
+        //Pop Sound
+        plantAudio.clip = netClip;
+        plantAudio.Play();
+    }
 }

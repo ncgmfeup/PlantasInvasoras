@@ -1669,53 +1669,94 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212771316230267496, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 615c5306acb774591a2fa868a6182bed,
-        type: 3}
-    - target: {fileID: 4189375246801778, guid: 1e75a04f9964d4af8a80ec0608e4b1c0, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4189375246801778, guid: 1e75a04f9964d4af8a80ec0608e4b1c0, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.042444944
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.7461605
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: 0.03080213
-      objectReference: {fileID: 0}
-    - target: {fileID: 61792705961127598, guid: 1e75a04f9964d4af8a80ec0608e4b1c0,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 2.2984579
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e75a04f9964d4af8a80ec0608e4b1c0, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1311603961 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1253209761129816, guid: 5b3f49ad4a04b4f8abe10597924107d9,
+    type: 2}
+  m_PrefabInternal: {fileID: 794828956}
+--- !u!82 &1311603962
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311603961}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1386562671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,7 +2438,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1847910015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3311572, y: -0.6615475, z: 0.039284807}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
