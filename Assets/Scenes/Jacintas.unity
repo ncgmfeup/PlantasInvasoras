@@ -2416,7 +2416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerTools:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1579883397802454, guid: 246a06b774ffafb4995c7da64da93e39, type: 2}
   - {fileID: 0}
   - {fileID: 1662990770152814, guid: ddcff54933fbc4ee8bededc67b98c7c9, type: 2}
 --- !u!1 &1977899413
