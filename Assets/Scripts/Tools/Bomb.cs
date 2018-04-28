@@ -47,7 +47,8 @@ public class Bomb : ToolNamespace.Tool {
                 rb.AddForce(impact);
 
                 Plant affected = nearbyObject.GetComponent<Plant>();
-                affected.bombed(impact.magnitude);
+                if (affected != null)
+                    affected.bombed(impact.magnitude);
             }
         }
     }

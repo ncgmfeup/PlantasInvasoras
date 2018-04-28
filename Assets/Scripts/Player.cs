@@ -73,5 +73,9 @@ public class Player : MonoBehaviour {
         return m_selectedTool;
     }
 
+    public GameObject GetTool(int numTool) {
+        return m_playerTools[numTool];
+    }
+
     
 }
