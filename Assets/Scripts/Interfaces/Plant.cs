@@ -7,11 +7,14 @@ namespace PlantNamespace {
     public abstract class Plant : MonoBehaviour {
 		
 		protected StageManager manager; // So I can alter the managers state
+        protected AudioSource plantAudio;
+
 		public enum PlantState {
 			DRYING, WATERED // Add here more states you need
 		}
         public void Start() {
             initializeVariables();
+            plantAudio = GetComponent<AudioSource>();
         }
 
         public void Update()  {
