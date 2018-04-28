@@ -9,6 +9,7 @@ public class JacintaManager : StateNamespace.StageManager {
 	public float health;
     public Slider healthSlider;
 
+	public int maxJacintas;
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
 
@@ -19,7 +20,7 @@ public class JacintaManager : StateNamespace.StageManager {
 		// WATER
 		waterRenderer = GameObject.Find("Water").GetComponent<SpriteRenderer>();
 		health = 100f;
-
+		maxJacintas = 5;
 		rWater=45; gWater=71; bWater=58; // Change here to alter water tint
 
 		waterColor = new Color(1,1,1,1);
@@ -30,8 +31,19 @@ public class JacintaManager : StateNamespace.StageManager {
 	
 	// Update is called once per frame
 	public override void UpdateGameState() {
+		updateHealth();
 		updateWater();
         updateWaterLevel();
+	}
+
+	void updateHealth() {
+		int invadingPlants = GameObject.FindGameObjectsWithTag("InvadingPlant").Length;
+		health = Mathf.Lerp(100f, 0f, (float)invadingPlants/maxJacintas);
+		if (health <= 0){
+			//TODO Lose
+		} else if (health >= 100f){
+			//TODO Win
+		}
 	}
 
     void updateWater() {
@@ -57,6 +69,9 @@ public class JacintaManager : StateNamespace.StageManager {
             	m_scenePlayer.UseToolOnObject(obj);
 			} else if (m_scenePlayer.GetSelectedWeapon() == Utils.AXE_SEL) {
 				// Instantiate axe
+            	m_scenePlayer.UseToolOnObject(obj);
+			} else if (m_scenePlayer.GetSelectedWeapon() == Utils.FIRE_SEL) {
+				// Instantiate flame
             	m_scenePlayer.UseToolOnObject(obj);
 			}
 		}
