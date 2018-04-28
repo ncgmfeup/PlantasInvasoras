@@ -11,6 +11,8 @@ public class JacintaManager : StateNamespace.StageManager {
 
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
+
+    private JacintaSoundManager soundManager;
 	
 	// Use this for initialization
 	public override void InitializeVariables() {
@@ -20,9 +22,10 @@ public class JacintaManager : StateNamespace.StageManager {
 
 		rWater=45; gWater=71; bWater=58; // Change here to alter water tint
 
-		waterColor = new Color(1,1,1,1);				
-		// JACINTAS
+		waterColor = new Color(1,1,1,1);
+        // JACINTAS
 
+        soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
 	}
 	
 	// Update is called once per frame
@@ -64,6 +67,9 @@ public class JacintaManager : StateNamespace.StageManager {
             canUseTool = false;
             StartCoroutine("DecreaseTime");
             m_scenePlayer.UseTool(touch);
+
+            //Play Sound
+            soundManager.playBombSound();
         }
     }
 }

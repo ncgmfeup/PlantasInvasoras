@@ -12,12 +12,6 @@ public class Jacinta : Plant {
 
 	public float minRange = 10f, maxRange = 20f;
 
-    public AudioClip bombedClip;
-    public AudioClip fireClip;
-    public AudioClip cutClip;
-    public AudioClip popClip;
-    public AudioClip netClip;
-
 	private Color m_jacintaColor;
 	
 	private PlantState currentState;
@@ -78,26 +72,19 @@ public class Jacinta : Plant {
 	}
 
 	public void reproduce() {
-        //Pop Sound
-        plantAudio.clip = popClip;
-        plantAudio.Play();
 		manager.SpawnInvadingPlant(new Vector3(this.transform.position.x + Random.Range(-1f,1f), 
 				this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));
-	}
+        soundManager.playPopSound();
+    }
 
 	public override void cut() {
 		Rigidbody2D rb = GetComponent<Rigidbody2D>();
 		rb.AddForce(m_cutImpulse, ForceMode2D.Impulse);
-	
-        //Cut Sound
-        plantAudio.clip = cutClip;
-        plantAudio.Play();
+        soundManager.playCutSound();
     }
 
 	public override void burnt() {
-        //Burn Sound
-        plantAudio.clip = fireClip;
-        plantAudio.Play();
+        soundManager.playFireSound();
     }
 
 	public override void bombed(float impact) {
@@ -107,17 +94,10 @@ public class Jacinta : Plant {
 		for (int i = 0 ; i < impact / 100f ; i++) {
 			reproduce();
 		}
-
-        //Bomb Sound
-        plantAudio.clip = bombedClip;
-        plantAudio.Play();
     }
     
 	public override void caught() {
 		currentState = PlantState.DRYING;
-
-        //Pop Sound
-        plantAudio.clip = netClip;
-        plantAudio.Play();
+        soundManager.playNetSound();
     }
 }

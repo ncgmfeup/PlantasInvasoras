@@ -7,14 +7,16 @@ namespace PlantNamespace {
     public abstract class Plant : MonoBehaviour {
 		
 		protected StageManager manager; // So I can alter the managers state
-        protected AudioSource plantAudio;
+        public GameObject mainCamera;
+        protected JacintaSoundManager soundManager;
 
-		public enum PlantState {
+        public enum PlantState {
 			DRYING, WATERED // Add here more states you need
 		}
         public void Start() {
             initializeVariables();
-            plantAudio = GetComponent<AudioSource>();
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            soundManager = mainCamera.GetComponent<JacintaSoundManager>();
         }
 
         public void Update()  {

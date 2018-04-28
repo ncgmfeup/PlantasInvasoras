@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4746034891497066}
   - component: {fileID: 114543497859801404}
   m_Layer: 0
-  m_Name: Axe 1
+  m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bad3bb6366f4b2abe1cc1568e47b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: -0.25, y: 0.25, z: 0}
 --- !u!212 &212197832315081554
 SpriteRenderer:
   m_ObjectHideFlags: 1
