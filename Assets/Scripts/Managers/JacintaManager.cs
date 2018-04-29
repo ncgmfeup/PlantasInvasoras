@@ -66,6 +66,7 @@ public class JacintaManager : StateNamespace.StageManager {
 
     private void updateWaterLevel()
     {
+
         healthSlider.value = health/100f;
     }
 
@@ -85,7 +86,7 @@ public class JacintaManager : StateNamespace.StageManager {
 			}
 		}
     }
-
+    
 	public override void touched(Vector2 touch) {
         if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
             canUseTool = false;

@@ -7,14 +7,15 @@ using PlantNamespace;
 public class Bomb : ToolNamespace.Tool {
 
     public float m_radius = 100f;
-    private float m_force = 370f;
+    public float m_force = 370f;
 
-    private float m_threshold = 0.8f;
+    public float m_threshold = 0.8f;
     public Bomb() {
         InitializeVariables();
     }
 
     public override void UseTool(Vector3 pos) {
+        StartCoroutine("Explode", pos);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, m_radius);
 
         foreach (Collider2D nearbyObject in colliders) {
@@ -46,11 +47,15 @@ public class Bomb : ToolNamespace.Tool {
                 rb.AddForce(impact);
 
                 Plant affected = nearbyObject.GetComponent<Plant>();
-                affected.bombed(impact.magnitude);
+                if (affected != null)
+                    affected.bombed(impact.magnitude);
             }
         }
-    
+    }
 
+    private IEnumerator Explode(Vector3 pos) {
+        Debug.Log("Exploded, fam");
+        yield return null;
     }
 
     public override void InitializeVariables() {

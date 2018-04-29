@@ -69,14 +69,6 @@ public class MimosaManager : StateNamespace.StageManager {
             m_scenePlayer.UseToolOnObject(obj);
     }
 
-	public override void touched(Vector2 touch) {
-        if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
-            canUseTool = false;
-            StartCoroutine("DecreaseTime");
-            m_scenePlayer.UseTool(touch);
-        }
-    }
-
     public override void HandleDifficulty() {}
 
 }

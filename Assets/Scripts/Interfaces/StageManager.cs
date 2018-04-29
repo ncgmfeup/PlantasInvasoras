@@ -91,8 +91,23 @@ namespace StateNamespace {
 
         // Updates all the necessary components in a frame
         public abstract void UpdateGameState();
-        public abstract void touched(Vector2 touch);
+        public void touched(Vector3 touch) {
+            if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
 
+                canUseTool = false;
+                
+                GameObject newTool = Instantiate(m_scenePlayer.GetTool(Utils.BOMB_SEL),
+                    touch, Quaternion.identity);
+                
+                newTool.GetComponent<Bomb>().UseTool(touch);
+
+                StartCoroutine("DecreaseTime");
+                
+
+                //Play Sound
+                //soundManager.playBombSound();
+            }
+        }
         public abstract void HitSomething(GameObject obj); 
 
         IEnumerator DecreaseTime() {
@@ -101,10 +116,7 @@ namespace StateNamespace {
         }
 
         public void SpawnInvadingPlant(Vector3 pos) {
-            if (PlantObjectPooler.sharedInstance == null)
-                Debug.Log("Merda");
-            else
-                PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
+            PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
         }
 
         public void SpawnNativePlant(Vector3 pos) {

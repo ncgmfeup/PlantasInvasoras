@@ -62,8 +62,7 @@ public class Player : MonoBehaviour {
         } if (m_selectedTool.Equals(Utils.NET_SEL)) {
             plant.caught();
             newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
-        }
-            
+        }     
     }
 
     public void SelectWeapon(int newSelected) {
@@ -72,6 +71,10 @@ public class Player : MonoBehaviour {
 
     public int GetSelectedWeapon() {
         return m_selectedTool;
+    }
+
+    public GameObject GetTool(int numTool) {
+        return m_playerTools[numTool];
     }
 
     
