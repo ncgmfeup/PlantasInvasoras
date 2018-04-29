@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class JacintaManager : StateNamespace.StageManager {
 	private SpriteRenderer waterRenderer;
@@ -12,6 +13,9 @@ public class JacintaManager : StateNamespace.StageManager {
 	public int maxJacintas;
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
+
+    [SerializeField]
+    GameObject winScreen, loseScreen;
 
     private JacintaSoundManager soundManager;
 	
@@ -27,6 +31,9 @@ public class JacintaManager : StateNamespace.StageManager {
         // JACINTAS
 
         soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
+
+        winScreen.SetActive(false);
+        loseScreen.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -40,9 +47,11 @@ public class JacintaManager : StateNamespace.StageManager {
 		int invadingPlants = GameObject.FindGameObjectsWithTag("InvadingPlant").Length;
 		health = Mathf.Lerp(100f, 0f, (float)invadingPlants/maxJacintas);
 		if (health <= 0){
-			//TODO Lose
+            //TODO Lose
+            showLoseScreen();
 		} else if (health >= 100f){
-			//TODO Win
+            //TODO Win
+            showWinScreen();
 		}
 	}
 
@@ -86,5 +95,22 @@ public class JacintaManager : StateNamespace.StageManager {
             //Play Sound
             soundManager.playBombSound();
         }
+    }
+
+    private void showWinScreen()
+    {
+        loseScreen.SetActive(false);
+        winScreen.SetActive(true);
+    }
+
+    private void showLoseScreen()
+    {
+        winScreen.SetActive(false);
+        loseScreen.SetActive(true);
+    }
+
+    public void returnMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
