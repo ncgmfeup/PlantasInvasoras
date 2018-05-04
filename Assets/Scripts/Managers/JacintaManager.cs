@@ -86,17 +86,6 @@ public class JacintaManager : StateNamespace.StageManager {
 			}
 		}
     }
-    
-	public override void touched(Vector2 touch) {
-        if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
-            canUseTool = false;
-            StartCoroutine("DecreaseTime");
-            m_scenePlayer.UseTool(touch);
-
-            //Play Sound
-            soundManager.playBombSound();
-        }
-    }
 
     private void showWinScreen()
     {

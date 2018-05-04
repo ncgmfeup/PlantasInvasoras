@@ -76,6 +76,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_radius: 100
   m_force: 370
+  sprites:
+  - {fileID: 21300000, guid: b4e270fdeaff94355a39c783a85732b3, type: 3}
+  - {fileID: 21300000, guid: 99ca021ce812245c28dc91068832c34d, type: 3}
   m_threshold: 0.8
 --- !u!212 &212922009559066970
 SpriteRenderer:

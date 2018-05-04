@@ -35,8 +35,17 @@ public class Net : ToolNamespace.Tool {
         	yield return new WaitForEndOfFrame();
       	}
 
+		elapsedTime = 0;
+
+		/* while (elapsedTime < m_secondsToLift) 	{
+			transform.position = Vector3.Lerp(startPos, finalPos, 
+				Easing.Back.InOut(elapsedTime / m_secondsToLift));
+			elapsedTime += Time.deltaTime;
+        	yield return new WaitForEndOfFrame();
+		} */
+
+		Destroy(gameObject);
 		yield return null;
-		Destroy(this);
 	}
 
 	

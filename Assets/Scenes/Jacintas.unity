@@ -216,6 +216,60 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 82767239}
+--- !u!1 &83041921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 83041923}
+  - component: {fileID: 83041922}
+  m_Layer: 0
+  m_Name: World Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &83041922
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 83041921}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &83041923
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 83041921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.01500316, y: 0.047515385, z: -2.8633218}
+  m_LocalScale: {x: 21.62, y: 10.9, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103995981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,11 +2137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b3cdcf6baee9149a4ace80b7f72a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popClip: {fileID: 8300000, guid: f3ec8c8b4f8d5f846b3278453f29b232, type: 3}
-  bombedClip: {fileID: 8300000, guid: b5ca96fed2c47eb429831c113606e6c9, type: 3}
-  fireClip: {fileID: 8300000, guid: 2c16a2b1a635fa447a7187766f522bbb, type: 3}
+  popClip: {fileID: 0}
+  bombedClip: {fileID: 0}
+  fireClip: {fileID: 0}
   cutClip: {fileID: 0}
-  netClip: {fileID: 8300000, guid: 90342cd75dc495946ae39ffbe5cc6140, type: 3}
+  netClip: {fileID: 0}
   podaClip: {fileID: 0}
 --- !u!1 &1356959589
 GameObject:
@@ -3194,6 +3248,8 @@ MonoBehaviour:
   healthSlider: {fileID: 1436153902}
   maxJacintas: 0
   waterColor: {r: 0, g: 0, b: 0, a: 0}
+  winScreen: {fileID: 0}
+  loseScreen: {fileID: 0}
 --- !u!4 &1847910017
 Transform:
   m_ObjectHideFlags: 0
@@ -3219,9 +3275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerTools:
-  - {fileID: 0}
+  - {fileID: 1403371937429694, guid: 25a19f23515aa4a209e463a4bbc37e64, type: 2}
   - {fileID: 1579883397802454, guid: 246a06b774ffafb4995c7da64da93e39, type: 2}
-  - {fileID: 1051951170265956, guid: 027989ff97b4cce4daec56505291ccc1, type: 2}
+  - {fileID: 0}
   - {fileID: 1662990770152814, guid: ddcff54933fbc4ee8bededc67b98c7c9, type: 2}
 --- !u!114 &1847910019
 MonoBehaviour:
