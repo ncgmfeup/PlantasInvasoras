@@ -35,7 +35,7 @@ public class JacintaManager : StateNamespace.StageManager {
 	{
 		if(base.CheckGameState())
 		{
-			if (health <= 0)
+			if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
 			{
             	m_gameState = GameState.GameLost;
 				m_currentHUD.UpdateGameHUD(m_gameState);

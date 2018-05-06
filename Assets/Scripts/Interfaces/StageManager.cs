@@ -17,7 +17,7 @@ namespace StateNamespace {
         public Player m_scenePlayer;
 
         [SerializeField]
-        private int m_maxInvadingPlantsBeforeGameLost;
+        protected int m_maxInvadingPlantsBeforeGameLost;
 
         private TouchManager touchManager;
 
