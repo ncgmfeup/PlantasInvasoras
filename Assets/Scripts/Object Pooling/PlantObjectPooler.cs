@@ -43,6 +43,11 @@ public class PlantObjectPooler : MonoBehaviour
     {
         return m_invadingPlantsPool.ActiveObjects;
     }
+
+    public int GetNumberOfActiveNativePlants()
+    {
+        return m_nativePlantsPool.ActiveObjects;
+    }
     
     public GameObject GetNativePlant()
     {

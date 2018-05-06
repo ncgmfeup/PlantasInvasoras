@@ -12,7 +12,7 @@ namespace StateNamespace {
 
         public static StageManager sharedInstance;
 
-        public GameState m_gameState { get; set; }
+        public GameState m_gameState;
 
         public Player m_scenePlayer;
 
@@ -21,6 +21,7 @@ namespace StateNamespace {
 
         private TouchManager touchManager;
 
+        protected IGameHUD m_currentHUD;
 
         private float m_timeBetweenTaps = 0.5f;
         protected bool canUseTool;
@@ -45,9 +46,15 @@ namespace StateNamespace {
             
             canUseTool = true;
 
+            m_currentHUD = GetComponent<GenericGameHUD>();
+            if(m_currentHUD == null)
+                Debug.LogError("Game HUD component not found. Please create one on the GameObject: " + gameObject.name);
+
             CheckIfPlayerExists();
 
             InitializeVariables();
+
+            m_gameState = GameState.Playing;
         }
 
         void CheckIfPlayerExists() {
@@ -58,18 +65,25 @@ namespace StateNamespace {
 
         // Update is called once per frame
         void Update() {
-            UpdateGameState();
+            if(!(m_gameState == GameState.Paused || 
+                 m_gameState == GameState.GameLost ||
+                 m_gameState == GameState.GameWon))
+            {
+                UpdateGameState();
 
-            touchManager.updateTouch();
+                touchManager.updateTouch();
 
-            HandleDifficulty();
+                HandleDifficulty();
+
+                CheckGameState();
+            }
         }
 
         // To detect the win/lose condition.
-        private void CheckGameState()
+        protected virtual bool CheckGameState()
         {
             if (m_gameState == GameState.Paused || m_gameState == GameState.Starting)
-                return;
+                return false;
 
             int currentlySpawnedInvadingPlants = 
                 PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
@@ -77,10 +91,11 @@ namespace StateNamespace {
             //If all invading plants in the plant pooler are inactive
             if (currentlySpawnedInvadingPlants == 0) {
                 m_gameState = GameState.GameWon;
+                if(m_currentHUD != null)
+                    m_currentHUD.UpdateGameHUD(m_gameState);
             }
-            else if (currentlySpawnedInvadingPlants > m_maxInvadingPlantsBeforeGameLost) {
-                m_gameState = GameState.GameLost;
-            }
+
+            return true;
         }
 
         // Initializes all stage specific variables

@@ -67,8 +67,9 @@ public class Jacinta : Plant {
           	elapsedTime += Time.deltaTime;
         	yield return new WaitForEndOfFrame();
       	}
-
+		
 		yield return null;
+		DeSpawn();
 	}
 
 	public void reproduce() {
