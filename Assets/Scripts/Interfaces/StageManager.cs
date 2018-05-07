@@ -53,7 +53,6 @@ namespace StateNamespace {
         void Start()
         {
             healthSlider = GameObject.Find("Slider").GetComponent<Slider>();
-            touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager
             
             canUseTool = true;
             touchManager = GetComponent<TouchManager>();
