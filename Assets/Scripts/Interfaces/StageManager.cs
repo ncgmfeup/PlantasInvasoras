@@ -28,6 +28,10 @@ namespace StateNamespace {
         private float m_timeBetweenTaps = 0.5f;
         protected bool canUseTool;
 
+        protected Slider healthSlider;
+
+        protected float health;
+
         private void Awake()
         {
             if (!sharedInstance) {
