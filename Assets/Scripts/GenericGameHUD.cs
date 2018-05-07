@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using StateNamespace;
 
 public class GenericGameHUD : MonoBehaviour, IGameHUD {
 
 	[SerializeField]
-	GameObject m_winGameScreen, m_lostGameScreen, m_pausedGameScreen, m_startingGameScreen, m_gameHUD;
+	GameObject m_winGameScreen, m_lostGameScreen, m_pausedGameScreen, m_gameHUD, m_startingGameCounter;
 
 	void Awake () {
 		if(!m_winGameScreen)
@@ -17,8 +18,8 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 		if(!m_pausedGameScreen)
 			Debug.LogError("Paused game screen not assigned.");
 
-		if(!m_startingGameScreen)
-			Debug.LogError("Starting game screen not assigned.");
+		if(!m_startingGameCounter)
+			Debug.LogError("Starting game counter not assigned.");
 
 		if(!m_gameHUD)
 			Debug.LogError("Main game HUD not assigned.");
@@ -31,13 +32,13 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 		{
 			case StageManager.GameState.Playing:
 				SetScreenElementVisibity(m_pausedGameScreen, false);
-				SetScreenElementVisibity(m_startingGameScreen, false);
+				SetScreenElementVisibity(m_startingGameCounter, false);
 				break;
 			case StageManager.GameState.Paused:
 				SetScreenElementVisibity(m_pausedGameScreen, true);
 				break;
 			case StageManager.GameState.Starting:
-				SetScreenElementVisibity(m_startingGameScreen, true);
+				SetScreenElementVisibity(m_startingGameCounter, true);
 				break;
 			case StageManager.GameState.GameWon:
 				SetScreenElementVisibity(m_winGameScreen, true);
@@ -61,11 +62,24 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 				Debug.LogError("Undefined element.");
 			#endif
 		}
-			
+	}
+
+	public void SetStartingGameText(float startingTime)
+	{
+		if(startingTime > 0.5f)
+			m_startingGameCounter.GetComponent<Text>().text = Mathf.Ceil(startingTime).ToString();
+		else if(startingTime > 0f)
+			m_startingGameCounter.GetComponent<Text>().text = "Start!";
+	}
+
+	public void PauseGame()
+	{
+		StageManager.sharedInstance.PauseGame();
 	}
 
 	public void ReturnMainMenu()
 	{
 		SceneManager.LoadScene(0);
 	}
+
 }

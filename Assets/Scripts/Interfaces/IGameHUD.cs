@@ -1,7 +1,7 @@
-﻿using StateNamespace;
+﻿public interface IGameHUD {
 
-public interface IGameHUD {
+	void SetStartingGameText(float startingTime);
 
-	void UpdateGameHUD(StageManager.GameState currentState);
+	void UpdateGameHUD(StateNamespace.StageManager.GameState currentState);
 
 }

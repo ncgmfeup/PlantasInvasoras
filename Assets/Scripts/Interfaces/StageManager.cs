@@ -5,14 +5,16 @@ using ToolNamespace;
 using PlantNamespace;
 
 namespace StateNamespace {
-	public abstract class StageManager : MonoBehaviour    {
+	public abstract class StageManager : MonoBehaviour
+    {
         public enum GameState {
             Starting, Playing, Paused, GameWon, GameLost
         }
 
         public static StageManager sharedInstance;
 
-        public GameState m_gameState;
+        [SerializeField]
+        protected GameState m_gameState;
 
         public Player m_scenePlayer;
 
@@ -25,6 +27,8 @@ namespace StateNamespace {
 
         private float m_timeBetweenTaps = 0.5f;
         protected bool canUseTool;
+        [SerializeField]
+        private float m_timeUntilGameStarts = 3.5f;
 
         private void Awake()
         {
@@ -55,7 +59,7 @@ namespace StateNamespace {
 
             InitializeVariables();
 
-            m_gameState = GameState.Playing;
+            m_gameState = GameState.Starting;
         }
 
         void CheckIfPlayerExists() {
@@ -66,7 +70,12 @@ namespace StateNamespace {
 
         // Update is called once per frame
         void Update() {
-            if(!(m_gameState == GameState.Paused || 
+            if(m_timeUntilGameStarts > 0.0f)
+            {
+                m_timeUntilGameStarts -= Time.deltaTime;
+                m_currentHUD.SetStartingGameText(m_timeUntilGameStarts);
+            }
+            else if(!(m_gameState == GameState.Paused || 
                  m_gameState == GameState.GameLost ||
                  m_gameState == GameState.GameWon))
             {
@@ -77,23 +86,24 @@ namespace StateNamespace {
                 HandleDifficulty();
 
                 CheckGameState();
+
+                m_currentHUD.UpdateGameHUD(m_gameState);
             }
         }
 
         // To detect the win/lose condition.
         protected virtual bool CheckGameState()
         {
-            if (m_gameState == GameState.Paused || m_gameState == GameState.Starting)
+            if (m_gameState == GameState.Paused)
                 return false;
 
+            m_gameState = GameState.Playing;
             int currentlySpawnedInvadingPlants = 
                 PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
 
             //If all invading plants in the plant pooler are inactive
             if (currentlySpawnedInvadingPlants == 0) {
                 m_gameState = GameState.GameWon;
-                if(m_currentHUD != null)
-                    m_currentHUD.UpdateGameHUD(m_gameState);
             }
 
             return true;
@@ -139,5 +149,10 @@ namespace StateNamespace {
             PlantObjectPooler.sharedInstance.SpawnNativePlantAtPosition(pos);
         }
         
+        public void PauseGame()
+        {
+            m_gameState = GameState.Paused;
+        }
+
     }
 }
