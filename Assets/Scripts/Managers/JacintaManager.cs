@@ -6,23 +6,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class JacintaManager : StateNamespace.StageManager {
-	private SpriteRenderer waterRenderer;
 	
 	public int maxJacintas;
-	private float rWater, gWater, bWater; // RGB Components for dead water
-	public Color waterColor;
+	
+	private JacintaSoundManager soundManager;
 
-    private JacintaSoundManager soundManager;
+	private WaterShaderScript waterController;
 	
 	// Use this for initialization
 	public override void InitializeVariables() {
 		// WATER
-		waterRenderer = GameObject.Find("Water").GetComponent<SpriteRenderer>();
 		health = 100f;
 		maxJacintas = 5;
-		rWater=45; gWater=71; bWater=58; // Change here to alter water tint
-
-		waterColor = new Color(1,1,1,1);
+		
+		waterController = GameObject.Find("Water").GetComponent<WaterShaderScript>();
         // JACINTAS
 		PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(-1.04f, 1.46f, -3.25f));
 
@@ -45,24 +42,16 @@ public class JacintaManager : StateNamespace.StageManager {
 	
 	// Update is called once per frame
 	public override void UpdateGameState() {
+		waterController.UpdateHealth(health);
+		updateWaterLevel();
 		updateHealth();
-		updateWater();
-        updateWaterLevel();
 		m_currentHUD.UpdateGameHUD(m_gameState);
 	}
 
 	void updateHealth() {
 		int invadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
-		health = Mathf.Lerp(100f, 0f, (float)invadingPlants/maxJacintas);
-	}
-
-    void updateWater() {
-		//health -= 0.02f*plants.Count;
-		waterColor.r = (rWater + (100-rWater)*health/100f)/100f;
-		waterColor.g = (gWater + (100-gWater)*health/100f)/100f;
-		waterColor.b = (bWater + (100-bWater)*health/100f)/100f;
-		
-		waterRenderer.color= waterColor;
+		Debug.Log("Updating with numPlants " + invadingPlants + " health " + health + " max " +maxJacintas);
+		health = health + (((float)(maxJacintas-invadingPlants)/maxJacintas) * 100f - health)*0.1f;
 	}
 
     private void updateWaterLevel() {

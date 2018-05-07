@@ -29,12 +29,9 @@ public class AlgaeShaderScript : MonoBehaviour {
 			m_randomTime = Random.Range(1f, 2.5f);	
 		}
 
-		Debug.Log("Magnitude " + EffectMaterial.GetFloat("_Magnitude"));
-		
-
-		m_currMagnitude = m_startMagnitude +
-			 (m_finalMagnitude - m_startMagnitude) * (m_elapsedTime / m_randomTime); 
-	
+		m_currMagnitude = Mathf.Lerp(m_startMagnitude, m_finalMagnitude, (m_elapsedTime / m_randomTime));
+		//m_currMagnitude = m_startMagnitude +
+			 //(m_finalMagnitude - m_startMagnitude) * (m_elapsedTime / m_randomTime); 
 
 		EffectMaterial.SetFloat("_Magnitude", m_currMagnitude);
 		
