@@ -51,8 +51,6 @@ public class Jacinta : Plant {
 	}
 
 	public override IEnumerator Die() {
-		Debug.Log("Is dying, poor thing");
-
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
 		m_jacintaColor = spriteRenderer.color;

@@ -27,7 +27,8 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 
 	// Shows the correct part of the hud based on what the current state of the game is.
 	public void UpdateGameHUD(StageManager.GameState currentState)
-	{
+	{  
+		/*
 		switch (currentState)
 		{
 			case StageManager.GameState.Playing:
@@ -49,7 +50,7 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 			default:
 				Debug.LogWarning("Recieved new game state definition. Are you sure you defined a correct case for every state?");
 				break;
-		}
+		}  */
 	}
 
 	private void SetScreenElementVisibity(GameObject hudElement, bool isVisible)

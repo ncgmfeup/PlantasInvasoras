@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class JacintaManager : StateNamespace.StageManager {
 	private SpriteRenderer waterRenderer;
-	public float health;
-    public Slider healthSlider;
-
+	
 	public int maxJacintas;
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
@@ -67,9 +65,7 @@ public class JacintaManager : StateNamespace.StageManager {
 		waterRenderer.color= waterColor;
 	}
 
-    private void updateWaterLevel()
-    {
-
+    private void updateWaterLevel() {
         healthSlider.value = health/100f;
     }
 

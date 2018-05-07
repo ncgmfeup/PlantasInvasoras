@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using ToolNamespace;
 using PlantNamespace;
 
@@ -30,6 +32,10 @@ namespace StateNamespace {
         [SerializeField]
         private float m_timeUntilGameStarts = 3.5f;
 
+        protected Slider healthSlider;
+
+        protected float health;
+
         private void Awake()
         {
             if (!sharedInstance) {
@@ -46,6 +52,9 @@ namespace StateNamespace {
         // Use this for initialization
         void Start()
         {
+            healthSlider = GameObject.Find("Slider").GetComponent<Slider>();
+            touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager
+            
             canUseTool = true;
             touchManager = GetComponent<TouchManager>();
             if(!touchManager)
