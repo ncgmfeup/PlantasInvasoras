@@ -29,6 +29,7 @@ namespace ObjectPooling
         /// <summary>
         /// How many objects from the pool are active.
         /// </summary>
+        [SerializeField]
         private int m_activeObjects = 0;
         
         /// <summary>

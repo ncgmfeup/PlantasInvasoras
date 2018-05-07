@@ -12,9 +12,6 @@ public class JacintaManager : StateNamespace.StageManager {
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
 
-    [SerializeField]
-    GameObject winScreen, loseScreen;
-
     private JacintaSoundManager soundManager;
 	
 	// Use this for initialization
@@ -27,11 +24,23 @@ public class JacintaManager : StateNamespace.StageManager {
 
 		waterColor = new Color(1,1,1,1);
         // JACINTAS
+		PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(-1.04f, 1.46f, -3.25f));
 
         soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
+	}
 
-        winScreen.SetActive(false);
-        loseScreen.SetActive(false);
+	protected sealed override bool CheckGameState()
+	{
+		if(base.CheckGameState())
+		{
+			if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
+			{
+            	m_gameState = GameState.GameLost;
+				m_currentHUD.UpdateGameHUD(m_gameState);
+			}
+			return true;
+		}
+		else return false;
 	}
 	
 	// Update is called once per frame
@@ -39,18 +48,12 @@ public class JacintaManager : StateNamespace.StageManager {
 		updateHealth();
 		updateWater();
         updateWaterLevel();
+		m_currentHUD.UpdateGameHUD(m_gameState);
 	}
 
 	void updateHealth() {
 		int invadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
 		health = Mathf.Lerp(100f, 0f, (float)invadingPlants/maxJacintas);
-		if (health <= 0){
-            //TODO Lose
-            showLoseScreen();
-		} else if (health >= 100f){
-            //TODO Win
-            showWinScreen();
-		}
 	}
 
     void updateWater() {
@@ -81,22 +84,5 @@ public class JacintaManager : StateNamespace.StageManager {
             	m_scenePlayer.UseToolOnObject(obj);
 			}
 		}
-    }
-
-    private void showWinScreen()
-    {
-        loseScreen.SetActive(false);
-        winScreen.SetActive(true);
-    }
-
-    private void showLoseScreen()
-    {
-        winScreen.SetActive(false);
-        loseScreen.SetActive(true);
-    }
-
-    public void returnMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 }
