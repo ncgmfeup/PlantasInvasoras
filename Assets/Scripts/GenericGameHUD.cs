@@ -55,8 +55,6 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 	{
 		if(hudElement)
 			hudElement.SetActive(isVisible);
-		else
-			Debug.LogError("Undefined element.");
 	}
 
 	public void ReturnMainMenu()

@@ -42,11 +42,12 @@ namespace StateNamespace {
         // Use this for initialization
         void Start()
         {
-            touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager
-            
             canUseTool = true;
+            touchManager = GetComponent<TouchManager>();
+            if(!touchManager)
+                Debug.LogError("Touch manager component not found. Please create one on the GameObject: " + gameObject.name);
 
-            m_currentHUD = GetComponent<GenericGameHUD>();
+            m_currentHUD = GetComponent<IGameHUD>();
             if(m_currentHUD == null)
                 Debug.LogError("Game HUD component not found. Please create one on the GameObject: " + gameObject.name);
 
