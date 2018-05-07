@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class JacintaManager : StateNamespace.StageManager {
 	private SpriteRenderer waterRenderer;
-	public float health;
-    public Slider healthSlider;
-
+	
 	public int maxJacintas;
 	private float rWater, gWater, bWater; // RGB Components for dead water
 	public Color waterColor;
@@ -44,7 +42,7 @@ public class JacintaManager : StateNamespace.StageManager {
 	}
 
 	void updateHealth() {
-		int invadingPlants = GameObject.FindGameObjectsWithTag("InvadingPlant").Length;
+		int invadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
 		health = Mathf.Lerp(100f, 0f, (float)invadingPlants/maxJacintas);
 		if (health <= 0){
             //TODO Lose
@@ -64,9 +62,7 @@ public class JacintaManager : StateNamespace.StageManager {
 		waterRenderer.color= waterColor;
 	}
 
-    private void updateWaterLevel()
-    {
-
+    private void updateWaterLevel() {
         healthSlider.value = health/100f;
     }
 
@@ -85,17 +81,6 @@ public class JacintaManager : StateNamespace.StageManager {
             	m_scenePlayer.UseToolOnObject(obj);
 			}
 		}
-    }
-    
-	public override void touched(Vector2 touch) {
-        if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
-            canUseTool = false;
-            StartCoroutine("DecreaseTime");
-            m_scenePlayer.UseTool(touch);
-
-            //Play Sound
-            soundManager.playBombSound();
-        }
     }
 
     private void showWinScreen()

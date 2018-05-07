@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using ToolNamespace;
 using PlantNamespace;
 
@@ -11,6 +13,9 @@ namespace StateNamespace {
         }
 
         public static StageManager sharedInstance;
+
+        protected float health;
+        protected Slider healthSlider;
 
         public GameState m_gameState { get; set; }
 
@@ -41,6 +46,7 @@ namespace StateNamespace {
         // Use this for initialization
         void Start()
         {
+            healthSlider = GameObject.Find("Slider").GetComponent<Slider>();
             touchManager = new TouchManager(this); // Instantiate a new instance of a touch manager
             
             canUseTool = true;
