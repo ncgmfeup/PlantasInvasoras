@@ -14,11 +14,7 @@ public class TouchManager : MonoBehaviour
     public float minSwipeForce = 50;
     public float tapTimeLimit = 1000;
 
-    private StageManager manager; // To tell what to do with input.
-
-    public TouchManager(StageManager manager) { 
-        this.manager = manager;
-
+    public void Start() { 
         mainCamera = Camera.main;
         cameraMovement = mainCamera.GetComponent<CameraMovement>();
         Input.simulateMouseWithTouches = true;
@@ -35,12 +31,12 @@ public class TouchManager : MonoBehaviour
             startTouchTime = Time.time;
           
             Vector2 altered = (mainCamera.ScreenToWorldPoint(startTouch));
-            manager.touched(altered);
+            StageManager.sharedInstance.touched(altered);
         }
         else if (Input.GetMouseButton(0)) //While Touch/Mouse down
         {
             swipeForce = (Vector2)Input.mousePosition - startTouch;
-            manager.touched((Vector2)startTouch);
+            StageManager.sharedInstance.touched((Vector2)startTouch);
         
             swipeForce /= Time.deltaTime;
             startTouch = Input.mousePosition;
@@ -81,7 +77,7 @@ public class TouchManager : MonoBehaviour
 
             if (hit)   {
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
-                manager.HitSomething(hit.collider.gameObject);
+                StageManager.sharedInstance.HitSomething(hit.collider.gameObject);
             }
         }
     }

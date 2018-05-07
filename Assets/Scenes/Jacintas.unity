@@ -3172,6 +3172,7 @@ GameObject:
   - component: {fileID: 1847910018}
   - component: {fileID: 1847910019}
   - component: {fileID: 1847910020}
+  - component: {fileID: 1847910021}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -3260,6 +3261,19 @@ MonoBehaviour:
   m_pausedGameScreen: {fileID: 0}
   m_startingGameScreen: {fileID: 0}
   m_gameHUD: {fileID: 0}
+--- !u!114 &1847910021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1847910015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644ba363ab9715b488e4e3b48ef0679a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSwipeForce: 0
+  tapTimeLimit: 0
 --- !u!1001 &1880360908
 Prefab:
   m_ObjectHideFlags: 0
