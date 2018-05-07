@@ -55,6 +55,13 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 	{
 		if(hudElement)
 			hudElement.SetActive(isVisible);
+		else
+		{
+			#ifdef UNITY_EDITOR
+				Debug.LogError("Undefined element.");
+			#endif
+		}
+			
 	}
 
 	public void ReturnMainMenu()
