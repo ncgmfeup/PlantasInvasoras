@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class JacintaManager : StateNamespace.StageManager {
 	
 	public int maxJacintas;
+    public float delayGameOverTime = 5.0f;
 	
 	private JacintaSoundManager soundManager;
 
@@ -17,9 +18,10 @@ public class JacintaManager : StateNamespace.StageManager {
 	public override void InitializeVariables() {
 		// WATER
 		health = 100f;
-		maxJacintas = 5;
+		maxJacintas = 2;
 		
 		waterController = GameObject.Find("Water").GetComponent<WaterShaderScript>();
+
         // JACINTAS
 		PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(-1.04f, 1.46f, -3.25f));
 
@@ -28,17 +30,20 @@ public class JacintaManager : StateNamespace.StageManager {
 
 	protected sealed override void CheckGameState()
 	{
-		if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
-		{
-			m_gameState = GameState.GameLost;
-			m_currentHUD.SetGameLostScreenVisibility(true);
-		}
+        base.CheckGameState();
+        if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
+        {
+            //m_gameState = GameState.GameLost;
+            //m_currentHUD.SetGameLostScreenVisibility(true);
+            StartCoroutine("DelayGameOver");
+        }
+        else StopCoroutine("DelayGameOver");
 	}
 	
 	// Update is called once per frame
 	public override void UpdateGameState() {
 		waterController.UpdateHealth(health);
-		updateWaterLevel();
+		//updateWaterLevel();
 		updateHealth();
 		//updateWater();
         updateWaterLevel();
@@ -48,6 +53,9 @@ public class JacintaManager : StateNamespace.StageManager {
 		int invadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
 		Debug.Log("Updating with numPlants " + invadingPlants + " health " + health + " max " +maxJacintas);
 		health = health + (((float)(maxJacintas-invadingPlants)/maxJacintas) * 100f - health)*0.1f;
+        if (health <= 0)
+            StartCoroutine("DelayGameOver");
+        else StopCoroutine("DelayGameOver");
 	}
 
     private void updateWaterLevel() {
@@ -69,5 +77,13 @@ public class JacintaManager : StateNamespace.StageManager {
             	m_scenePlayer.UseToolOnObject(obj);
 			}
 		}
+    }
+
+    private IEnumerator DelayGameOver()
+    {
+        yield return new WaitForSeconds(delayGameOverTime);
+        m_gameState = GameState.GameLost;
+        m_currentHUD.SetGameLostScreenVisibility(true);
+        yield return null;
     }
 }
