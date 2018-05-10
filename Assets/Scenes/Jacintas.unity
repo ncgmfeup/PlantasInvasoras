@@ -3635,7 +3635,7 @@ MonoBehaviour:
   m_lostGameScreen: {fileID: 29540583}
   m_pausedGameScreen: {fileID: 0}
   m_startingGameCounter: {fileID: 1230845781}
-  m_gameHUD: {fileID: 0}
+  m_gameHUD: {fileID: 399142304}
 --- !u!114 &1847910021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3648,7 +3648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSwipeForce: 0
-  tapTimeLimit: 0
+  tapTimeLimit: 1
 --- !u!1001 &1880360908
 Prefab:
   m_ObjectHideFlags: 0
