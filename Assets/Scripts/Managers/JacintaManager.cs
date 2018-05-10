@@ -26,18 +26,13 @@ public class JacintaManager : StateNamespace.StageManager {
         soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
 	}
 
-	protected sealed override bool CheckGameState()
+	protected sealed override void CheckGameState()
 	{
-		if(base.CheckGameState())
+		if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
 		{
-			if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
-			{
-            	m_gameState = GameState.GameLost;
-				m_currentHUD.UpdateGameHUD(m_gameState);
-			}
-			return true;
+			m_gameState = GameState.GameLost;
+			m_currentHUD.ShowGameLostScreen();
 		}
-		else return false;
 	}
 	
 	// Update is called once per frame
@@ -45,6 +40,8 @@ public class JacintaManager : StateNamespace.StageManager {
 		waterController.UpdateHealth(health);
 		updateWaterLevel();
 		updateHealth();
+		updateWater();
+        updateWaterLevel();
 		m_currentHUD.UpdateGameHUD(m_gameState);
 	}
 

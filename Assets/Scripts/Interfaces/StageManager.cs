@@ -67,7 +67,7 @@ namespace StateNamespace {
 
             InitializeVariables();
 
-            m_gameState = GameState.Starting;
+            StartCoroutine(PreGameBehaviour());
         }
 
         void CheckIfPlayerExists() {
@@ -78,14 +78,10 @@ namespace StateNamespace {
 
         // Update is called once per frame
         void Update() {
-            if(m_timeUntilGameStarts > 0.0f)
-            {
-                m_timeUntilGameStarts -= Time.deltaTime;
-                m_currentHUD.SetStartingGameText(m_timeUntilGameStarts);
-            }
-            else if(!(m_gameState == GameState.Paused || 
+            if(!(m_gameState == GameState.Paused || 
                  m_gameState == GameState.GameLost ||
-                 m_gameState == GameState.GameWon))
+                 m_gameState == GameState.GameWon ||
+                 m_gameState == GameState.Starting))
             {
                 UpdateGameState();
 
@@ -94,27 +90,21 @@ namespace StateNamespace {
                 HandleDifficulty();
 
                 CheckGameState();
-
-                m_currentHUD.UpdateGameHUD(m_gameState);
             }
         }
 
         // To detect the win/lose condition.
-        protected virtual bool CheckGameState()
+        protected virtual void CheckGameState()
         {
-            if (m_gameState == GameState.Paused)
-                return false;
-
-            m_gameState = GameState.Playing;
             int currentlySpawnedInvadingPlants = 
                 PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
 
             //If all invading plants in the plant pooler are inactive
             if (currentlySpawnedInvadingPlants == 0) {
+                ResumeGame();
                 m_gameState = GameState.GameWon;
+                m_currentHUD.ShowGameWonScreen();
             }
-
-            return true;
         }
 
         // Initializes all stage specific variables
@@ -144,11 +134,6 @@ namespace StateNamespace {
         }
         public abstract void HitSomething(GameObject obj); 
 
-        IEnumerator DecreaseTime() {
-            yield return new WaitForSeconds(m_timeBetweenTaps);
-            canUseTool = true;
-        }
-
         public void SpawnInvadingPlant(Vector3 pos) {
             PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);
         }
@@ -160,7 +145,41 @@ namespace StateNamespace {
         public void PauseGame()
         {
             m_gameState = GameState.Paused;
+            m_currentHUD.ShowPauseScreen();
         }
 
+        public void ResumeGame()
+        {
+            m_gameState = GameState.Playing;
+            m_currentHUD.HidePauseScreen();
+        }
+
+        IEnumerator DecreaseTime() {
+            yield return new WaitForSeconds(m_timeBetweenTaps);
+            canUseTool = true;
+        }
+
+        private IEnumerator PreGameBehaviour()
+        {
+            m_gameState = GameState.Starting;
+            float currStartTime = 3f;
+            m_currentHUD.SetStartingGameText(currStartTime);
+            yield return new WaitForSeconds(1f);
+            
+            currStartTime--;
+            m_currentHUD.SetStartingGameText(currStartTime);
+            yield return new WaitForSeconds(1f);
+            
+            currStartTime--;
+            m_currentHUD.SetStartingGameText(currStartTime);
+            yield return new WaitForSeconds(1f);
+            
+            currStartTime--;
+            m_currentHUD.SetStartingGameText(currStartTime);
+            yield return new WaitForSeconds(.5f);
+
+            m_gameState = GameState.Playing;
+            m_currentHUD.HideStartingScreen();
+        }
     }
 }

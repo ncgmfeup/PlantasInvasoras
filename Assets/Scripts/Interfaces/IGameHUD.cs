@@ -2,6 +2,14 @@
 
 	void SetStartingGameText(float startingTime);
 
-	void UpdateGameHUD(StateNamespace.StageManager.GameState currentState);
+	void ShowPauseScreen();
+
+	void HidePauseScreen();
+
+	void ShowGameWonScreen();
+
+	void ShowGameLostScreen();
+
+	void HideStartingScreen();
 
 }

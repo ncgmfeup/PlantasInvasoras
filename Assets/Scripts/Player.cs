@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private GameObject[] m_playerTools;
 
+    [SerializeField]
     private int m_selectedTool = -1;
 
     void Start() {
