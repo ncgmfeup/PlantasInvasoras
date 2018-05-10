@@ -64,11 +64,9 @@ public class Jacinta : Plant {
 		spriteRenderer.sprite = witeredSprites[chosenSpriteIndex];
 		yield return new WaitForSeconds(m_secondsToStayDried);
 		
-		
-		currentState = PlantState.WATERED;
-		spriteRenderer.sprite = healthySprites[chosenSpriteIndex];
-		yield return null;
 		DeSpawn();
+        currentState = PlantState.WATERED;
+		spriteRenderer.sprite = healthySprites[chosenSpriteIndex];
 	}
 
 	public void reproduce() {

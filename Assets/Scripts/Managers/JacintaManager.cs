@@ -8,14 +8,14 @@ using UnityEngine.SceneManagement;
 public class JacintaManager : StateNamespace.StageManager {
 	
 	public int maxJacintas;
-    public float delayGameOverTime = 5.0f;
+    public float delayGameOverTime = 8.0f;
 	
 	private JacintaSoundManager soundManager;
 
 	private WaterShaderScript waterController;
-	
-	// Use this for initialization
-	public override void InitializeVariables() {
+
+    // Use this for initialization
+    public override void InitializeVariables() {
 		// WATER
 		health = 100f;
 		maxJacintas = 2;
@@ -67,16 +67,19 @@ public class JacintaManager : StateNamespace.StageManager {
 	public override void HitSomething(GameObject obj) {
 		Debug.Log("Cenas");
         if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG) {
-			if (m_scenePlayer.GetSelectedWeapon() == Utils.NET_SEL) {
-				// Instantiate net
-            	m_scenePlayer.UseToolOnObject(obj);
-			} else if (m_scenePlayer.GetSelectedWeapon() == Utils.AXE_SEL) {
+            if (m_scenePlayer.GetSelectedWeapon() == Utils.NET_SEL && canUseTool) {
+                // Instantiate net
+                m_scenePlayer.UseToolOnObject(obj);
+                StartCoroutine("NetCooldown");
+            } else if (m_scenePlayer.GetSelectedWeapon() == Utils.AXE_SEL && canUseTool) {
 				// Instantiate axe
             	m_scenePlayer.UseToolOnObject(obj);
-			} else if (m_scenePlayer.GetSelectedWeapon() == Utils.FIRE_SEL) {
+                StartCoroutine("ToolCooldown");
+            } else if (m_scenePlayer.GetSelectedWeapon() == Utils.FIRE_SEL && canUseTool) {
 				// Instantiate flame
             	m_scenePlayer.UseToolOnObject(obj);
-			}
+                StartCoroutine("ToolCooldown");
+            }
 		}
     }
 
@@ -86,5 +89,19 @@ public class JacintaManager : StateNamespace.StageManager {
         m_gameState = GameState.GameLost;
         m_currentHUD.SetGameLostScreenVisibility(true);
         yield return null;
+    }
+
+    IEnumerator NetCooldown()
+    {
+        canUseTool = false;
+        yield return new WaitForSeconds(4.0f);
+        canUseTool = true;
+    }
+
+    IEnumerator ToolCooldown()
+    {
+        canUseTool = false;
+        yield return new WaitForSeconds(1.0f);
+        canUseTool = true;
     }
 }
