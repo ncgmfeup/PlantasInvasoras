@@ -161,6 +161,8 @@ namespace StateNamespace {
 
         private IEnumerator PreGameBehaviour()
         {
+            m_currentHUD.SetGameHUDVisibility(false);
+
             m_gameState = GameState.Starting;
             float currStartTime = 3f;
             m_currentHUD.SetStartingGameText(currStartTime);
@@ -180,6 +182,7 @@ namespace StateNamespace {
 
             m_gameState = GameState.Playing;
             m_currentHUD.SetStartingScreenVisibility(false);
+            m_currentHUD.SetGameHUDVisibility(true);
         }
     }
 }
