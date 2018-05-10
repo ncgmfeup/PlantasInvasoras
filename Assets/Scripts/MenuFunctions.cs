@@ -80,6 +80,11 @@ public class MenuFunctions : MonoBehaviour {
             encyclopediaScreen.SetActive(isVisible);
     }
 
+    public void PlayJacintasLevel()
+    {
+        SceneManager.LoadScene("Jacintas");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
