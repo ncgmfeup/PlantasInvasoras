@@ -2,14 +2,14 @@
 
 	void SetStartingGameText(float startingTime);
 
-	void ShowPauseScreen();
+	void SetPauseScreenVisibility(bool isVisible);
 
-	void HidePauseScreen();
+	void SetGameWonScreenVisibility(bool isVisible);
 
-	void ShowGameWonScreen();
+	void SetGameLostScreenVisibility(bool isVisible);
 
-	void ShowGameLostScreen();
+	void SetStartingScreenVisibility(bool isVisible);
 
-	void HideStartingScreen();
-
+	void SetGameHUDVisibility(bool isVisible);
+	
 }

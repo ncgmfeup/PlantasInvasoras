@@ -31,7 +31,7 @@ public class JacintaManager : StateNamespace.StageManager {
 		if (PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants() > m_maxInvadingPlantsBeforeGameLost)
 		{
 			m_gameState = GameState.GameLost;
-			m_currentHUD.ShowGameLostScreen();
+			m_currentHUD.SetGameLostScreenVisibility(true);
 		}
 	}
 	
