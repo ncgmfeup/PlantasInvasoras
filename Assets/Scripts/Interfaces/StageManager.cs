@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ToolNamespace;
 using PlantNamespace;
+using UnityEngine.EventSystems;
 
 namespace StateNamespace {
 	public abstract class StageManager : MonoBehaviour
@@ -116,8 +117,7 @@ namespace StateNamespace {
         // Updates all the necessary components in a frame
         public abstract void UpdateGameState();
         public void touched(Vector3 touch) {
-            if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool) {
-
+            if (m_scenePlayer.GetSelectedWeapon() == Utils.BOMB_SEL && canUseTool && !EventSystem.current.IsPointerOverGameObject()) {
                 canUseTool = false;
                 
                 GameObject newTool = Instantiate(m_scenePlayer.GetTool(Utils.BOMB_SEL),
@@ -126,8 +126,6 @@ namespace StateNamespace {
                 newTool.GetComponent<Bomb>().UseTool(touch);
 
                 StartCoroutine("DecreaseTime");
-                
-
                 //Play Sound
                 //soundManager.playBombSound();
             }
@@ -161,6 +159,8 @@ namespace StateNamespace {
 
         private IEnumerator PreGameBehaviour()
         {
+            m_currentHUD.SetGameHUDVisibility(false);
+
             m_gameState = GameState.Starting;
             float currStartTime = 3f;
             m_currentHUD.SetStartingGameText(currStartTime);
@@ -180,6 +180,7 @@ namespace StateNamespace {
 
             m_gameState = GameState.Playing;
             m_currentHUD.SetStartingScreenVisibility(false);
+            m_currentHUD.SetGameHUDVisibility(true);
         }
     }
 }

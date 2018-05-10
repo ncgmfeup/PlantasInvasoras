@@ -6,25 +6,31 @@ using PlantNamespace;
 public class Jacinta : Plant {
 
 	public float m_secondsToDry;
+
+	public float m_secondsToStayDried;
 	public float m_secondsToReproduce;
 
 	public Vector2 m_cutImpulse;
 
 	public float minRange = 10f, maxRange = 20f;
-
-	private Color m_jacintaColor;
 	
 	private PlantState currentState;
 
+	public Sprite[] healthySprites;
+	public Sprite[] witeredSprites; 
+	private int chosenSpriteIndex;
+	private SpriteRenderer spriteRenderer; 
+
     public override void initializeVariables() {
-		m_jacintaColor = new Color(1,1,1,1); // Updates when dried
-		m_secondsToDry = 1;
 		m_secondsToReproduce = Random.Range(minRange, maxRange);
 		m_cutImpulse = new Vector2(0f, -1f);
 		GameObject gameManager = GameObject.Find("GameManager");
 		manager = (StateNamespace.StageManager) gameManager.GetComponent(typeof(JacintaManager));
 
 		currentState = PlantState.WATERED;
+		chosenSpriteIndex = Random.Range(0,healthySprites.Length);
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer.sprite = healthySprites[chosenSpriteIndex];
 
 		Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.centerOfMass = new Vector2(0,-2);
@@ -44,28 +50,23 @@ public class Jacinta : Plant {
 				StartCoroutine("Die");
 
 				// RETORNAR À POOL
-				currentState = PlantState.WATERED;
+				//currentState = PlantState.WATERED;
+
 				break;
 
 		}
 	}
 
 	public override IEnumerator Die() {
-		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+		//SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-		m_jacintaColor = spriteRenderer.color;
-
-		yield return new WaitForSeconds(1f);
-
-		float elapsedTime = 0;
-		while (elapsedTime < m_secondsToDry) 	{
-			m_jacintaColor.a = Mathf.Lerp(1f, 0f, (elapsedTime / m_secondsToDry));
-			spriteRenderer.color = m_jacintaColor; 
-
-          	elapsedTime += Time.deltaTime;
-        	yield return new WaitForEndOfFrame();
-      	}
+		yield return new WaitForSeconds(m_secondsToDry);
+		spriteRenderer.sprite = witeredSprites[chosenSpriteIndex];
+		yield return new WaitForSeconds(m_secondsToStayDried);
 		
+		
+		currentState = PlantState.WATERED;
+		spriteRenderer.sprite = healthySprites[chosenSpriteIndex];
 		yield return null;
 		DeSpawn();
 	}

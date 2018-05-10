@@ -13,14 +13,15 @@
 
 	SubShader
 	{
-		Tags
-		{
-			"Queue" = "Transparent"
-			"PreviewType" = "Plane"
+		Tags {
+			"Queue"="Transparent" 
+			"RenderType"="Transparent"
 		}
+		ZWrite Off		
+		Blend SrcAlpha OneMinusSrcAlpha
+
 		Pass
 		{
-			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
 			#pragma vertex vert

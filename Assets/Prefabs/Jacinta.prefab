@@ -192,15 +192,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f4c3ebe8d6a4b60b3b62911206614d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_secondsToDry: 1
+  mainCamera: {fileID: 0}
+  m_secondsToDry: 3
+  m_secondsToStayDried: 1
   m_secondsToReproduce: 0
+  m_cutImpulse: {x: 0, y: 0}
   minRange: 10
   maxRange: 20
-  bombedClip: {fileID: 8300000, guid: b5ca96fed2c47eb429831c113606e6c9, type: 3}
-  fireClip: {fileID: 8300000, guid: 2c16a2b1a635fa447a7187766f522bbb, type: 3}
-  cutClip: {fileID: 0}
-  popClip: {fileID: 8300000, guid: f3ec8c8b4f8d5f846b3278453f29b232, type: 3}
-  netClip: {fileID: 8300000, guid: 90342cd75dc495946ae39ffbe5cc6140, type: 3}
+  healthySprites:
+  - {fileID: 21300000, guid: 786c85c8082dc4a66b8e7cf809286d40, type: 3}
+  - {fileID: 21300000, guid: 36618a8b685fb469291d722356422985, type: 3}
+  witeredSprites:
+  - {fileID: 21300000, guid: 44d9b4c2883717840b82cc306b85d523, type: 3}
+  - {fileID: 21300000, guid: b1892e8e3c6d8924dbf960ad9300dec6, type: 3}
 --- !u!212 &212771316230267496
 SpriteRenderer:
   m_ObjectHideFlags: 1

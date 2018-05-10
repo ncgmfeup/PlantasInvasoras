@@ -5,6 +5,7 @@ using UnityEngine;
 public class Net : ToolNamespace.Tool {
 
 	private float m_secondsToLift;
+	private float m_secondsToStayLift;
 
 	public Net()   {	
 		InitializeVariables();
@@ -13,7 +14,7 @@ public class Net : ToolNamespace.Tool {
 
     public override void InitializeVariables() {
 		m_secondsToLift = 2;	
-		
+		m_secondsToStayLift = 2;
 	}
 
     public override void UseTool(Vector3 pos)  {
@@ -28,7 +29,7 @@ public class Net : ToolNamespace.Tool {
 		
 		float elapsedTime = 0;
 
-		while (elapsedTime < m_secondsToLift) 	{
+		while (elapsedTime < m_secondsToLift + m_secondsToStayLift) 	{
 			transform.position = Vector3.Lerp(startPos, finalPos, 
 				Easing.Back.InOut(elapsedTime / m_secondsToLift));
 			elapsedTime += Time.deltaTime;
