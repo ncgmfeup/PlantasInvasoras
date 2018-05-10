@@ -40,9 +40,8 @@ public class JacintaManager : StateNamespace.StageManager {
 		waterController.UpdateHealth(health);
 		updateWaterLevel();
 		updateHealth();
-		updateWater();
+		//updateWater();
         updateWaterLevel();
-		m_currentHUD.UpdateGameHUD(m_gameState);
 	}
 
 	void updateHealth() {
