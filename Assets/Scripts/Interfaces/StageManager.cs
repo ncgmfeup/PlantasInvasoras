@@ -103,7 +103,7 @@ namespace StateNamespace {
             if (currentlySpawnedInvadingPlants == 0) {
                 ResumeGame();
                 m_gameState = GameState.GameWon;
-                m_currentHUD.ShowGameWonScreen();
+                m_currentHUD.SetGameWonScreenVisibility(true);
             }
         }
 
@@ -145,13 +145,13 @@ namespace StateNamespace {
         public void PauseGame()
         {
             m_gameState = GameState.Paused;
-            m_currentHUD.ShowPauseScreen();
+            m_currentHUD.SetPauseScreenVisibility(true);
         }
 
         public void ResumeGame()
         {
             m_gameState = GameState.Playing;
-            m_currentHUD.HidePauseScreen();
+            m_currentHUD.SetPauseScreenVisibility(false);
         }
 
         IEnumerator DecreaseTime() {
@@ -179,7 +179,7 @@ namespace StateNamespace {
             yield return new WaitForSeconds(.5f);
 
             m_gameState = GameState.Playing;
-            m_currentHUD.HideStartingScreen();
+            m_currentHUD.SetStartingScreenVisibility(false);
         }
     }
 }

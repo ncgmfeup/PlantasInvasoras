@@ -6,7 +6,11 @@ using StateNamespace;
 public class GenericGameHUD : MonoBehaviour, IGameHUD {
 
 	[SerializeField]
-	GameObject m_winGameScreen, m_lostGameScreen, m_pausedGameScreen, m_startingGameCounter;
+	GameObject m_winGameScreen,
+			   m_lostGameScreen,
+			   m_pausedGameScreen,
+			   m_startingGameCounter,
+			   m_gameHUD;
 
 	void Awake () {
 		if(!m_winGameScreen)
@@ -42,29 +46,29 @@ public class GenericGameHUD : MonoBehaviour, IGameHUD {
 			m_startingGameCounter.GetComponent<Text>().text = "Start!";
 	}
 
-	public void ShowPauseScreen()
+	public void SetPauseScreenVisibility(bool isVisible)
 	{
-		SetScreenElementVisibity(m_startingGameCounter, true);
+		SetScreenElementVisibity(m_startingGameCounter, isVisible);
 	}
 
-	public void HidePauseScreen()
+	public void SetGameWonScreenVisibility(bool isVisible)
 	{
-		SetScreenElementVisibity(m_startingGameCounter, false);
+		SetScreenElementVisibity(m_winGameScreen, isVisible);
 	}
 
-	public void ShowGameWonScreen()
+	public void SetGameLostScreenVisibility(bool isVisible)
 	{
-		SetScreenElementVisibity(m_winGameScreen, true);
+		SetScreenElementVisibity(m_lostGameScreen, isVisible);
 	}
 
-	public void ShowGameLostScreen()
+	public void SetStartingScreenVisibility(bool isVisible)
 	{
-		SetScreenElementVisibity(m_lostGameScreen, true);
+		SetScreenElementVisibity(m_startingGameCounter, isVisible);
 	}
 
-	public void HideStartingScreen()
+	public void SetGameHUDVisibility(bool isVisible)
 	{
-		SetScreenElementVisibity(m_startingGameCounter, false);
+		SetScreenElementVisibity(m_gameHUD, isVisible);
 	}
 
 	public void ReturnMainMenu()
