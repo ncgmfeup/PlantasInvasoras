@@ -126,8 +126,6 @@ namespace StateNamespace {
                 newTool.GetComponent<Bomb>().UseTool(touch);
 
                 StartCoroutine("DecreaseTime");
-                
-
                 //Play Sound
                 //soundManager.playBombSound();
             }

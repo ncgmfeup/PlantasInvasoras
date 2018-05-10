@@ -46,7 +46,7 @@ public class JacintaManager : StateNamespace.StageManager {
 
 	void updateHealth() {
 		int invadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
-		Debug.Log("Updating with numPlants " + invadingPlants + " health " + health + " max " +maxJacintas);
+		//Debug.Log("Updating with numPlants " + invadingPlants + " health " + health + " max " + maxJacintas);
 		health = health + (((float)(maxJacintas-invadingPlants)/maxJacintas) * 100f - health)*0.1f;
 	}
 
@@ -57,6 +57,7 @@ public class JacintaManager : StateNamespace.StageManager {
     public override void HandleDifficulty() {}
 
 	public override void HitSomething(GameObject obj) {
+		Debug.Log("Cenas");
         if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG) {
 			if (m_scenePlayer.GetSelectedWeapon() == Utils.NET_SEL) {
 				// Instantiate net
