@@ -53,6 +53,8 @@ public class TouchManager : MonoBehaviour
 
     private void HandleSwipe(bool ended)
     {
+        Debug.Log("yooo");
+
         float sfx = Mathf.Abs(swipeForce.x);
         float sfy = Mathf.Abs(swipeForce.y);
 
@@ -71,9 +73,10 @@ public class TouchManager : MonoBehaviour
         {
             //Tap
             //Debug.Log("Tap");
-
+            
             Vector2 touch = mainCamera.ScreenToWorldPoint(startTouch);
             RaycastHit2D hit = Physics2D.Raycast(touch, Vector2.zero);
+
 
             if (hit)   {
                 Debug.Log("Hit: " + hit.collider.gameObject.name);
