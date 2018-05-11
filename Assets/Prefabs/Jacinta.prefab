@@ -200,11 +200,15 @@ MonoBehaviour:
   minRange: 10
   maxRange: 20
   healthySprites:
+  - {fileID: 21300000, guid: 615c5306acb774591a2fa868a6182bed, type: 3}
   - {fileID: 21300000, guid: 786c85c8082dc4a66b8e7cf809286d40, type: 3}
   - {fileID: 21300000, guid: 36618a8b685fb469291d722356422985, type: 3}
+  - {fileID: 21300000, guid: e3c9441ceff6f4f1e85eecdd1ddaf1b3, type: 3}
   witeredSprites:
+  - {fileID: 21300000, guid: 5f2444607e91fdc4a918105e166b5290, type: 3}
   - {fileID: 21300000, guid: 44d9b4c2883717840b82cc306b85d523, type: 3}
   - {fileID: 21300000, guid: b1892e8e3c6d8924dbf960ad9300dec6, type: 3}
+  - {fileID: 21300000, guid: 68ab04a66950fae4c8d2514e8680f80a, type: 3}
 --- !u!212 &212771316230267496
 SpriteRenderer:
   m_ObjectHideFlags: 1
