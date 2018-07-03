@@ -1523,8 +1523,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Game Design and Lead Artist\nLiliana Santos\n\nProgramadores\n\nFilipe
-    Costa\nM\xE1rio Esteves\nPedro Reis\nRicardo Teixeira\n"
+  m_Text: "Game Design and Artist\nLiliana Santos\n\nProgrammers\n\nFilipe Costa\nM\xE1rio
+    Esteves\nPedro Reis\nRicardo Teixeira\n"
 --- !u!222 &1272772522
 CanvasRenderer:
   m_ObjectHideFlags: 0
