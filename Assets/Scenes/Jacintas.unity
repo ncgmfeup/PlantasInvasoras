@@ -1772,7 +1772,7 @@ GameObject:
   - component: {fileID: 1018876363}
   m_Layer: 0
   m_Name: Jacinta (1)
-  m_TagString: InvadingPlant
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2018,7 +2018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0.99264705, g: 0.021896647, b: 0.021896647, a: 1}
   max_strenght: 1
-  lifetime: 2
+  lifetime: 3
 --- !u!1 &1071921257
 GameObject:
   m_ObjectHideFlags: 0
