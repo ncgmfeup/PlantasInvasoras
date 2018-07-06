@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aura_priority: 0
-  evil_color: {r: 1, g: 1, b: 1, a: 1}
+  evil_color: {r: 1, g: 0.02238324, b: 0.02238324, a: 1}
   max_strenght: 0.8
   lifetime: 3
   decay_color: {r: 0.5441177, g: 0.41465518, b: 0.13602942, a: 1}
