@@ -53,7 +53,7 @@ public class TouchManager : MonoBehaviour
 
     private void HandleSwipe(bool ended)
     {
-        Debug.Log("yooo");
+        //Debug.Log("yooo");
 
         float sfx = Mathf.Abs(swipeForce.x);
         float sfy = Mathf.Abs(swipeForce.y);

@@ -21,6 +21,8 @@ public class Jacinta : Plant {
 	private int chosenSpriteIndex;
 	private SpriteRenderer spriteRenderer; 
 
+	private JacintaShader jacintaShader; 
+
     public override void initializeVariables() {
 		m_secondsToReproduce = Random.Range(minRange, maxRange);
 		m_cutImpulse = new Vector2(0f, -1f);
@@ -34,6 +36,8 @@ public class Jacinta : Plant {
 
 		Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.centerOfMass = new Vector2(0,-2);
+
+		jacintaShader = GetComponent<JacintaShader>();
 	}
 	
 	// Update is called once per frame
@@ -97,5 +101,9 @@ public class Jacinta : Plant {
 	public override void caught() {
 		currentState = PlantState.DRYING;
         soundManager.playNetSound();
+    }
+
+	public override void Touch() {
+		jacintaShader.TurnOnEvilAura();
     }
 }

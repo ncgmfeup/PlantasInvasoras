@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212771316230267496}
   - component: {fileID: 50789978009401996}
   - component: {fileID: 114238509244618378}
+  - component: {fileID: 114861243727360730}
   - component: {fileID: 61792705961127598}
   - component: {fileID: 114142403921056872}
   - component: {fileID: 82468863601041692}
@@ -209,6 +210,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 44d9b4c2883717840b82cc306b85d523, type: 3}
   - {fileID: 21300000, guid: b1892e8e3c6d8924dbf960ad9300dec6, type: 3}
   - {fileID: 21300000, guid: 68ab04a66950fae4c8d2514e8680f80a, type: 3}
+--- !u!114 &114861243727360730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864722989104568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650076b14b754bd46ab00ea207a2fb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aura_priority: 0
+  evil_color: {r: 1, g: 1, b: 1, a: 1}
+  max_strenght: 0.8
+  lifetime: 3
+  decay_color: {r: 0.5441177, g: 0.41465518, b: 0.13602942, a: 1}
+  force: 0
+  force_evil: 0
+  force_decay: 0
 --- !u!212 &212771316230267496
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -223,7 +243,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4a38b061c03193c4e85715d548e9e02a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

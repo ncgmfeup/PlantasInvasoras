@@ -65,7 +65,7 @@ public class JacintaManager : StateNamespace.StageManager {
     public override void HandleDifficulty() {}
 
 	public override void HitSomething(GameObject obj) {
-		Debug.Log("Cenas");
+		//Debug.Log("Cenas");
         if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG) {
             if (m_scenePlayer.GetSelectedWeapon() == Utils.NET_SEL && canUseTool) {
                 // Instantiate net
@@ -79,6 +79,8 @@ public class JacintaManager : StateNamespace.StageManager {
 				// Instantiate flame
             	m_scenePlayer.UseToolOnObject(obj);
                 StartCoroutine("ToolCooldown");
+            } else {
+               obj.SendMessage("Touch", null, SendMessageOptions.DontRequireReceiver);
             }
 		}
     }

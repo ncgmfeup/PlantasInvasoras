@@ -33,6 +33,7 @@ namespace PlantNamespace {
         public abstract void burnt();
         public abstract void cut();
         public abstract void caught();
+        public abstract void Touch();
         public abstract void initializeVariables();
 
         // Dying coroutine
