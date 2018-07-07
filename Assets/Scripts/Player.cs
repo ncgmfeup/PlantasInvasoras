@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
   public ToolType tool = ToolType.None;
   private GameObject tool_obj;
 
-	public GameObject[] tools;
+  public GameObject[] tools;
 
   [SerializeField]
   private GameObject[] m_playerTools;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
   /**
    * Useful for explosions!
    */
-  public void UseTool(Vector2 position)
+  public void UseTool2(Vector2 position)
   {
     if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length &&
         m_playerTools[m_selectedTool] != null)
@@ -98,40 +98,59 @@ public class Player : MonoBehaviour
     return m_playerTools[numTool];
   }
 
-	//Select a new tool.
+  //Select a new tool.
   public void SelectWeapon(int tool_id)
   {
-		if(tool != ToolType.None)
-			return;
-		tool = (ToolType)tool_id;
+    if (tool != ToolType.None)
+      return;
+    tool = (ToolType)tool_id;
     switch (tool)
     {
+      case ToolType.Bomb:
+        tool_obj = Instantiate(tools[0], Vector3.zero, Quaternion.identity);
+        break;
+      case ToolType.Axe:
+        tool_obj = Instantiate(tools[1], Vector3.zero, Quaternion.identity);
+        break;
       case ToolType.Fire:
-				tool_obj = Instantiate(tools[2], Vector3.zero, Quaternion.identity);
+        tool_obj = Instantiate(tools[2], Vector3.zero, Quaternion.identity);
+        break;
+      case ToolType.Net:
+        tool_obj = Instantiate(tools[3], Vector3.zero, Quaternion.identity);
         break;
       default:
-				ResetTool();
+        ResetTool();
         break;
     }
-		//Debug.Log("Tool:" + tool.ToString());
+    Debug.Log("Tool:" + tool.ToString());
   }
 
-	//Sets the position of tool_obj
-	public void UpdateToolPosition(Vector2 position)
+  //Sets the position of tool_obj
+  public void UpdateToolPosition(Vector2 position)
   {
-		//Debug.Log("Updating Tool Position");
-		if(tool_obj != null)
-			tool_obj.transform.position = new Vector3(position.x, position.y, tool_obj.transform.position.z);
+    //Debug.Log("Updating Tool Position");
+    if (tool_obj != null)
+      tool_obj.transform.position = new Vector3(position.x, position.y, tool_obj.transform.position.z);
   }
 
-	//Deletes current object and sets tool to ToolType.None
-	public void ResetTool(){
-		if(tool_obj != null){
-			//Debug.Log("Destroy Tool");
-			Destroy(tool_obj);
-		}
+  //Deletes current object and sets tool to ToolType.None
+  public void ResetTool()
+  {
+    if (tool_obj != null)
+    {
+      //Debug.Log("Destroy Tool");
+      Destroy(tool_obj);
+    }
+    tool_obj = null;
+    tool = ToolType.None;
+  }
+
+	//Calls use tool on position. Warning!! Doesn't deletes the object.
+	public void UseTool(Vector2 position)
+  {
+		tool_obj.GetComponent<Tool>().UseTool(position);
 		tool_obj = null;
-		tool = ToolType.None;
-	}
+    tool = ToolType.None;
+  }
 
 }

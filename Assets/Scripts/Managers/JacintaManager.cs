@@ -146,6 +146,9 @@ public class JacintaManager : StateNamespace.StageManager
         if (hit = Physics2D.Raycast(position, Vector2.zero))
           hit.collider.gameObject.SendMessage("Touch", null, SendMessageOptions.DontRequireReceiver);
         break;
+      case Player.ToolType.Bomb:
+        m_scenePlayer.UseTool(position);
+        break;
       default:
         m_scenePlayer.ResetTool();
         break;

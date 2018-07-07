@@ -64,7 +64,7 @@ public class Bomb : ToolNamespace.Tool {
         Debug.Log("Extracting from water");
 
 		Vector3 startScale = new Vector3(0,0,0);
-		Vector3 finalScale = this.transform.localScale/2f;
+		Vector3 finalScale = this.transform.localScale/0.5f;
 		
 		float elapsedTime = 0;
 
@@ -88,7 +88,6 @@ public class Bomb : ToolNamespace.Tool {
 		} */
 
 		Destroy(gameObject);
-		yield return null;
         yield return null;
     }
 
