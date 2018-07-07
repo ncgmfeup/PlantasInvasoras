@@ -29,64 +29,9 @@ public class Player : MonoBehaviour
   {
     if (!StageManager.sharedInstance)
       Debug.LogWarning("No state manager found in the scene.");
-
-    instantiateTools();
   }
 
-  private void instantiateTools()
-  {
-    /*m_playerTools[0]
-    m_playerTools[0] = new Bomb();
-    m_playerTools[1] = new Axe();
-    m_playerTools[2] = new Flame();
-    m_playerTools[3] = new Net();
-*/
-  }
 
-  /**
-   * Useful for explosions!
-   */
-  public void UseTool2(Vector2 position)
-  {
-    if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length &&
-        m_playerTools[m_selectedTool] != null)
-      m_playerTools[m_selectedTool].GetComponent<Tool>().UseTool(position);
-  }
-
-  /**
-   * Used only for certain weapons
-   */
-  public void UseToolOnObject(GameObject plantObject)
-  {
-    Plant plant = plantObject.GetComponent<Plant>();
-
-    // Bomb is handled dynamically, through physics
-    GameObject newTool;
-
-    newTool = Instantiate(m_playerTools[m_selectedTool],
-         plantObject.transform.position, m_playerTools[m_selectedTool].transform.rotation);
-    if (m_selectedTool.Equals(Utils.AXE_SEL))
-    {
-      plant.cut();
-      newTool.GetComponent<Axe>().UseTool(plantObject.transform.position);
-    }
-    else if (m_selectedTool.Equals(Utils.FIRE_SEL))
-    {
-      plant.burnt();
-      Debug.Log("Burning");
-      newTool.GetComponent<Flame>().UseTool(plantObject.transform.position);
-    }
-    if (m_selectedTool.Equals(Utils.NET_SEL))
-    {
-      plant.caught();
-      newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
-    }
-  }
-
-  public void SelectWeapon2(int newSelected)
-  {
-    m_selectedTool = newSelected;
-  }
 
   public int GetSelectedWeapon()
   {

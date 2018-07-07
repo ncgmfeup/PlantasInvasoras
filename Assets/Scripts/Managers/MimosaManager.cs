@@ -64,11 +64,6 @@ public class MimosaManager : StateNamespace.StageManager {
         return;
 	}
 
-	public override void HitSomething(GameObject obj) {
-        if (obj.tag == Utils.BAD_PLANT_TAG || obj.tag == Utils.NORMAL_PLANT_TAG)
-            m_scenePlayer.UseToolOnObject(obj);
-    }
-
     public override void HandleDifficulty() {}
 
 	public override void TouchStart(Vector2 position) {}

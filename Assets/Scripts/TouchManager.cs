@@ -70,41 +70,5 @@ public class TouchManager : MonoBehaviour
     }
     #endregion
   }
-
-  private void HandleSwipe(bool ended)
-  {
-    //Debug.Log("yooo");
-
-    float sfx = Mathf.Abs(swipeForce.x);
-    float sfy = Mathf.Abs(swipeForce.y);
-
-    if (sfx > sfy && sfx > minSwipeForce)
-    {
-      //Horizontal Swipe
-      //Debug.Log("Horizontal Swipe");
-      //cameraMovement.Swipe(swipeForce.x);
-    }
-    else if (sfy > minSwipeForce)
-    {
-      //Vertical Swipe
-      //Debug.Log("Vertical Swipe");
-    }
-    else if (ended && Time.time - startTouchTime < tapTimeLimit)
-    {
-      //Tap
-      //Debug.Log("Tap");
-
-      Vector2 touch = mainCamera.ScreenToWorldPoint(startTouch);
-      RaycastHit2D hit = Physics2D.Raycast(touch, Vector2.zero);
-
-
-      if (hit)
-      {
-        Debug.Log("Hit: " + hit.collider.gameObject.name);
-        StageManager.sharedInstance.HitSomething(hit.collider.gameObject);
-      }
-    }
-  }
-
 }
 

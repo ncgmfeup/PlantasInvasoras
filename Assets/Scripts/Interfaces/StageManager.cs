@@ -140,7 +140,7 @@ namespace StateNamespace {
         //Called at the end of the touch
         public abstract void TouchEnd(Vector2 position);
 
-        public abstract void HitSomething(GameObject obj); 
+        //public abstract void HitSomething(GameObject obj); 
 
         public void SpawnInvadingPlant(Vector3 pos) {
             PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(pos);

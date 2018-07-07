@@ -65,7 +65,7 @@ public class JacintaShader : MonoBehaviour
 
 	void UpdateDecayAura()
   {
-		decay_aura_force = 0;
+		//decay_aura_force = 0;
   }
 
   void ForceAura()
@@ -93,5 +93,9 @@ public class JacintaShader : MonoBehaviour
   public void TurnOnEvilAura()
   {
 		lastClick = Time.time;
+  }
+
+  public void SetDecay(float d) {
+    decay_aura_force = d;
   }
 }

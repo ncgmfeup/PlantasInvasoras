@@ -198,6 +198,7 @@ MonoBehaviour:
   m_secondsToStayDried: 1
   m_secondsToReproduce: 0
   m_cutImpulse: {x: 0, y: 0}
+  min_drying_height: 2.5
   minRange: 10
   maxRange: 20
   healthySprites:

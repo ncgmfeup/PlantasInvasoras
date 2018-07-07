@@ -8,10 +8,14 @@ public class Jacinta : Plant
 
   public float m_secondsToDry;
 
+  private float dryingTimer = 0;
+
   public float m_secondsToStayDried;
   public float m_secondsToReproduce;
 
   public Vector2 m_cutImpulse;
+
+  public float min_drying_height;
 
   public float minRange = 10f, maxRange = 20f;
 
@@ -52,35 +56,48 @@ public class Jacinta : Plant
     switch (currentState)
     {
       case PlantState.WATERED:
+        if (transform.position.y > min_drying_height){
+          currentState = PlantState.DRYING;
+        }
+
         m_secondsToReproduce -= Time.deltaTime;
         if (m_secondsToReproduce <= 0)
         {
           reproduce();
           m_secondsToReproduce = Random.Range(minRange, maxRange);
         }
+
+        dryingTimer -= Time.deltaTime;
+        dryingTimer = Mathf.Max(dryingTimer, 0);
         break;
       case PlantState.DRYING:
-        StartCoroutine("Die");
+        if (transform.position.y < min_drying_height){
+          currentState = PlantState.WATERED;
+          m_secondsToReproduce = Random.Range(minRange, maxRange);
+        }
 
-        // RETORNAR À POOL
-        //currentState = PlantState.WATERED;
-
+        dryingTimer += Time.deltaTime;
+        if(dryingTimer > m_secondsToDry)
+          StartCoroutine("Die");
         break;
 
     }
+
+    jacintaShader.SetDecay(dryingTimer/m_secondsToDry);
   }
 
   public override IEnumerator Die()
   {
     //SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-    yield return new WaitForSeconds(m_secondsToDry);
+    //yield return new WaitForSeconds(m_secondsToDry);
     spriteRenderer.sprite = witeredSprites[chosenSpriteIndex];
     yield return new WaitForSeconds(m_secondsToStayDried);
 
     DeSpawn();
     currentState = PlantState.WATERED;
     spriteRenderer.sprite = healthySprites[chosenSpriteIndex];
+    dryingTimer = 0;
   }
 
   public void reproduce()
@@ -103,7 +120,7 @@ public class Jacinta : Plant
     {
       fire = Instantiate(fire_prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
       currentState = PlantState.BURNING;
-	  StartCoroutine(Burn());
+      StartCoroutine(Burn());
     }
     soundManager.playFireSound();
   }
@@ -136,9 +153,15 @@ public class Jacinta : Plant
     if (fire != null)
     {
       Destroy(fire);
-	  fire = null;
-	  currentState = PlantState.WATERED;
+      fire = null;
+      currentState = PlantState.WATERED;
     }
 
+  }
+
+  void OnActivate()
+  {
+    if(jacintaShader != null)
+      jacintaShader.TurnOnEvilAura();
   }
 }
