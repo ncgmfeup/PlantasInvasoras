@@ -210,6 +210,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 44d9b4c2883717840b82cc306b85d523, type: 3}
   - {fileID: 21300000, guid: b1892e8e3c6d8924dbf960ad9300dec6, type: 3}
   - {fileID: 21300000, guid: 68ab04a66950fae4c8d2514e8680f80a, type: 3}
+  fire_prefab: {fileID: 1957529820694994, guid: 691b755bb6ab12a4f93a1d8f8ac3b500,
+    type: 2}
+  m_secondsToBurn: 3
 --- !u!114 &114861243727360730
 MonoBehaviour:
   m_ObjectHideFlags: 1

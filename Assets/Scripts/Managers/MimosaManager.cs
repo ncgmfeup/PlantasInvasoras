@@ -71,4 +71,8 @@ public class MimosaManager : StateNamespace.StageManager {
 
     public override void HandleDifficulty() {}
 
+	public override void TouchStart(Vector2 position) {}
+    public override void TouchContinue(Vector2 position) {}
+    public override void TouchEnd(Vector2 position) {}
+
 }

@@ -130,6 +130,16 @@ namespace StateNamespace {
                 //soundManager.playBombSound();
             }
         }
+
+        //Called at the start of the touch
+        public abstract void TouchStart(Vector2 position);
+
+        //Called during the touch
+        public abstract void TouchContinue(Vector2 position);
+        
+        //Called at the end of the touch
+        public abstract void TouchEnd(Vector2 position);
+
         public abstract void HitSomething(GameObject obj); 
 
         public void SpawnInvadingPlant(Vector3 pos) {

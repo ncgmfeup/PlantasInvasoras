@@ -29,4 +29,6 @@ public class Flame : ToolNamespace.Tool {
         Debug.Log("Flame Swipe");
 	}
 
+    
+
 }

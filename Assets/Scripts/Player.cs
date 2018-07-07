@@ -9,74 +9,129 @@ using PlantNamespace;
 /// Defines the player in the game. Contains all the tools the player has access to, 
 /// and also creates the gameplay effects in the scene.
 /// </summary>
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
-    [SerializeField]
-    private GameObject[] m_playerTools;
+  public enum ToolType { None, Bomb, Axe, Fire, Net }
 
-    [SerializeField]
-    private int m_selectedTool = -1;
+  public ToolType tool = ToolType.None;
+  private GameObject tool_obj;
 
-    void Start() {
-        if (!StageManager.sharedInstance)
-            Debug.LogWarning("No state manager found in the scene.");
+	public GameObject[] tools;
 
-        instantiateTools();
+  [SerializeField]
+  private GameObject[] m_playerTools;
+
+  [SerializeField]
+  private int m_selectedTool = -1;
+
+  void Start()
+  {
+    if (!StageManager.sharedInstance)
+      Debug.LogWarning("No state manager found in the scene.");
+
+    instantiateTools();
+  }
+
+  private void instantiateTools()
+  {
+    /*m_playerTools[0]
+    m_playerTools[0] = new Bomb();
+    m_playerTools[1] = new Axe();
+    m_playerTools[2] = new Flame();
+    m_playerTools[3] = new Net();
+*/
+  }
+
+  /**
+   * Useful for explosions!
+   */
+  public void UseTool(Vector2 position)
+  {
+    if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length &&
+        m_playerTools[m_selectedTool] != null)
+      m_playerTools[m_selectedTool].GetComponent<Tool>().UseTool(position);
+  }
+
+  /**
+   * Used only for certain weapons
+   */
+  public void UseToolOnObject(GameObject plantObject)
+  {
+    Plant plant = plantObject.GetComponent<Plant>();
+
+    // Bomb is handled dynamically, through physics
+    GameObject newTool;
+
+    newTool = Instantiate(m_playerTools[m_selectedTool],
+         plantObject.transform.position, m_playerTools[m_selectedTool].transform.rotation);
+    if (m_selectedTool.Equals(Utils.AXE_SEL))
+    {
+      plant.cut();
+      newTool.GetComponent<Axe>().UseTool(plantObject.transform.position);
     }
-
-    private void instantiateTools() {
-        /*m_playerTools[0]
-        m_playerTools[0] = new Bomb();
-        m_playerTools[1] = new Axe();
-        m_playerTools[2] = new Flame();
-        m_playerTools[3] = new Net();
-    */
+    else if (m_selectedTool.Equals(Utils.FIRE_SEL))
+    {
+      plant.burnt();
+      Debug.Log("Burning");
+      newTool.GetComponent<Flame>().UseTool(plantObject.transform.position);
     }
-    
-    /**
-     * Useful for explosions!
-     */
-    public void UseTool(Vector2 position) {
-        if (m_selectedTool > -1 && m_selectedTool < m_playerTools.Length && 
-            m_playerTools[m_selectedTool] != null)
-            m_playerTools[m_selectedTool].GetComponent<Tool>().UseTool(position);
+    if (m_selectedTool.Equals(Utils.NET_SEL))
+    {
+      plant.caught();
+      newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
     }
+  }
 
-    /**
-     * Used only for certain weapons
-     */
-    public void UseToolOnObject(GameObject plantObject) {
-        Plant plant = plantObject.GetComponent<Plant>();
+  public void SelectWeapon2(int newSelected)
+  {
+    m_selectedTool = newSelected;
+  }
 
-        // Bomb is handled dynamically, through physics
-        GameObject newTool;
+  public int GetSelectedWeapon()
+  {
+    return m_selectedTool;
+  }
 
-        newTool = Instantiate(m_playerTools[m_selectedTool],
-             plantObject.transform.position, m_playerTools[m_selectedTool].transform.rotation);
-        if (m_selectedTool.Equals(Utils.AXE_SEL)) {
-            plant.cut();
-            newTool.GetComponent<Axe>().UseTool(plantObject.transform.position);
-        } else if (m_selectedTool.Equals(Utils.FIRE_SEL)) {
-            plant.burnt();
-            Debug.Log("Burning");
-            newTool.GetComponent<Flame>().UseTool(plantObject.transform.position);
-        } if (m_selectedTool.Equals(Utils.NET_SEL)) {
-            plant.caught();
-            newTool.GetComponent<Net>().UseTool(plantObject.transform.position);
-        }     
+  public GameObject GetTool(int numTool)
+  {
+    return m_playerTools[numTool];
+  }
+
+	//Select a new tool.
+  public void SelectWeapon(int tool_id)
+  {
+		if(tool != ToolType.None)
+			return;
+		tool = (ToolType)tool_id;
+    switch (tool)
+    {
+      case ToolType.Fire:
+				tool_obj = Instantiate(tools[2], Vector3.zero, Quaternion.identity);
+        break;
+      default:
+				ResetTool();
+        break;
     }
+		//Debug.Log("Tool:" + tool.ToString());
+  }
 
-    public void SelectWeapon(int newSelected) {
-        m_selectedTool = newSelected;
-    }
+	//Sets the position of tool_obj
+	public void UpdateToolPosition(Vector2 position)
+  {
+		//Debug.Log("Updating Tool Position");
+		if(tool_obj != null)
+			tool_obj.transform.position = new Vector3(position.x, position.y, tool_obj.transform.position.z);
+  }
 
-    public int GetSelectedWeapon() {
-        return m_selectedTool;
-    }
+	//Deletes current object and sets tool to ToolType.None
+	public void ResetTool(){
+		if(tool_obj != null){
+			//Debug.Log("Destroy Tool");
+			Destroy(tool_obj);
+		}
+		tool_obj = null;
+		tool = ToolType.None;
+	}
 
-    public GameObject GetTool(int numTool) {
-        return m_playerTools[numTool];
-    }
-
-    
 }

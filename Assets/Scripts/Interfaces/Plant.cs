@@ -11,8 +11,11 @@ namespace PlantNamespace {
         protected JacintaSoundManager soundManager;
 
         public enum PlantState {
-			DRYING, WATERED // Add here more states you need
+			DRYING, WATERED, BURNING // Add here more states you need
 		}
+
+        protected PlantState currentState;
+
         public void Start() {
             initializeVariables();
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
