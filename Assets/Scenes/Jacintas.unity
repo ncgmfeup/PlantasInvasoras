@@ -6930,10 +6930,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameState: 0
   m_scenePlayer: {fileID: 0}
-  m_maxInvadingPlantsBeforeGameLost: 2
+  m_maxInvadingPlantsBeforeGameLost: 5
   m_timeUntilGameStarts: 3
   maxJacintas: 0
-  delayGameOverTime: 10
+  delayGameOverTime: 1
 --- !u!4 &1847910017
 Transform:
   m_ObjectHideFlags: 0

@@ -42,6 +42,7 @@ public class JacintaShader : MonoBehaviour
   void OnEnable()
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
+    lastClick = Time.time;
     UpdateAura();
   }
 

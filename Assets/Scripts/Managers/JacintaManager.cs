@@ -8,21 +8,31 @@ using UnityEngine.SceneManagement;
 public class JacintaManager : StateNamespace.StageManager
 {
 
-  public int maxJacintas;
+  //public int maxJacintas;
   public float delayGameOverTime = 8.0f;
 
   private JacintaSoundManager soundManager;
 
   private WaterShaderScript waterController;
 
+  private ParticleSystem bubblesSystem;
+
+  private float healthRegen;
+
+  private float maxBubblesSpawnRate;
+
   // Use this for initialization
   public override void InitializeVariables()
   {
     // WATER
     health = 100f;
-    maxJacintas = 2;
+    //m_maxInvadingPlantsBeforeGameLost = 2;
 
     waterController = GameObject.Find("Water").GetComponent<WaterShaderScript>();
+
+    bubblesSystem = GameObject.Find("Bubbles").GetComponent<ParticleSystem>();
+    var emission = bubblesSystem.emission;
+    maxBubblesSpawnRate = emission.rateOverTime.constant;
 
     // JACINTAS
     PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(-1.04f, 1.46f, -3.25f));
@@ -46,18 +56,21 @@ public class JacintaManager : StateNamespace.StageManager
   public override void UpdateGameState()
   {
     waterController.UpdateHealth(health);
-    //updateWaterLevel();
     updateHealth();
-    //updateWater();
     updateWaterLevel();
+    //waterController.UpdateHealth(health);
+    updateBubbles();
   }
 
   void updateHealth()
   {
     int invadingPlants = PlantObjectPooler.sharedInstance.GetNumberOfActiveInvadingPlants();
     //Debug.Log("Updating with numPlants " + invadingPlants + " health " + health + " max " + maxJacintas);
-    health = health + (((float)(maxJacintas - invadingPlants) / maxJacintas) * 100f - health) * 0.1f;
-    if (health <= 0)
+    float regen = ((float)(m_maxInvadingPlantsBeforeGameLost - invadingPlants) / m_maxInvadingPlantsBeforeGameLost) * 100f;
+    health = Mathf.SmoothDamp(health, regen, ref healthRegen, 1);
+    
+    //health = health + (((float)(maxJacintas - invadingPlants) / maxJacintas) * 100f - health) * 0.1f;
+    if (health < 1)
       StartCoroutine("DelayGameOver");
     else StopCoroutine("DelayGameOver");
   }
@@ -65,6 +78,12 @@ public class JacintaManager : StateNamespace.StageManager
   private void updateWaterLevel()
   {
     healthSlider.value = health / 100f;
+  }
+
+  private void updateBubbles()
+  {
+    var emission = bubblesSystem.emission;
+    emission.rateOverTime = Mathf.Lerp(0, maxBubblesSpawnRate, health/100f);
   }
 
   public override void HandleDifficulty() { }

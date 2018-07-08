@@ -35,7 +35,7 @@ namespace StateNamespace {
 
         protected Slider healthSlider;
 
-        protected float health;
+        public float health;
 
         private void Awake()
         {
