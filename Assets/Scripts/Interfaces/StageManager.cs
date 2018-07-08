@@ -22,6 +22,9 @@ namespace StateNamespace {
         public Player m_scenePlayer;
 
         [SerializeField]
+        protected int m_initialInvadingPlants;
+
+        [SerializeField]
         protected int m_maxInvadingPlantsBeforeGameLost;
 
         private TouchManager touchManager;
@@ -35,7 +38,7 @@ namespace StateNamespace {
 
         protected Slider healthSlider;
 
-        public float health;
+        protected float health;
 
         private void Awake()
         {

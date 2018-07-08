@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,8 +34,10 @@ public class JacintaManager : StateNamespace.StageManager
     maxBubblesSpawnRate = emission.rateOverTime.constant;
 
     // JACINTAS
-    PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(-1.04f, 1.46f, -3.25f));
-
+    for(int i = 0; i < m_initialInvadingPlants; i++){
+      PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(Random.Range(-2f, 2f), 1.46f, -3.25f));
+    }
+    
     soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
   }
 
