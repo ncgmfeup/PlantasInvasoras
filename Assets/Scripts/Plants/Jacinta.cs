@@ -119,6 +119,7 @@ public class Jacinta : Plant
     if (currentState == PlantState.WATERED)
     {
       fire = Instantiate(fire_prefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+      fire.transform.parent = transform;
       currentState = PlantState.BURNING;
       StartCoroutine(Burn());
     }
