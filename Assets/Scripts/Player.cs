@@ -19,10 +19,11 @@ public class Player : MonoBehaviour
 
   public GameObject[] tools;
 
-  [SerializeField]
+  //TODO - delete
+  //[SerializeField]
   private GameObject[] m_playerTools;
 
-  [SerializeField]
+  //[SerializeField]
   private int m_selectedTool = -1;
 
   void Start()

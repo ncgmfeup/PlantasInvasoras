@@ -20,6 +20,8 @@ public class JacintaManager : StateNamespace.StageManager
 
   private float maxBubblesSpawnRate;
 
+  public GameObject[] fishes;
+
   // Use this for initialization
   public override void InitializeVariables()
   {
@@ -27,11 +29,13 @@ public class JacintaManager : StateNamespace.StageManager
     health = 100f;
     //m_maxInvadingPlantsBeforeGameLost = 2;
 
-    waterController = GameObject.Find("Water").GetComponent<WaterShaderScript>();
+    var water = GameObject.Find("Water");
+    waterController = water.GetComponent<WaterShaderScript>();
 
-    bubblesSystem = GameObject.Find("Bubbles").GetComponent<ParticleSystem>();
+    bubblesSystem = water.transform.Find("Bubbles").GetComponent<ParticleSystem>();
     var emission = bubblesSystem.emission;
-    maxBubblesSpawnRate = emission.rateOverTime.constant;
+    var rOt = emission.rateOverTime;
+    maxBubblesSpawnRate = rOt.constant;
 
     // JACINTAS
     for(int i = 0; i < m_initialInvadingPlants; i++){
@@ -61,6 +65,8 @@ public class JacintaManager : StateNamespace.StageManager
     updateWaterLevel();
     //waterController.UpdateHealth(health);
     updateBubbles();
+    foreach (GameObject fish in fishes)
+      fish.GetComponent<Fish>().UpdateHealth(health);
   }
 
   void updateHealth()
