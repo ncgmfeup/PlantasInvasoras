@@ -7053,7 +7053,7 @@ MonoBehaviour:
   m_gameState: 0
   m_scenePlayer: {fileID: 0}
   m_initialInvadingPlants: 2
-  m_maxInvadingPlantsBeforeGameLost: 5
+  m_maxInvadingPlantsBeforeGameLost: 50
   m_timeUntilGameStarts: 3
   delayGameOverTime: 1
   fishes:
