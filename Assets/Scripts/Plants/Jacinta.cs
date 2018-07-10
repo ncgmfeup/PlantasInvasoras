@@ -125,7 +125,7 @@ public class Jacinta : Plant
       currentState = PlantState.BURNING;
       StartCoroutine(Burn());
     }
-    //soundManager.playFireSound();
+    soundManager.PlayFire();
   }
 
   public override void bombed(float impact)

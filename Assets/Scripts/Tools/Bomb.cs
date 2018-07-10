@@ -13,17 +13,10 @@ public class Bomb : ToolNamespace.Tool
   [SerializeField]
   private Sprite[] sprites;
 
-  private SoundEffectsManager soundManager;
-
   public float m_threshold = 0.8f;
   public Bomb()
   {
     InitializeVariables();
-  }
-
-  void Start()
-  {
-    soundManager = GameObject.Find("SoundEffectsManager").GetComponent<SoundEffectsManager>();
   }
 
   public override void UseTool(Vector3 pos)

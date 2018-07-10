@@ -7,6 +7,9 @@ public class Axe : ToolNamespace.Tool
   private float m_secondsToSweep;
 
   private Vector3 m_displacement;
+  private Vector3 lastPosition;
+
+  private float lastSlash, timeBetweenSlashes = 0.5f;
 
   public Axe()
   {
@@ -50,5 +53,19 @@ public class Axe : ToolNamespace.Tool
   public override void UpdateToolState()
   {
     Debug.Log("Axe Swipe");
+  }
+
+  //Warning, on first call, sound manager is null and last position is not defined.
+  public override void SetPosition(Vector3 position)
+  {
+    transform.position = position;
+    if (soundManager != null && Vector3.Distance(position, lastPosition) > 1f &&
+      (Time.time - lastSlash) > timeBetweenSlashes)
+    {
+      soundManager.PlaySlash();
+      lastSlash = Time.time;
+    }
+    lastPosition = position;
+
   }
 }

@@ -10,7 +10,7 @@ public class JacintaManager : StateNamespace.StageManager
   //public int maxJacintas;
   public float delayGameOverTime = 8.0f;
 
-  //private JacintaSoundManager soundManager;
+  private MusicManager soundManager;
 
   private WaterShaderScript waterController;
 
@@ -42,7 +42,7 @@ public class JacintaManager : StateNamespace.StageManager
       PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(Random.Range(-2f, 2f), 1.46f, -3.25f));
     }
     
-    //soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
+    soundManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
   }
 
   protected sealed override void CheckGameState()
@@ -65,6 +65,7 @@ public class JacintaManager : StateNamespace.StageManager
     updateWaterLevel();
     //waterController.UpdateHealth(health);
     updateBubbles();
+    updateSound();
     foreach (GameObject fish in fishes)
       fish.GetComponent<Fish>().UpdateHealth(health);
   }
@@ -85,6 +86,11 @@ public class JacintaManager : StateNamespace.StageManager
   private void updateWaterLevel()
   {
     healthSlider.value = health / 100f;
+  }
+
+   private void updateSound()
+  {
+    soundManager.SetHealth(health);
   }
 
   private void updateBubbles()
