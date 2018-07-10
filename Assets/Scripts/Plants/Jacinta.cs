@@ -31,6 +31,9 @@ public class Jacinta : Plant
   private SpriteRenderer spriteRenderer;
 
   private JacintaShader jacintaShader;
+  private Rigidbody2D rb;
+
+  private float buoyancyOffset;
 
  
 
@@ -46,8 +49,9 @@ public class Jacinta : Plant
     spriteRenderer = GetComponent<SpriteRenderer>();
     spriteRenderer.sprite = healthySprites[chosenSpriteIndex];
 
-    Rigidbody2D rb = GetComponent<Rigidbody2D>();
+    rb = GetComponent<Rigidbody2D>();
     rb.centerOfMass = new Vector2(0, -2);
+    buoyancyOffset = Random.Range(0f, Mathf.PI*2);
 
     jacintaShader = GetComponent<JacintaShader>();
   }
@@ -86,6 +90,8 @@ public class Jacinta : Plant
     }
 
     jacintaShader.SetDecay(dryingTimer/m_secondsToDry);
+
+    rb.mass = 1.25f + Mathf.Sin(Time.time + buoyancyOffset)/4;
   }
 
   public override IEnumerator Die()

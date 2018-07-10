@@ -1592,6 +1592,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 969ae2a2f728c5f4ea396fe25ecbb00d, type: 3}
   - {fileID: 8300000, guid: 74dfcd1269710d54fbfa3ef1c42d430f, type: 3}
   - {fileID: 8300000, guid: 21faf7523d594de4d88cd6d8c88769e0, type: 3}
+  fireClip: {fileID: 8300000, guid: 2c16a2b1a635fa447a7187766f522bbb, type: 3}
+  slashClip: {fileID: 8300000, guid: 23aa6ff8696f2be4da5cce566877234c, type: 3}
 --- !u!82 &974806179
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6611,7 +6613,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -8214,7 +8216,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4617696519168142, guid: 591ed230d460404458ccffc20953c29b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.28
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4617696519168142, guid: 591ed230d460404458ccffc20953c29b, type: 2}
       propertyPath: m_LocalPosition.y
