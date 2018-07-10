@@ -8,7 +8,7 @@ namespace PlantNamespace {
 		
 		protected StageManager manager; // So I can alter the managers state
         public GameObject mainCamera;
-        protected JacintaSoundManager soundManager;
+        protected SoundEffectsManager soundManager;
 
         public enum PlantState {
 			DRYING, WATERED, BURNING // Add here more states you need
@@ -17,9 +17,10 @@ namespace PlantNamespace {
         protected PlantState currentState;
 
         public void Start() {
-            initializeVariables();
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            soundManager = mainCamera.GetComponent<JacintaSoundManager>();
+            soundManager = GameObject.Find("SoundEffectsManager").GetComponent<SoundEffectsManager>();
+            initializeVariables();
+            
         }
 
         public void Update()  {

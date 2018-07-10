@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         ResetTool();
         break;
     }
-    Debug.Log("Tool:" + tool.ToString());
+    //Debug.Log("Tool:" + tool.ToString());
   }
 
   //Sets the position of tool_obj

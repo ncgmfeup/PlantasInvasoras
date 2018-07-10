@@ -72,7 +72,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Magnitude: 0.1571771
+    - _Magnitude: 0.089485474
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

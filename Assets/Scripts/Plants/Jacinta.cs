@@ -32,6 +32,8 @@ public class Jacinta : Plant
 
   private JacintaShader jacintaShader;
 
+ 
+
   public override void initializeVariables()
   {
     m_secondsToReproduce = Random.Range(minRange, maxRange);
@@ -104,14 +106,14 @@ public class Jacinta : Plant
   {
     manager.SpawnInvadingPlant(new Vector3(this.transform.position.x + Random.Range(-1f, 1f),
         this.transform.position.y + Random.Range(-0.3f, 0.3f), this.transform.position.z));
-    soundManager.playPopSound();
+    soundManager.SchedulePop();
   }
 
   public override void cut()
   {
     Rigidbody2D rb = GetComponent<Rigidbody2D>();
     rb.AddForce(m_cutImpulse, ForceMode2D.Impulse);
-    soundManager.playCutSound();
+    //soundManager.playCutSound();
   }
 
   public override void burnt()
@@ -123,12 +125,12 @@ public class Jacinta : Plant
       currentState = PlantState.BURNING;
       StartCoroutine(Burn());
     }
-    soundManager.playFireSound();
+    //soundManager.playFireSound();
   }
 
   public override void bombed(float impact)
   {
-    Debug.Log("Affected with " + impact);
+    //Debug.Log("Affected with " + impact);
 
     // If was bombed closer, more seeds fly, more reproductions
     for (int i = 0; i < (int)(impact / 100f); i++)
@@ -140,7 +142,7 @@ public class Jacinta : Plant
   public override void caught()
   {
     currentState = PlantState.DRYING;
-    soundManager.playNetSound();
+    //soundManager.playNetSound();
   }
 
   public override void Touch()

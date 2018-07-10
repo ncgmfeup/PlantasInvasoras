@@ -99,7 +99,7 @@ namespace ObjectPooling
                 currentObject.SetActive(false);
                 currentObject.GetComponent<PoolableObject>().m_sourcePool = this;
                 m_gameObjectPool.Add(currentObject);
-                Debug.Log("Added obj " + currentObject.name + " to the pool.");
+                //Debug.Log("Added obj " + currentObject.name + " to the pool.");
             }
         }
     }

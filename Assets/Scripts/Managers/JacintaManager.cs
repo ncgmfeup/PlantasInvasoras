@@ -10,7 +10,7 @@ public class JacintaManager : StateNamespace.StageManager
   //public int maxJacintas;
   public float delayGameOverTime = 8.0f;
 
-  private JacintaSoundManager soundManager;
+  //private JacintaSoundManager soundManager;
 
   private WaterShaderScript waterController;
 
@@ -42,7 +42,7 @@ public class JacintaManager : StateNamespace.StageManager
       PlantObjectPooler.sharedInstance.SpawnInvadingPlantAtPosition(new Vector3(Random.Range(-2f, 2f), 1.46f, -3.25f));
     }
     
-    soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
+    //soundManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<JacintaSoundManager>();
   }
 
   protected sealed override void CheckGameState()
