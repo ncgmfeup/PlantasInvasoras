@@ -5987,6 +5987,18 @@ MonoBehaviour:
   cutClip: {fileID: 0}
   netClip: {fileID: 0}
   podaClip: {fileID: 0}
+--- !u!114 &1311603964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311603961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a3f323f8aca2942949df178f372328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlay: {fileID: 2100000, guid: 07ef16a7bcb6dde4cb3fce0dc4145890, type: 2}
 --- !u!1 &1342465698
 GameObject:
   m_ObjectHideFlags: 0
