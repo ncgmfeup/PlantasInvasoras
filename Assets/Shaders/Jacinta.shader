@@ -20,6 +20,7 @@ Shader "Shaders/Jacinta"
 		Tags
 		{
 			"Queue" = "Transparent"
+			"RenderType" = "Transparent"
 			"PreviewType" = "Plane"
 		}
 
@@ -27,6 +28,7 @@ Shader "Shaders/Jacinta"
 		Pass
 		{
 			Name "BASE"
+			ZWrite Off
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
