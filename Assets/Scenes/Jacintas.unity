@@ -1592,7 +1592,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 969ae2a2f728c5f4ea396fe25ecbb00d, type: 3}
   - {fileID: 8300000, guid: 74dfcd1269710d54fbfa3ef1c42d430f, type: 3}
   - {fileID: 8300000, guid: 21faf7523d594de4d88cd6d8c88769e0, type: 3}
-  fireClip: {fileID: 8300000, guid: 2c16a2b1a635fa447a7187766f522bbb, type: 3}
+  fireClip: {fileID: 8300000, guid: 5730c8641bd7c54459994f65b3d701b2, type: 3}
   slashClip: {fileID: 8300000, guid: 23aa6ff8696f2be4da5cce566877234c, type: 3}
   dryClip: {fileID: 8300000, guid: c8df7f98ef1f65a46b9649ce4649aeeb, type: 3}
   fishOutClip: {fileID: 8300000, guid: 0b7a192a9a8522240baaece9c68a6a86, type: 3}
