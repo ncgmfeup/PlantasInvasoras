@@ -393,7 +393,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -620, y: -420}
-  m_SizeDelta: {x: 480, y: 90}
+  m_SizeDelta: {x: 450, y: 112.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &115822798
 MonoBehaviour:
@@ -1592,7 +1592,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 969ae2a2f728c5f4ea396fe25ecbb00d, type: 3}
   - {fileID: 8300000, guid: 74dfcd1269710d54fbfa3ef1c42d430f, type: 3}
   - {fileID: 8300000, guid: 21faf7523d594de4d88cd6d8c88769e0, type: 3}
-  fireClip: {fileID: 8300000, guid: 5730c8641bd7c54459994f65b3d701b2, type: 3}
+  fireClip: {fileID: 8300000, guid: ae774fd66de3ad14fb0b7d5bf6508882, type: 3}
   slashClip: {fileID: 8300000, guid: 23aa6ff8696f2be4da5cce566877234c, type: 3}
   dryClip: {fileID: 8300000, guid: c8df7f98ef1f65a46b9649ce4649aeeb, type: 3}
   fishOutClip: {fileID: 8300000, guid: 0b7a192a9a8522240baaece9c68a6a86, type: 3}
@@ -7391,7 +7391,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 31, y: -379}
-  m_SizeDelta: {x: 480, y: 90}
+  m_SizeDelta: {x: 450, y: 112.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1816675862
 MonoBehaviour:
@@ -7786,7 +7786,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 620, y: -420}
-  m_SizeDelta: {x: 480, y: 90}
+  m_SizeDelta: {x: 450, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1934784609
 MonoBehaviour:

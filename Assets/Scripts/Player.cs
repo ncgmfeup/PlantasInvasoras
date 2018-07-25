@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     //Debug.Log("Updating Tool Position");
     if (tool_obj != null)
       //tool_obj.transform.position = new Vector3(position.x, position.y, tool_obj.transform.position.z);
-      tool_obj.GetComponent<Tool>().SetPosition(new Vector3(position.x, position.y, tool_obj.transform.position.z));
+      tool_obj.GetComponent<Tool>().SetPosition(new Vector3(position.x, position.y, -4));
   }
 
   //Deletes current object and sets tool to ToolType.None
