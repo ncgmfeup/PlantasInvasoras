@@ -62,8 +62,9 @@ public class Jacinta : Plant
     switch (currentState)
     {
       case PlantState.WATERED:
-        if (transform.position.y > min_drying_height){
+        if (transform.position.y > min_drying_height || transform.position.y < -5f){
           currentState = PlantState.DRYING;
+          soundManager.PlayFishOut();
         }
 
         m_secondsToReproduce -= Time.deltaTime;
@@ -77,7 +78,7 @@ public class Jacinta : Plant
         dryingTimer = Mathf.Max(dryingTimer, 0);
         break;
       case PlantState.DRYING:
-        if (transform.position.y < min_drying_height){
+        if (transform.position.y < min_drying_height && transform.position.y > -5f){
           currentState = PlantState.WATERED;
           m_secondsToReproduce = Random.Range(minRange, maxRange);
         }
@@ -99,9 +100,11 @@ public class Jacinta : Plant
     //SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
     //yield return new WaitForSeconds(m_secondsToDry);
+    currentState = PlantState.DYING;
+    soundManager.PlayDry();
     spriteRenderer.sprite = witeredSprites[chosenSpriteIndex];
     yield return new WaitForSeconds(m_secondsToStayDried);
-
+    
     DeSpawn();
     currentState = PlantState.WATERED;
     spriteRenderer.sprite = healthySprites[chosenSpriteIndex];

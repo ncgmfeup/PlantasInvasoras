@@ -11,7 +11,7 @@ namespace PlantNamespace {
         protected SoundEffectsManager soundManager;
 
         public enum PlantState {
-			DRYING, WATERED, BURNING // Add here more states you need
+			DRYING, WATERED, BURNING, DYING // Add here more states you need
 		}
 
         protected PlantState currentState;
