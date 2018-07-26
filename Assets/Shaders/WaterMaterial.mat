@@ -80,7 +80,7 @@ Material:
     - _GlossyReflections: 1
     - _Magnitude: 0.12837541
     - _MagnitudeDisplacement: 0
-    - _MagnitudeWave: 0.07423389
+    - _MagnitudeWave: 0.06062798
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -93,6 +93,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorTint: {r: 0.2571571, g: 0.6413862, b: 0.35961822, a: 1}
+    - _ColorTint: {r: 0.48554006, g: 0.7516401, b: 0.5565001, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Offset: {r: 0.92379117, g: 0, b: 0, a: 0}
+    - _Offset: {r: 3.302456, g: 0, b: 0, a: 0}
