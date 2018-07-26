@@ -1532,18 +1532,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Sobre o jogo:\r\n\nEste \xE9 um jogo de sensibiliza\xE7\xE3o para a problem\xE1tica
-    das plantas invasoras.\r\nO objetivo \xE9 destruir as invasoras com os m\xE9todos
-    adequados. Para isso basta arrastar o/os item/itens do invent\xE1rio at\xE9 \xE0s
-    invasoras.\r\n \r\nSobre o jacinto-de-\xE1gua:\r\n\nO jacinto-de-\xE1gua (<i>Eichhornia
-    crassipes</i>) \xE9 uma planta aqu\xE1tica flutuante que se multiplica rapidamente
-    formando um tapete espesso que flutua, fazendo com que os peixes morram asfixiados
-    por falta de oxig\xE9nio.\r\n\xC9 considerada uma das plantas invasoras aqu\xE1ticas
-    mais problem\xE1ticas em Portugal e no mundo, com um n\xEDvel de risco ecol\xF3gico
-    muito elevado. Diversas t\xE9cnicas j\xE1 foram testadas para tentar erradicar
-    os jacintos-de-\xE1gua, mas muitas falharam. Para eliminar esta planta \xE9 necess\xE1rio
-    remov\xEA-la da \xE1gua e deix\xE1-la secar.\r\n \r\nPara saber mais sobre plantas
-    invasoras:\r\nhttp://invasoras.pt\r\n"
+  m_Text: "<b>Sobre o jogo\r</b>\n\r\nEste \xE9 um jogo de sensibiliza\xE7\xE3o para
+    a problem\xE1tica das plantas invasoras.\r\nO objetivo \xE9 destruir as invasoras
+    com os m\xE9todos adequados. Para isso, basta arrastar os itens do invent\xE1rio
+    at\xE9 \xE0s invasoras.\r\n\r\n<b>Sobre o jacinto-de-\xE1gua</b>\r\n\r\nO jacinto-de-\xE1gua
+    (<i>Eichhornia crassipes</i>) \xE9 uma planta aqu\xE1tica flutuante que se multiplica
+    rapidamente formando um tapete espesso que flutua, fazendo com que os peixes morram
+    asfixiados por falta de oxig\xE9nio.\r\n\xC9 considerada uma das plantas invasoras
+    aqu\xE1ticas mais problem\xE1ticas em Portugal e no mundo, com um n\xEDvel de
+    risco ecol\xF3gico muito elevado. Diversas t\xE9cnicas j\xE1 foram testadas para
+    tentar erradicar os jacintos-de-\xE1gua, mas muitas falharam. Para eliminar esta
+    planta \xE9 necess\xE1rio remov\xEA-la da \xE1gua e deix\xE1-la secar.\r\n \r\nPara
+    saber mais sobre plantas invasoras:\r\n<b>http://invasoras.pt\r</b>\n"
 --- !u!222 &921533059
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1897230246}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.28837416
+  m_Size: 0.3189836
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2600,7 +2600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 184.48404}
+  m_AnchoredPosition: {x: 0.000030517578, y: 191.5}
   m_SizeDelta: {x: 900, y: 1200.6885}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1400338233
@@ -2742,7 +2742,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e7c08a13393a1af4a8aadee40854adad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5205a9fe88c50044fa7f7cda708d0eb6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4039,7 +4039,7 @@ RectTransform:
   m_Father: {fileID: 500827249}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.7116258}
+  m_AnchorMin: {x: 0, y: 0.6810164}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
