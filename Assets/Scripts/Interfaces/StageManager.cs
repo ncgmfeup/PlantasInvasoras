@@ -69,9 +69,10 @@ namespace StateNamespace {
 
             CheckIfPlayerExists();
 
-            InitializeVariables();
-
             m_gameState = GameState.Tutorial;
+
+            //InitializeVariables();
+
             //StartCoroutine(PreGameBehaviour());
         }
 
@@ -155,6 +156,8 @@ namespace StateNamespace {
         }
         
         public void StartGame() {
+            InitializeVariables();
+
             StartCoroutine(PreGameBehaviour());
         }
 
