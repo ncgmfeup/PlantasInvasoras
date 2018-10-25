@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Algae
   m_Shader: {fileID: 4800000, guid: 90358552b4c4b4b2bacc663c59aa9d03, type: 3}
@@ -72,7 +72,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Magnitude: 0.07804508
+    - _Magnitude: 0.1318383
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

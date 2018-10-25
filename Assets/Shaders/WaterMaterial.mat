@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WaterMaterial
   m_Shader: {fileID: 4800000, guid: c5a7eb5e6e5d84a35b816a19a738b08f, type: 3}
@@ -80,7 +80,7 @@ Material:
     - _GlossyReflections: 1
     - _Magnitude: 0.12837541
     - _MagnitudeDisplacement: 0
-    - _MagnitudeWave: 0.06062798
+    - _MagnitudeWave: 0.051921856
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -93,6 +93,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorTint: {r: 0.48554006, g: 0.7516401, b: 0.5565001, a: 1}
+    - _ColorTint: {r: 0.9115173, g: 0.9572842, b: 0.9237218, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Offset: {r: 3.302456, g: 0, b: 0, a: 0}
+    - _Offset: {r: 1.6310375, g: 0, b: 0, a: 0}

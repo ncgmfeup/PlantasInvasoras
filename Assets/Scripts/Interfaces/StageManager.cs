@@ -11,7 +11,7 @@ namespace StateNamespace {
 	public abstract class StageManager : MonoBehaviour
     {
         public enum GameState {
-            Starting, Playing, Paused, GameWon, GameLost
+            Tutorial, Starting, Playing, Paused, GameWon, GameLost
         }
 
         public static StageManager sharedInstance;
@@ -71,7 +71,8 @@ namespace StateNamespace {
 
             InitializeVariables();
 
-            StartCoroutine(PreGameBehaviour());
+            m_gameState = GameState.Tutorial;
+            //StartCoroutine(PreGameBehaviour());
         }
 
         void CheckIfPlayerExists() {
@@ -82,10 +83,7 @@ namespace StateNamespace {
 
         // Update is called once per frame
         void Update() {
-            if(!(m_gameState == GameState.Paused || 
-                 m_gameState == GameState.GameLost ||
-                 m_gameState == GameState.GameWon ||
-                 m_gameState == GameState.Starting))
+            if(m_gameState == GameState.Playing)
             {
                 UpdateGameState();
 
@@ -94,6 +92,9 @@ namespace StateNamespace {
                 HandleDifficulty();
 
                 CheckGameState();
+            }
+            else if (m_gameState == GameState.Tutorial) {
+
             }
         }
 
@@ -153,6 +154,10 @@ namespace StateNamespace {
             PlantObjectPooler.sharedInstance.SpawnNativePlantAtPosition(pos);
         }
         
+        public void StartGame() {
+            StartCoroutine(PreGameBehaviour());
+        }
+
         public void PauseGame()
         {
             m_gameState = GameState.Paused;
